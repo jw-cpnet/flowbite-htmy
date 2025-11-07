@@ -1,7 +1,6 @@
 """Context providers for theme and configuration."""
 
 from dataclasses import dataclass
-from typing import Any
 
 from htmy import Component, ComponentType, Context
 

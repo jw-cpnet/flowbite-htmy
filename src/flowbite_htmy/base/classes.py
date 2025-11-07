@@ -1,6 +1,5 @@
 """Utility for building Tailwind CSS class strings."""
 
-from typing import Any
 
 
 class ClassBuilder:
