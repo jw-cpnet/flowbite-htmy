@@ -72,6 +72,15 @@ def index() -> None:
 
 **Stats**: 36 tests passing, 91% coverage, all type-checked and linted
 
+### Phase 2 - Layout Components (In Progress)
+
+- ✅ **PageLayout** - Complete HTML page structure with dependencies
+- [ ] Footer - Page footer
+- [ ] Container - Max-width content wrapper
+- [ ] Navbar - Navigation bar (requires JS/HTMX for mobile)
+
+**Stats**: 43 tests passing, 92% coverage
+
 ### Planned Components
 
 See [SPECS.md](SPECS.md) for the complete roadmap.
