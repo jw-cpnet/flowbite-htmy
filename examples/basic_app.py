@@ -182,9 +182,12 @@ async def index() -> dict:
         html.div(
             Button(label="Blue", color=Color.BLUE, variant=ButtonVariant.GRADIENT, shadow=True),
             Button(label="Green", color=Color.GREEN, variant=ButtonVariant.GRADIENT, shadow=True),
-            Button(label="Cyan", color=Color.INFO, variant=ButtonVariant.GRADIENT, shadow=True),
-            Button(label="Purple", color=Color.PURPLE, variant=ButtonVariant.GRADIENT, shadow=True),
+            Button(label="Cyan", color=Color.CYAN, variant=ButtonVariant.GRADIENT, shadow=True),
+            Button(label="Teal", color=Color.TEAL, variant=ButtonVariant.GRADIENT, shadow=True),
+            Button(label="Lime", color=Color.LIME, variant=ButtonVariant.GRADIENT, shadow=True),
+            Button(label="Red", color=Color.RED, variant=ButtonVariant.GRADIENT, shadow=True),
             Button(label="Pink", color=Color.PINK, variant=ButtonVariant.GRADIENT, shadow=True),
+            Button(label="Purple", color=Color.PURPLE, variant=ButtonVariant.GRADIENT, shadow=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
 
