@@ -15,7 +15,7 @@ from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
 from flowbite_htmy.components import Button
-from flowbite_htmy.icons import Social, get_social_icon
+from flowbite_htmy.icons import Payment, Social, get_payment_icon, get_social_icon
 from flowbite_htmy.types import ButtonVariant, Color, Size
 
 app = FastAPI(title="Flowbite-HTMY Button Showcase")
@@ -247,6 +247,73 @@ async def index() -> dict:
                 icon=get_social_icon(Social.APPLE),
                 color=Color.NONE,
                 class_="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-[#050708]/50 dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30",
+            ),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
+
+        # Payment buttons
+        html.h2(
+            "Payment buttons",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Payment provider buttons with brand logos and colors.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(
+                label="Connect with MetaMask",
+                icon=get_payment_icon(Payment.METAMASK),
+                color=Color.NONE,
+                class_="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-gray-100 dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700",
+            ),
+            Button(
+                label="Connect with Opera Wallet",
+                icon=get_payment_icon(Payment.OPERA_WALLET),
+                color=Color.NONE,
+                class_="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-gray-100 dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700",
+            ),
+            Button(
+                label="Pay with Bitcoin",
+                icon=get_payment_icon(Payment.BITCOIN),
+                color=Color.NONE,
+                class_="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-[#FF9119]/50 dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40",
+            ),
+            Button(
+                label="Check out with PayPal",
+                icon=get_payment_icon(Payment.PAYPAL),
+                color=Color.NONE,
+                class_="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-[#F7BE38]/50 dark:focus:ring-[#F7BE38]/50",
+            ),
+            Button(
+                label="Check out with Apple Pay",
+                icon=get_payment_icon(Payment.APPLE_PAY),
+                color=Color.NONE,
+                class_="text-white bg-[#050708] hover:bg-[#050708]/80 focus:ring-[#050708]/50 dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600",
+            ),
+            Button(
+                label="Pay with American Express",
+                icon=get_payment_icon(Payment.AMEX),
+                color=Color.NONE,
+                class_="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-[#2557D6]/50 dark:focus:ring-[#2557D6]/50",
+            ),
+            Button(
+                label="Pay with Visa",
+                icon=get_payment_icon(Payment.VISA),
+                color=Color.NONE,
+                class_="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-gray-100 dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200",
+            ),
+            Button(
+                label="Pay with MasterCard",
+                icon=get_payment_icon(Payment.MASTERCARD),
+                color=Color.NONE,
+                class_="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-gray-100 dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700",
+            ),
+            Button(
+                label="Pay with Ethereum",
+                icon=get_payment_icon(Payment.ETHEREUM),
+                color=Color.NONE,
+                class_="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-gray-100 dark:focus:ring-gray-500",
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
