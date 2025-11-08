@@ -96,9 +96,9 @@ class Button:
         color_classes = self._get_color_classes()
         builder.add(color_classes)
 
-        # Dark mode color variants
+        # Dark mode color variants (always include, Tailwind handles with dark: prefix)
         dark_classes = self._get_dark_color_classes()
-        if theme.dark_mode and dark_classes:
+        if dark_classes:
             builder.add(dark_classes)
 
         # Merge with custom classes
