@@ -108,6 +108,7 @@ async def index() -> dict:
             Button(label="Green to Blue", color="green-blue", variant=ButtonVariant.GRADIENT),
             Button(label="Purple to Pink", color="purple-pink", variant=ButtonVariant.GRADIENT),
             Button(label="Pink to Orange", color="pink-orange", variant=ButtonVariant.GRADIENT),
+            Button(label="Teal to Lime", color="teal-lime", variant=ButtonVariant.GRADIENT),
             Button(label="Red to Yellow", color="red-yellow", variant=ButtonVariant.GRADIENT),
             class_="flex flex-wrap gap-2 mb-12",
         ),

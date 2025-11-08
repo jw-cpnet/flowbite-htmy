@@ -119,6 +119,7 @@ class Button:
         "green-blue": "text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-green-200 dark:focus:ring-green-800",
         "purple-pink": "text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-purple-200 dark:focus:ring-purple-800",
         "pink-orange": "text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-pink-200 dark:focus:ring-pink-800",
+        "teal-lime": "text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-lime-200 dark:focus:ring-teal-700",
         "red-yellow": "text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-red-100 dark:focus:ring-red-400",
     }
     _SHADOW_COLORS: ClassVar[Mapping[Any, str]] = {
@@ -136,6 +137,7 @@ class Button:
         "green-blue": "shadow-green-500/50 dark:shadow-green-800/80",
         "purple-pink": "shadow-purple-500/50 dark:shadow-purple-800/80",
         "pink-orange": "shadow-pink-500/50 dark:shadow-pink-800/80",
+        "teal-lime": "shadow-lime-500/50 dark:shadow-teal-800/80",
         "red-yellow": "shadow-red-500/50 dark:shadow-red-800/80",
     }
 
