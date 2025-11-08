@@ -19,6 +19,9 @@ class Color(str, Enum):
     # Additional colors
     BLUE = "blue"
     GREEN = "green"
+    CYAN = "cyan"
+    TEAL = "teal"
+    LIME = "lime"
     RED = "red"
     YELLOW = "yellow"
     INDIGO = "indigo"

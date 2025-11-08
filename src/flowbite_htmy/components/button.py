@@ -105,7 +105,10 @@ class Button:
     _GRADIENT_MONO_COLORS: ClassVar[Mapping[Color, str]] = {
         Color.BLUE: "text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-blue-300 dark:focus:ring-blue-800",
         Color.GREEN: "text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-green-300 dark:focus:ring-green-800",
+        Color.CYAN: "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800",
         Color.INFO: "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-cyan-300 dark:focus:ring-cyan-800",
+        Color.TEAL: "text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-teal-300 dark:focus:ring-teal-800",
+        Color.LIME: "text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-lime-300 dark:focus:ring-lime-800",
         Color.RED: "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-red-300 dark:focus:ring-red-800",
         Color.PINK: "text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-pink-300 dark:focus:ring-pink-800",
         Color.PURPLE: "text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-purple-300 dark:focus:ring-purple-800",
@@ -121,7 +124,10 @@ class Button:
     _SHADOW_COLORS: ClassVar[Mapping[Any, str]] = {
         Color.BLUE: "shadow-blue-500/50 dark:shadow-blue-800/80",
         Color.GREEN: "shadow-green-500/50 dark:shadow-green-800/80",
+        Color.CYAN: "shadow-cyan-500/50 dark:shadow-cyan-800/80",
         Color.INFO: "shadow-cyan-500/50 dark:shadow-cyan-800/80",
+        Color.TEAL: "shadow-teal-500/50 dark:shadow-teal-800/80",
+        Color.LIME: "shadow-lime-500/50 dark:shadow-lime-800/80",
         Color.RED: "shadow-red-500/50 dark:shadow-red-800/80",
         Color.PINK: "shadow-pink-500/50 dark:shadow-pink-800/80",
         Color.PURPLE: "shadow-purple-500/50 dark:shadow-purple-800/80",
@@ -245,13 +251,17 @@ class Button:
         return self._OUTLINE_COLORS.get(self.color, self._OUTLINE_COLORS[Color.PRIMARY])  # type: ignore[call-overload, no-any-return]
 
     def _get_gradient_variant_classes(self) -> str:
-        if isinstance(self.color, str):
+        # Check if it's a Color enum or a duotone string like "purple-blue"
+        if isinstance(self.color, Color):
+            # Monochrome gradient (Color enum)
+            return self._GRADIENT_MONO_COLORS.get(
+                self.color, self._GRADIENT_MONO_COLORS[Color.BLUE]
+            )
+        else:
+            # Duotone gradient (string like "purple-blue")
             return self._GRADIENT_DUOTONE_COLORS.get(
                 self.color, self._GRADIENT_MONO_COLORS[Color.BLUE]
             )
-        return self._GRADIENT_MONO_COLORS.get(
-            self.color, self._GRADIENT_MONO_COLORS[Color.BLUE]
-        )
 
     def _get_gradient_outline_variant_classes(self) -> str:
         base_classes = "relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group dark:text-white"

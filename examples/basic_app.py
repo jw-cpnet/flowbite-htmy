@@ -62,8 +62,12 @@ async def index() -> dict:
         ),
         html.div(
             Button(label="Default", color=Color.PRIMARY, pill=True),
+            Button(label="Alternative", color=Color.SECONDARY, pill=True),
+            Button(label="Dark", color=Color.DARK, pill=True),
+            Button(label="Light", color=Color.LIGHT, pill=True),
             Button(label="Green", color=Color.GREEN, pill=True),
             Button(label="Red", color=Color.RED, pill=True),
+            Button(label="Yellow", color=Color.YELLOW, pill=True),
             Button(label="Purple", color=Color.PURPLE, pill=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
@@ -80,7 +84,9 @@ async def index() -> dict:
         html.div(
             Button(label="Blue", color=Color.BLUE, variant=ButtonVariant.GRADIENT),
             Button(label="Green", color=Color.GREEN, variant=ButtonVariant.GRADIENT),
-            Button(label="Cyan", color=Color.INFO, variant=ButtonVariant.GRADIENT),
+            Button(label="Cyan", color=Color.CYAN, variant=ButtonVariant.GRADIENT),
+            Button(label="Teal", color=Color.TEAL, variant=ButtonVariant.GRADIENT),
+            Button(label="Lime", color=Color.LIME, variant=ButtonVariant.GRADIENT),
             Button(label="Red", color=Color.RED, variant=ButtonVariant.GRADIENT),
             Button(label="Pink", color=Color.PINK, variant=ButtonVariant.GRADIENT),
             Button(label="Purple", color=Color.PURPLE, variant=ButtonVariant.GRADIENT),
