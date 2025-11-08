@@ -15,6 +15,9 @@ _SOCIAL_ICON_CLASSES: Final[str] = "w-4 h-4 me-2"
 # Default classes for payment icons (some are wider)
 _PAYMENT_ICON_CLASSES: Final[str] = "h-4 me-2 -ms-1"
 
+# Default classes for general icons
+_ICON_CLASSES: Final[str] = "me-2"
+
 
 class Social(str, Enum):
     """Enum for social media brand icons."""
@@ -45,6 +48,18 @@ class Payment(str, Enum):
 
     def __str__(self) -> str:
         """Return the payment provider value as a string."""
+        return self.value
+
+
+class Icon(str, Enum):
+    """Enum for general purpose icons."""
+
+    ENVELOPE = "envelope"
+    SHOPPING_CART = "shopping-cart"
+    ARROW_RIGHT = "arrow-right"
+
+    def __str__(self) -> str:
+        """Return the icon value as a string."""
         return self.value
 
 
@@ -170,4 +185,46 @@ def get_payment_icon(icon: Payment, *, class_: str = _PAYMENT_ICON_CLASSES) -> S
     svg_template = _PAYMENT_SVGS.get(icon)
     if svg_template is None:
         raise ValueError(f"Unknown payment icon: {icon}")
+    return SafeStr(svg_template.format(class_=class_))
+
+
+# SVG icon registry for general purpose icons
+# SVGs sourced from Flowbite documentation
+# The {class_} placeholder allows for dynamic class injection
+_ICON_SVGS: Final[dict[Icon, str]] = {
+    Icon.ENVELOPE: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">'
+        '<path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>'
+        '<path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>'
+        "</svg>"
+    ),
+    Icon.SHOPPING_CART: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">'
+        '<path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>'
+        "</svg>"
+    ),
+    Icon.ARROW_RIGHT: (
+        '<svg class="{class_} rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>'
+        "</svg>"
+    ),
+}
+
+
+def get_icon(icon: Icon, *, class_: str = _ICON_CLASSES) -> SafeStr:
+    """Retrieve the SVG markup for a general purpose icon.
+
+    Args:
+        icon: The icon to retrieve from the Icon enum.
+        class_: Optional CSS classes to apply. Defaults to me-2.
+
+    Returns:
+        SafeStr object containing the complete SVG markup.
+
+    Raises:
+        ValueError: If the icon is not found in the registry.
+    """
+    svg_template = _ICON_SVGS.get(icon)
+    if svg_template is None:
+        raise ValueError(f"Unknown icon: {icon}")
     return SafeStr(svg_template.format(class_=class_))

@@ -15,7 +15,7 @@ from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
 from flowbite_htmy.components import Button
-from flowbite_htmy.icons import Payment, Social, get_payment_icon, get_social_icon
+from flowbite_htmy.icons import Icon, Payment, Social, get_icon, get_payment_icon, get_social_icon
 from flowbite_htmy.types import ButtonVariant, Color, Size
 
 app = FastAPI(title="Flowbite-HTMY Button Showcase")
@@ -169,6 +169,72 @@ async def index() -> dict:
             Button(label="Large", color=Color.PRIMARY, size=Size.LG),
             Button(label="Extra large", color=Color.PRIMARY, size=Size.XL),
             class_="flex flex-wrap items-center gap-2 mb-12",
+        ),
+
+        # Button sizes with icon
+        html.h2(
+            "Button sizes with icon",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Buttons with icons in different sizes.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(
+                label="Extra small",
+                icon=get_icon(Icon.ENVELOPE, class_="w-3 h-3 me-2"),
+                color=Color.PRIMARY,
+                size=Size.XS,
+            ),
+            Button(
+                label="Small",
+                icon=get_icon(Icon.ENVELOPE, class_="w-3 h-3 me-2"),
+                color=Color.PRIMARY,
+                size=Size.SM,
+            ),
+            Button(
+                label="Base",
+                icon=get_icon(Icon.ENVELOPE, class_="w-3.5 h-3.5 me-2"),
+                color=Color.PRIMARY,
+                size=Size.MD,
+            ),
+            Button(
+                label="Large",
+                icon=get_icon(Icon.ENVELOPE, class_="w-4 h-4 me-2"),
+                color=Color.PRIMARY,
+                size=Size.LG,
+            ),
+            Button(
+                label="Extra large",
+                icon=get_icon(Icon.ENVELOPE, class_="w-4 h-4 me-2"),
+                color=Color.PRIMARY,
+                size=Size.XL,
+            ),
+            class_="flex flex-wrap items-center gap-2 mb-12",
+        ),
+
+        # Buttons with icon
+        html.h2(
+            "Buttons with icon",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Buttons with icons positioned on the left or right side.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(
+                label="Buy now",
+                icon=get_icon(Icon.SHOPPING_CART, class_="w-3.5 h-3.5 me-2"),
+                color=Color.PRIMARY,
+            ),
+            Button(
+                label="Choose plan",
+                icon=get_icon(Icon.ARROW_RIGHT, class_="w-3.5 h-3.5 ms-2"),
+                color=Color.PRIMARY,
+            ),
+            class_="flex flex-wrap gap-2 mb-12",
         ),
 
         # Colored shadows
