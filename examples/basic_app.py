@@ -18,7 +18,7 @@ from flowbite_htmy.components import Button
 from flowbite_htmy.types import Color
 
 app = FastAPI(title="Flowbite-HTMY Button Showcase")
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="examples/templates")
 jinja = Jinja(templates)
 renderer = Renderer()
 
@@ -31,21 +31,24 @@ async def index() -> dict:
     # Build button components using htmy (type-safe!)
     buttons_section = html.div(
         html.h2(
-            "Button Components",
+            "Default buttons",
             class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
         ),
         html.p(
-            "Flowbite button components built with htmy - type-safe and composable",
+            "Use these default button styles with multiple colors to indicate an action or link within your website.",
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
 
-        # Color variants
+        # Default button color variants (matching Flowbite order)
         html.div(
-            Button(label="Primary", color=Color.PRIMARY),
-            Button(label="Secondary", color=Color.SECONDARY),
-            Button(label="Success", color=Color.SUCCESS),
-            Button(label="Danger", color=Color.DANGER),
-            Button(label="Warning", color=Color.WARNING),
+            Button(label="Default", color=Color.PRIMARY),
+            Button(label="Alternative", color=Color.SECONDARY),
+            Button(label="Dark", color=Color.DARK),
+            Button(label="Light", color=Color.LIGHT),
+            Button(label="Green", color=Color.GREEN),
+            Button(label="Red", color=Color.RED),
+            Button(label="Yellow", color=Color.YELLOW),
+            Button(label="Purple", color=Color.PURPLE),
             class_="flex flex-wrap gap-2 mb-8",
         ),
 
