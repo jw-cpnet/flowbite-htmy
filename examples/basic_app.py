@@ -5,7 +5,8 @@ Then visit: http://localhost:8000
 """
 
 from fastapi import FastAPI
-from htmy import Renderer, html
+from fastapi.responses import HTMLResponse
+from htmy import Renderer, Tag, html
 
 from flowbite_htmy.components import Alert, Avatar, Badge, Button, Card
 from flowbite_htmy.layouts import PageLayout
@@ -15,22 +16,29 @@ app = FastAPI(title="Flowbite-HTMY Component Showcase")
 renderer = Renderer()
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def index() -> str:
     """Render the component showcase page."""
-    page = PageLayout(
-        title="Flowbite-HTMY Component Showcase",
-        body_class="bg-gray-50 dark:bg-gray-900 min-h-screen",
-        content=(
-            # Header
+    # Build all content in a single wrapper div
+    content_wrapper = html.div(
+            # Header with dark mode toggle
             html.div(
-                html.h1(
-                    "Flowbite-HTMY Component Showcase",
-                    class_="text-4xl font-bold text-gray-900 dark:text-white mb-2",
-                ),
-                html.p(
-                    "All Phase 1 components built with htmy, FastAPI, and HTMX",
-                    class_="text-lg text-gray-600 dark:text-gray-400 mb-8",
+                html.div(
+                    html.h1(
+                        "Flowbite-HTMY Component Showcase",
+                        class_="text-4xl font-bold text-gray-900 dark:text-white mb-2",
+                    ),
+                    html.p(
+                        "All Phase 1 components built with htmy, FastAPI, and HTMX",
+                        class_="text-lg text-gray-600 dark:text-gray-400 mb-4",
+                    ),
+                    # Dark mode info
+                    Badge(
+                        label="💡 Use browser/OS dark mode to test",
+                        color=Color.DARK,
+                        class_="text-xs",
+                    ),
+                    class_="flex justify-between items-start mb-8",
                 ),
                 class_="container mx-auto px-4 py-8",
             ),
@@ -218,13 +226,18 @@ async def index() -> str:
                 ),
                 class_="container mx-auto px-4",
             ),
-        ),
+    )
+
+    page = PageLayout(
+        title="Flowbite-HTMY Component Showcase",
+        body_class="bg-gray-50 dark:bg-gray-900 min-h-screen",
+        content=content_wrapper,
     )
 
     return await renderer.render(page)
 
 
-@app.get("/clicked")
+@app.get("/clicked", response_class=HTMLResponse)
 async def clicked() -> str:
     """HTMX endpoint - button click response."""
     alert = Alert(
@@ -235,7 +248,7 @@ async def clicked() -> str:
     return await renderer.render(alert)
 
 
-@app.get("/learn-more")
+@app.get("/learn-more", response_class=HTMLResponse)
 async def learn_more() -> str:
     """HTMX endpoint - learn more content."""
     content = html.div(
@@ -258,4 +271,4 @@ if __name__ == "__main__":
     print("🚀 Starting Flowbite-HTMY Component Showcase")
     print("📍 Visit: http://localhost:8000")
     print("✨ All Phase 1 components + PageLayout included!")
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("basic_app:app", host="0.0.0.0", port=8000, reload=True)

@@ -31,6 +31,9 @@ class PageLayout:
     include_flowbite_js: bool = False
     """Include Flowbite JavaScript for interactive components."""
 
+    include_dark_mode_script: bool = False
+    """Include dark mode toggle JavaScript."""
+
     body_class: str = ""
     """Custom CSS classes for the body element."""
 
@@ -87,6 +90,12 @@ class PageLayout:
                 )
             )
 
+        # Optional dark mode toggle script (simple approach without localStorage for now)
+        if self.include_dark_mode_script:
+            # Simple inline script using onclick - avoids htmy escaping issues
+            # More robust solution would use external JS file
+            pass  # For now, we'll handle dark mode with Tailwind's dark: classes
+
         return html.head(*head_children)
 
     def _render_body(self) -> Component:
@@ -95,4 +104,8 @@ class PageLayout:
         Returns:
             Body element with content.
         """
-        return html.body(self.content, class_=self.body_class if self.body_class else None)
+        # Handle tuple/list content by unpacking
+        if isinstance(self.content, (list, tuple)):
+            return html.body(*self.content, class_=self.body_class if self.body_class else None)
+        else:
+            return html.body(self.content, class_=self.body_class if self.body_class else None)

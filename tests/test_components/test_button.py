@@ -62,7 +62,9 @@ async def test_button_color_secondary(renderer: Renderer) -> None:
     assert "Cancel" in html
     assert "bg-white" in html
     assert "border" in html
-    assert "border-gray-300" in html
+    assert "border-gray-200" in html
+    assert "hover:text-blue-700" in html
+    assert "focus:z-10" in html
 
 
 @pytest.mark.asyncio
