@@ -2,7 +2,7 @@
 
 from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Any, ClassVar, cast
+from typing import Any, ClassVar
 
 from htmy import Component, Context, SafeStr, html
 
@@ -33,6 +33,9 @@ class Button:
 
     label: str
     """Button text label."""
+
+    icon: SafeStr | None = None
+    """Optional SVG icon to display before the label."""
 
     color: Color | str = Color.PRIMARY
     """Button color variant. Can be a `Color` enum or a string for duotone gradients (e.g., 'purple-blue')."""
@@ -147,10 +150,15 @@ class Button:
         classes = self._build_classes(theme)
         is_disabled = self.disabled or self.loading
 
-        # Build button content with optional loading spinner
-        button_content: Any = (
-            [_spinner_svg(), self.label] if self.loading else self.label
-        )
+        # Build button content with optional icon and loading spinner
+        content_parts: list[Any] = []
+        if self.icon:
+            content_parts.append(self.icon)
+        if self.loading:
+            content_parts.append(_spinner_svg())
+        content_parts.append(self.label)
+
+        button_content: Any = content_parts if len(content_parts) > 1 else self.label
 
         # For gradient outline, wrap content in a span
         if self.variant == ButtonVariant.GRADIENT_OUTLINE:
@@ -160,38 +168,25 @@ class Button:
             inner_span_classes += " " + self._get_size_classes(is_inner=True)
             inner_span_classes += " " + self._get_shape_classes()
 
-            if self.loading:
-                # Already a list with spinner + span - wrap the list
-                button_content = [html.span(cast("Any", button_content), class_=inner_span_classes)]
+            # Wrap all content parts in the inner span
+            if isinstance(button_content, list):
+                button_content = html.span(*button_content, class_=inner_span_classes)
             else:
-                # Wrap the label text in inner span
-                button_content = html.span(self.label, class_=inner_span_classes)
+                button_content = html.span(button_content, class_=inner_span_classes)
 
-        # Render button
-        if isinstance(button_content, list):
-            return html.button(
-                *button_content,
-                type=self.type,
-                disabled=is_disabled or None,
-                class_=classes,
-                hx_get=self.hx_get,
-                hx_post=self.hx_post,
-                hx_target=self.hx_target,
-                hx_swap=self.hx_swap,
-                hx_trigger=self.hx_trigger,
-            )
-        else:
-            return html.button(
-                button_content,
-                type=self.type,
-                disabled=is_disabled or None,
-                class_=classes,
-                hx_get=self.hx_get,
-                hx_post=self.hx_post,
-                hx_target=self.hx_target,
-                hx_swap=self.hx_swap,
-                hx_trigger=self.hx_trigger,
-            )
+        # Render button (unpack list if needed)
+        args = button_content if isinstance(button_content, list) else [button_content]
+        return html.button(
+            *args,
+            type=self.type,
+            disabled=is_disabled or None,
+            class_=classes,
+            hx_get=self.hx_get,
+            hx_post=self.hx_post,
+            hx_target=self.hx_target,
+            hx_swap=self.hx_swap,
+            hx_trigger=self.hx_trigger,
+        )
 
     def _build_classes(self, theme: ThemeContext) -> str:
         """Build CSS classes for the button."""
