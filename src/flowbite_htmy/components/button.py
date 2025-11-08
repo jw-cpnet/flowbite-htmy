@@ -242,6 +242,8 @@ class Button:
         return "rounded-full" if self.pill else "rounded-lg"
 
     def _get_default_variant_classes(self) -> str:
+        if self.color == Color.NONE:
+            return ""
         return self._DEFAULT_COLORS.get(self.color, self._DEFAULT_COLORS[Color.PRIMARY])  # type: ignore[call-overload, no-any-return]
 
     def _get_outline_variant_classes(self) -> str:

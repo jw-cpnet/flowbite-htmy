@@ -221,26 +221,31 @@ async def index() -> dict:
             Button(
                 label="Sign in with Facebook",
                 icon=get_social_icon(Social.FACEBOOK),
+                color=Color.NONE,
                 class_="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-[#3b5998]/50 dark:focus:ring-[#3b5998]/55",
             ),
             Button(
                 label="Sign in with Twitter",
                 icon=get_social_icon(Social.TWITTER),
+                color=Color.NONE,
                 class_="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-[#1da1f2]/50 dark:focus:ring-[#1da1f2]/55",
             ),
             Button(
                 label="Sign in with Github",
                 icon=get_social_icon(Social.GITHUB),
+                color=Color.NONE,
                 class_="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-[#24292F]/50 dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30",
             ),
             Button(
                 label="Sign in with Google",
                 icon=get_social_icon(Social.GOOGLE),
+                color=Color.NONE,
                 class_="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-[#4285F4]/50 dark:focus:ring-[#4285F4]/55",
             ),
             Button(
                 label="Sign in with Apple",
                 icon=get_social_icon(Social.APPLE),
+                color=Color.NONE,
                 class_="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-[#050708]/50 dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30",
             ),
             class_="flex flex-wrap gap-2 mb-12",
