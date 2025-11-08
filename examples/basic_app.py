@@ -113,6 +113,26 @@ async def index() -> dict:
             class_="flex flex-wrap gap-2 mb-12",
         ),
 
+        # Gradient outline
+        html.h2(
+            "Outlined gradient",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Gradient buttons with outlined style and transparent background.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(label="Purple to blue", color="purple-blue", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(label="Cyan to blue", color="cyan-blue", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(label="Green to blue", color="green-blue", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(label="Purple to pink", color="purple-pink", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(label="Pink to orange", color="pink-orange", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(label="Teal to Lime", color="teal-lime", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(label="Red to Yellow", color="red-yellow", variant=ButtonVariant.GRADIENT_OUTLINE),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
+
         # Outline buttons
         html.h2(
             "Outline buttons",
