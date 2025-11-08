@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Basic App",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/basic_app.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Basic App (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/basic_app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
+        }
+    ]
+}

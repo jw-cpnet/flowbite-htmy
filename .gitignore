@@ -36,7 +36,6 @@ htmlcov/
 .pytype/
 
 # IDEs
-.vscode/
 .idea/
 *.swp
 *.swo
