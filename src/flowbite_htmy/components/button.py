@@ -35,7 +35,10 @@ class Button:
     """Button text label."""
 
     icon: SafeStr | None = None
-    """Optional SVG icon to display before the label."""
+    """Optional SVG icon to display with the label."""
+
+    icon_position: str = "left"
+    """Position of the icon relative to the label. Either 'left' or 'right'. Default is 'left'."""
 
     color: Color | str = Color.PRIMARY
     """Button color variant. Can be a `Color` enum or a string for duotone gradients (e.g., 'purple-blue')."""
@@ -152,11 +155,21 @@ class Button:
 
         # Build button content with optional icon and loading spinner
         content_parts: list[Any] = []
-        if self.icon:
+
+        # Add icon on the left if position is 'left'
+        if self.icon and self.icon_position == "left":
             content_parts.append(self.icon)
+
+        # Add loading spinner (always before label)
         if self.loading:
             content_parts.append(_spinner_svg())
+
+        # Add label
         content_parts.append(self.label)
+
+        # Add icon on the right if position is 'right'
+        if self.icon and self.icon_position == "right":
+            content_parts.append(self.icon)
 
         button_content: Any = content_parts if len(content_parts) > 1 else self.label
 

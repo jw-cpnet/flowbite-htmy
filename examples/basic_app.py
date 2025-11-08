@@ -232,6 +232,7 @@ async def index() -> dict:
             Button(
                 label="Choose plan",
                 icon=get_icon(Icon.ARROW_RIGHT, class_="w-3.5 h-3.5 ms-2"),
+                icon_position="right",
                 color=Color.PRIMARY,
             ),
             class_="flex flex-wrap gap-2 mb-12",
