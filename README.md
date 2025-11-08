@@ -27,25 +27,40 @@ pip install flowbite-htmy[fastapi]
 
 ## Quick Start
 
+### Recommended: Hybrid Approach (Jinja + htmy)
+
+Use Jinja for layouts and htmy for components:
+
 ```python
 from fastapi import FastAPI
-from fasthx.htmy import HTMY
+from fastapi.templating import Jinja2Templates
+from fasthx.jinja import Jinja
+from htmy import Renderer, html
 from flowbite_htmy.components import Button
-from flowbite_htmy.types import Color, Size
+from flowbite_htmy.types import Color
 
 app = FastAPI()
-htmy = HTMY()
+templates = Jinja2Templates(directory="templates")
+jinja = Jinja(templates)
+renderer = Renderer()
 
 @app.get("/")
-@htmy.page(lambda _: Button(
-    label="Click Me",
-    color=Color.PRIMARY,
-    size=Size.LG,
-    hx_get="/clicked",
-))
-def index() -> None:
-    ...
+@jinja.page("base.html.jinja")
+async def index():
+    # Build components with htmy (type-safe!)
+    buttons = html.div(
+        Button(label="Primary", color=Color.PRIMARY),
+        Button(label="Success", color=Color.SUCCESS),
+    )
+
+    # Render and pass to Jinja template
+    return {
+        "title": "My App",
+        "content": await renderer.render(buttons)
+    }
 ```
+
+See `examples/` for complete working example with dark mode toggle.
 
 ## Requirements
 
