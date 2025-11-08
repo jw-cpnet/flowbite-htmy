@@ -6,25 +6,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 flowbite-htmy is a Python library that recreates Flowbite UI components using htmy for type-safe, maintainable server-side rendering with FastAPI and HTMX. The project follows a strict Test-Driven Development (TDD) approach.
 
-**Status**: Alpha (v0.1.0) - Initial scaffolding complete, Phase 1 components in progress
+**Status**: Alpha (v0.1.0) - Phase 1 complete (5 components), hybrid Jinja + htmy architecture
 
 ## Core Architecture
 
+### Hybrid Jinja + htmy Pattern
+
+**CRITICAL DECISION:** This project uses a hybrid approach for optimal results:
+
+- **Jinja templates** (.html.jinja) → Page layouts, JavaScript, meta tags, full HTML structure
+- **htmy components** (Python) → Type-safe UI elements (buttons, cards, alerts, etc.)
+- **fasthx** → Integration layer between FastAPI, Jinja, and htmy
+
+**Why hybrid?** Pure htmy has JavaScript escaping issues. Jinja excels at layouts and scripts, while htmy excels at type-safe components.
+
 ### Component Philosophy
 
-This library implements Flowbite components in two styles:
+This library implements Flowbite UI components as htmy components:
 
-1. **Class-Based Components** (for complex/stateful components):
+1. **Class-Based Components** (primary pattern used):
    - Use `@dataclass(frozen=True, kw_only=True)`
    - Implement `htmy(self, context: Context) -> Component` method
    - Store props as dataclass fields
-   - Used for components with complex state or multiple variants (e.g., Button, Card)
+   - Used for all current components (Button, Badge, Alert, Card, Avatar)
 
-2. **Function-Based Components** (for simple/stateless components):
+2. **Function-Based Components** (alternative for very simple cases):
    - Use `@component` decorator from htmy
    - Take props as function parameters with `context: Context` as last param
    - Return Component directly
-   - Used for simple display components (e.g., Badge, Icon)
+   - Currently unused but available for future simple components
 
 ### Key Utilities
 
@@ -223,24 +233,32 @@ Library tracks specific versions:
 
 When updating, check for breaking changes and update all components.
 
-## Phase 1 Components (Current Focus)
+## Phase 1 Components (✅ COMPLETE)
 
-Implement in this order:
-1. **Button** - Primary interactive element
-2. **Badge** - Simple indicator
-3. **Alert** - Notification/message
-4. **Card** - Content container
-5. **Avatar** - User image/placeholder
+All Phase 1 components implemented with TDD:
+1. ✅ **Button** - Primary interactive element (100% coverage)
+2. ✅ **Badge** - Simple indicator (98% coverage)
+3. ✅ **Alert** - Notification/message (98% coverage)
+4. ✅ **Card** - Content container (96% coverage)
+5. ✅ **Avatar** - User image/placeholder (94% coverage)
 
 These are CSS-only components demonstrating core patterns.
 
+**Note:** Layout components (PageLayout, Footer, Navbar) were removed as they're redundant with the hybrid Jinja + htmy pattern. Use Jinja templates for layouts instead.
+
 ## Common Patterns
 
-### Conditional Dark Mode Classes
+### Dark Mode Classes (Always Include)
 ```python
+# ✅ CORRECT - Always include dark mode classes
 builder = ClassBuilder("base")
-builder.add_if(theme.dark_mode, "dark:bg-gray-800", "dark:text-white")
+builder.add("dark:bg-gray-800 dark:text-white")
+
+# ❌ WRONG - Don't conditionally add based on theme.dark_mode
+# builder.add_if(theme.dark_mode, "dark:bg-gray-800")  # Old approach
 ```
+
+Tailwind's `dark:` prefix handles activation automatically based on dark mode state.
 
 ### Color Variants
 ```python
