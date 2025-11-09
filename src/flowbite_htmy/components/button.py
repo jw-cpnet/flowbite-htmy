@@ -40,6 +40,9 @@ class Button:
     icon_position: str = "left"
     """Position of the icon relative to the label. Either 'left' or 'right'. Default is 'left'."""
 
+    badge: str | None = None
+    """Optional badge text/count to display after the label (e.g., notification count)."""
+
     color: Color | str = Color.PRIMARY
     """Button color variant. Can be a `Color` enum or a string for duotone gradients (e.g., 'purple-blue')."""
 
@@ -167,6 +170,11 @@ class Button:
         # Add label
         content_parts.append(self.label)
 
+        # Add badge after label if provided
+        if self.badge:
+            badge_classes = self._get_badge_classes()
+            content_parts.append(html.span(self.badge, class_=badge_classes))
+
         # Add icon on the right if position is 'right'
         if self.icon and self.icon_position == "right":
             content_parts.append(self.icon)
@@ -283,3 +291,27 @@ class Button:
 
     def _get_shadow_classes(self) -> str:
         return f"shadow-lg {self._SHADOW_COLORS.get(self.color, '')}"
+
+    def _get_badge_classes(self) -> str:
+        """Get classes for inline notification badge.
+
+        Returns badge classes based on the button color to ensure proper contrast.
+        """
+        # Map button colors to appropriate badge colors
+        badge_color_map = {
+            Color.PRIMARY: "text-blue-800 bg-blue-200",
+            Color.SECONDARY: "text-gray-800 bg-gray-200",
+            Color.SUCCESS: "text-green-800 bg-green-200",
+            Color.DANGER: "text-red-800 bg-red-200",
+            Color.WARNING: "text-yellow-800 bg-yellow-200",
+            Color.INFO: "text-cyan-800 bg-cyan-200",
+            Color.DARK: "text-gray-200 bg-gray-800",
+        }
+
+        # Get color classes, default to blue
+        badge_colors = badge_color_map.get(
+            self.color if isinstance(self.color, Color) else Color.PRIMARY,
+            "text-blue-800 bg-blue-200"
+        )
+
+        return f"inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold {badge_colors} rounded-full"

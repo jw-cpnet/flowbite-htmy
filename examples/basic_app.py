@@ -238,6 +238,24 @@ async def index() -> dict:
             class_="flex flex-wrap gap-2 mb-12",
         ),
 
+        # Button with badge
+        html.h2(
+            "Button with badge",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Buttons with notification badges showing counts or status.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(
+                label="Messages",
+                badge="2",
+                color=Color.PRIMARY,
+            ),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
+
         # Colored shadows
         html.h2(
             "Colored shadows",
