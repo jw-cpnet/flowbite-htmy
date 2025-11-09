@@ -14,9 +14,7 @@ from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
-from flowbite_htmy.components import Badge
 from flowbite_htmy.icons import Icon, Payment, Social, get_icon, get_payment_icon, get_social_icon
-from flowbite_htmy.types import Color
 
 app = FastAPI(title="Flowbite-HTMY Card Showcase")
 templates = Jinja2Templates(directory="examples/templates")
@@ -1167,7 +1165,10 @@ async def index() -> dict:
                         html.a(
                             get_payment_icon(Payment.METAMASK, class_="h-4"),
                             html.span("MetaMask", class_="flex-1 ms-3 whitespace-nowrap"),
-                            Badge(label="Popular", color=Color.GRAY, class_="ms-3"),
+                            html.span(
+                                "Popular",
+                                class_="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded-sm dark:bg-gray-700 dark:text-gray-400",
+                            ),
                             href="#",
                             class_="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white",
                         ),
