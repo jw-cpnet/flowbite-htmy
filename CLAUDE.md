@@ -106,9 +106,13 @@ ruff format src/flowbite_htmy
 
 ### Running Examples
 ```bash
-# Run basic FastAPI example
-python examples/basic_app.py
-# Server runs on http://localhost:8000
+# Run button showcase app
+python examples/buttons.py
+
+# Or run badge showcase app
+python examples/badges.py
+
+# Both run on http://localhost:8000
 ```
 
 ## TDD Workflow
