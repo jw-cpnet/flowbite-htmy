@@ -1002,6 +1002,145 @@ async def index() -> dict:
             ),
             class_="mb-12",
         ),
+        # 12. Testimonial card
+        html.h2(
+            "Testimonial card",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Grid of testimonial cards with quotes and author information.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                # Testimonial 1
+                html.figure(
+                    html.blockquote(
+                        html.h3(
+                            "Very easy this was to integrate",
+                            class_="text-lg font-semibold text-gray-900 dark:text-white",
+                        ),
+                        html.p(
+                            "If you care for your time, I hands down would go with this.\"",
+                            class_="my-4",
+                        ),
+                        class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
+                    ),
+                    html.figcaption(
+                        html.img(
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png",
+                            alt="profile picture",
+                            class_="rounded-full w-9 h-9",
+                        ),
+                        html.div(
+                            html.div("Bonnie Green"),
+                            html.div(
+                                "Developer at Open AI",
+                                class_="text-sm text-gray-500 dark:text-gray-400",
+                            ),
+                            class_="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3",
+                        ),
+                        class_="flex items-center justify-center",
+                    ),
+                    class_="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700",
+                ),
+                # Testimonial 2
+                html.figure(
+                    html.blockquote(
+                        html.h3(
+                            "Solid foundation for any project",
+                            class_="text-lg font-semibold text-gray-900 dark:text-white",
+                        ),
+                        html.p(
+                            "Designing with Figma components that can be easily translated to the utility classes of Tailwind CSS is a huge timesaver!\"",
+                            class_="my-4",
+                        ),
+                        class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
+                    ),
+                    html.figcaption(
+                        html.img(
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png",
+                            alt="profile picture",
+                            class_="rounded-full w-9 h-9",
+                        ),
+                        html.div(
+                            html.div("Roberta Casas"),
+                            html.div(
+                                "Lead designer at Dropbox",
+                                class_="text-sm text-gray-500 dark:text-gray-400",
+                            ),
+                            class_="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3",
+                        ),
+                        class_="flex items-center justify-center",
+                    ),
+                    class_="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700",
+                ),
+                # Testimonial 3
+                html.figure(
+                    html.blockquote(
+                        html.h3(
+                            "Mindblowing workflow",
+                            class_="text-lg font-semibold text-gray-900 dark:text-white",
+                        ),
+                        html.p(
+                            "Aesthetically, the well designed components are beautiful and will undoubtedly level up your next application.\"",
+                            class_="my-4",
+                        ),
+                        class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
+                    ),
+                    html.figcaption(
+                        html.img(
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png",
+                            alt="profile picture",
+                            class_="rounded-full w-9 h-9",
+                        ),
+                        html.div(
+                            html.div("Jese Leos"),
+                            html.div(
+                                "Software Engineer at Facebook",
+                                class_="text-sm text-gray-500 dark:text-gray-400",
+                            ),
+                            class_="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3",
+                        ),
+                        class_="flex items-center justify-center",
+                    ),
+                    class_="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-es-lg md:border-b-0 md:border-e dark:bg-gray-800 dark:border-gray-700",
+                ),
+                # Testimonial 4
+                html.figure(
+                    html.blockquote(
+                        html.h3(
+                            "Efficient Collaborating",
+                            class_="text-lg font-semibold text-gray-900 dark:text-white",
+                        ),
+                        html.p(
+                            "You have many examples that can be used to create a fast prototype for your team.\"",
+                            class_="my-4",
+                        ),
+                        class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
+                    ),
+                    html.figcaption(
+                        html.img(
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png",
+                            alt="profile picture",
+                            class_="rounded-full w-9 h-9",
+                        ),
+                        html.div(
+                            html.div("Joseph McFall"),
+                            html.div(
+                                "CTO at Google",
+                                class_="text-sm text-gray-500 dark:text-gray-400",
+                            ),
+                            class_="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3",
+                        ),
+                        class_="flex items-center justify-center",
+                    ),
+                    class_="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-b-lg md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700",
+                ),
+                class_="grid mb-8 border border-gray-200 rounded-lg shadow-xs dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800",
+            ),
+            class_="mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
