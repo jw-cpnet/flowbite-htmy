@@ -41,6 +41,7 @@ htmlcov/
 *.swo
 *~
 .DS_Store
+.claude/
 
 # Project specific
 *.log
