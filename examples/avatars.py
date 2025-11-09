@@ -172,29 +172,61 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            # Online status
+            # Rounded avatar with top green dot
             html.div(
                 html.div(
-                    Avatar(
+                    html.img(
                         src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                        alt="User online",
+                        alt="",
+                        class_="w-10 h-10 rounded-full",
                     ),
                     html.span(
-                        class_="top-0 start-7 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"
+                        class_="top-0 left-7 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"
                     ),
                     class_="relative",
                 ),
                 class_="me-4",
             ),
-            # Offline status
+            # Square avatar with top red dot (with transform)
             html.div(
                 html.div(
-                    Avatar(
+                    html.img(
                         src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                        alt="User offline",
+                        alt="",
+                        class_="w-10 h-10 rounded-sm",
                     ),
                     html.span(
-                        class_="bottom-0 start-7 absolute w-3.5 h-3.5 bg-gray-400 border-2 border-white dark:border-gray-800 rounded-full"
+                        class_="absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"
+                    ),
+                    class_="relative",
+                ),
+                class_="me-4",
+            ),
+            # Rounded avatar with bottom green dot
+            html.div(
+                html.div(
+                    html.img(
+                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                        alt="",
+                        class_="w-10 h-10 rounded-full",
+                    ),
+                    html.span(
+                        class_="bottom-0 left-7 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"
+                    ),
+                    class_="relative",
+                ),
+                class_="me-4",
+            ),
+            # Square avatar with bottom green dot (with transform)
+            html.div(
+                html.div(
+                    html.img(
+                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                        alt="",
+                        class_="w-10 h-10 rounded-sm",
+                    ),
+                    html.span(
+                        class_="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"
                     ),
                     class_="relative",
                 ),
