@@ -92,18 +92,30 @@ async def index() -> dict:
             class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
         ),
         html.p(
-            "Make cards interactive with hover states and links.",
+            "Add icons and inline links within cards.",
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            Card(
-                href="#",
-                title="Noteworthy technology acquisitions 2021",
-                content=html.p(
-                    "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-                    class_="font-normal text-gray-700 dark:text-gray-400",
+            html.div(
+                get_icon(Icon.GIFT, class_="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3"),
+                html.a(
+                    html.h5(
+                        "Need a help in Claim?",
+                        class_="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white",
+                    ),
+                    href="#",
                 ),
-                class_="hover:bg-gray-100 dark:hover:bg-gray-700",
+                html.p(
+                    "Go to this step by step guideline process on how to certify for your weekly benefits:",
+                    class_="mb-3 font-normal text-gray-500 dark:text-gray-400",
+                ),
+                html.a(
+                    "See our guideline",
+                    get_icon(Icon.EXTERNAL_LINK, class_="w-3 h-3 ms-2.5 rtl:rotate-[270deg]"),
+                    href="#",
+                    class_="inline-flex font-medium items-center text-blue-600 hover:underline",
+                ),
+                class_="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700",
             ),
             class_="mb-12",
         ),
