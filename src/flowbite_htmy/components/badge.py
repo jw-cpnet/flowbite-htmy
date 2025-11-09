@@ -1,8 +1,9 @@
 """Badge component for Flowbite."""
 
 from dataclasses import dataclass
+from typing import Any
 
-from htmy import Component, Context, html
+from htmy import Component, Context, SafeStr, html
 
 from flowbite_htmy.base import ClassBuilder, ThemeContext
 from flowbite_htmy.types import Color
@@ -37,6 +38,9 @@ class Badge:
     href: str | None = None
     """Optional URL to make the badge a clickable link."""
 
+    icon: SafeStr | None = None
+    """Optional SVG icon to display before the label."""
+
     class_: str = ""
     """Additional custom classes."""
 
@@ -52,10 +56,19 @@ class Badge:
         theme = ThemeContext.from_context(context)
         classes = self._build_classes(theme)
 
+        # Build content with optional icon
+        content: Any = [self.icon, self.label] if self.icon else self.label
+
         # Render as link if href is provided
         if self.href:
-            return html.a(self.label, href=self.href, class_=classes)
-        return html.span(self.label, class_=classes)
+            if isinstance(content, list):
+                return html.a(*content, href=self.href, class_=classes)
+            return html.a(content, href=self.href, class_=classes)
+
+        # Render as span
+        if isinstance(content, list):
+            return html.span(*content, class_=classes)
+        return html.span(content, class_=classes)
 
     def _build_classes(self, theme: ThemeContext) -> str:
         """Build CSS classes for the badge.
@@ -69,9 +82,11 @@ class Badge:
         # Base badge classes
         base = "font-medium px-2.5 py-0.5"
 
-        # Add link-specific classes
+        # Add layout classes for links or icons
         if self.href:
             base += " inline-flex items-center justify-center"
+        elif self.icon:
+            base += " inline-flex items-center"
 
         builder = ClassBuilder(base)
 

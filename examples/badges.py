@@ -15,6 +15,7 @@ from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
 from flowbite_htmy.components import Badge
+from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color
 
 app = FastAPI(title="Flowbite-HTMY Badge Showcase")
@@ -126,6 +127,31 @@ async def index() -> dict:
         html.div(
             Badge(label="Badge link", color=Color.BLUE, border=True, href="#"),
             Badge(label="Badge link", color=Color.BLUE, border=True, large=True, href="#"),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
+
+        # Badges with icon
+        html.h2(
+            "Badges with icon",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Use the icon prop to add SVG icons before the badge text.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Badge(
+                label="3 days ago",
+                icon=get_icon(Icon.CLOCK, class_="w-2.5 h-2.5 me-1.5"),
+                color=Color.GRAY,
+                border=True,
+            ),
+            Badge(
+                label="2 minutes ago",
+                icon=get_icon(Icon.CLOCK, class_="w-2.5 h-2.5 me-1.5"),
+                color=Color.BLUE,
+                border=True,
+            ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
     )

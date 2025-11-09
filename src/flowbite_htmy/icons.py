@@ -58,6 +58,7 @@ class Icon(str, Enum):
     SHOPPING_CART = "shopping-cart"
     ARROW_RIGHT = "arrow-right"
     THUMBS_UP = "thumbs-up"
+    CLOCK = "clock"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -212,6 +213,11 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
     Icon.THUMBS_UP: (
         '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">'
         '<path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"/>'
+        "</svg>"
+    ),
+    Icon.CLOCK: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">'
+        '<path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>'
         "</svg>"
     ),
 }
