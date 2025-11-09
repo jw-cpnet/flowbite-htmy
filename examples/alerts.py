@@ -290,62 +290,131 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            Alert(
-                message=html.span(
-                    "Info alert! Change a few things up and ",
-                    html.a("try submitting again", href="#", class_="font-medium underline hover:no-underline"),
-                    ".",
+            # Info border accent - custom layout to match Flowbite exactly
+            html.div(
+                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
+                html.div(
+                    "A simple info alert with an ",
+                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    ". Give it a click if you like.",
+                    class_="ms-3 text-sm font-medium",
                 ),
-                color=Color.INFO,
-                border_accent=True,
-                dismissible=True,
+                html.button(
+                    html.span("Dismiss", class_="sr-only"),
+                    html.raw(
+                        '<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">'
+                        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
+                        "</svg>"
+                    ),
+                    type="button",
+                    class_="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700",
+                    **{"data-dismiss-target": "#alert-border-1", "aria-label": "Close"},
+                ),
                 id="alert-border-1",
+                role="alert",
+                class_="flex items-center p-4 mb-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800",
             ),
-            Alert(
-                message=html.span(
-                    "Danger alert! Change a few things up and ",
-                    html.a("try submitting again", href="#", class_="font-medium underline hover:no-underline"),
-                    ".",
+            # Danger border accent
+            html.div(
+                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
+                html.div(
+                    "A simple danger alert with an ",
+                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    ". Give it a click if you like.",
+                    class_="ms-3 text-sm font-medium",
                 ),
-                color=Color.DANGER,
-                border_accent=True,
-                dismissible=True,
+                html.button(
+                    html.span("Dismiss", class_="sr-only"),
+                    html.raw(
+                        '<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">'
+                        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
+                        "</svg>"
+                    ),
+                    type="button",
+                    class_="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700",
+                    **{"data-dismiss-target": "#alert-border-2", "aria-label": "Close"},
+                ),
                 id="alert-border-2",
+                role="alert",
+                class_="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800",
             ),
-            Alert(
-                message=html.span(
-                    "Success alert! Change a few things up and ",
-                    html.a("try submitting again", href="#", class_="font-medium underline hover:no-underline"),
-                    ".",
+            # Success border accent
+            html.div(
+                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
+                html.div(
+                    "A simple success alert with an ",
+                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    ". Give it a click if you like.",
+                    class_="ms-3 text-sm font-medium",
                 ),
-                color=Color.SUCCESS,
-                border_accent=True,
-                dismissible=True,
+                html.button(
+                    html.span("Dismiss", class_="sr-only"),
+                    html.raw(
+                        '<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">'
+                        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
+                        "</svg>"
+                    ),
+                    type="button",
+                    class_="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700",
+                    **{"data-dismiss-target": "#alert-border-3", "aria-label": "Close"},
+                ),
                 id="alert-border-3",
+                role="alert",
+                class_="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800",
             ),
-            Alert(
-                message=html.span(
-                    "Warning alert! Change a few things up and ",
-                    html.a("try submitting again", href="#", class_="font-medium underline hover:no-underline"),
-                    ".",
+            # Warning border accent
+            html.div(
+                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
+                html.div(
+                    "A simple warning alert with an ",
+                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    ". Give it a click if you like.",
+                    class_="ms-3 text-sm font-medium",
                 ),
-                color=Color.WARNING,
-                border_accent=True,
-                dismissible=True,
+                html.button(
+                    html.span("Dismiss", class_="sr-only"),
+                    html.raw(
+                        '<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">'
+                        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
+                        "</svg>"
+                    ),
+                    type="button",
+                    class_="ms-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700",
+                    **{"data-dismiss-target": "#alert-border-4", "aria-label": "Close"},
+                ),
                 id="alert-border-4",
+                role="alert",
+                class_="flex items-center p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800",
             ),
-            Alert(
-                message=html.span(
-                    "Dark alert! Change a few things up and ",
-                    html.a("try submitting again", href="#", class_="font-medium underline hover:no-underline"),
-                    ".",
+            # Dark/Gray border accent
+            html.div(
+                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 dark:text-gray-300"),
+                html.div(
+                    "A simple dark alert with an ",
+                    html.a(
+                        "example link",
+                        href="#",
+                        class_="font-semibold underline hover:text-gray-800 hover:no-underline dark:text-gray-300",
+                    ),
+                    ". Give it a click if you like.",
+                    class_="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300",
                 ),
-                color=Color.DARK,
-                border_accent=True,
-                dismissible=True,
+                html.button(
+                    html.span("Dismiss", class_="sr-only"),
+                    html.raw(
+                        '<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">'
+                        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
+                        "</svg>"
+                    ),
+                    type="button",
+                    class_="ms-auto -mx-1.5 -my-1.5 bg-gray-50 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white",
+                    **{"data-dismiss-target": "#alert-border-5", "aria-label": "Close"},
+                ),
                 id="alert-border-5",
+                role="alert",
+                class_="flex items-center p-4 border-t-4 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-600",
             ),
-            class_="space-y-4 mb-12",
+            class_="mb-12",
         ),
         # 7. Additional content
         html.h2(
