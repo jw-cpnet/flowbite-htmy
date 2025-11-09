@@ -299,6 +299,156 @@ async def index() -> dict:
             ),
             class_="mb-12",
         ),
+        # 8. Card with navigation tabs
+        html.h2(
+            "Card with navigation tabs",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Interactive tabbed cards with switchable content panels.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                html.ul(
+                    html.li(
+                        html.button(
+                            "About",
+                            id="about-tab",
+                            type="button",
+                            role="tab",
+                            class_="inline-block p-4 text-blue-600 rounded-ss-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500",
+                            **{
+                                "data-tabs-target": "#about",
+                                "aria-controls": "about",
+                                "aria-selected": "true",
+                            },
+                        ),
+                        class_="me-2",
+                    ),
+                    html.li(
+                        html.button(
+                            "Services",
+                            id="services-tab",
+                            type="button",
+                            role="tab",
+                            class_="inline-block p-4 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300",
+                            **{
+                                "data-tabs-target": "#services",
+                                "aria-controls": "services",
+                                "aria-selected": "false",
+                            },
+                        ),
+                        class_="me-2",
+                    ),
+                    html.li(
+                        html.button(
+                            "Facts",
+                            id="statistics-tab",
+                            type="button",
+                            role="tab",
+                            class_="inline-block p-4 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300",
+                            **{
+                                "data-tabs-target": "#statistics",
+                                "aria-controls": "statistics",
+                                "aria-selected": "false",
+                            },
+                        ),
+                        class_="me-2",
+                    ),
+                    id="defaultTab",
+                    role="tablist",
+                    class_="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800",
+                    **{"data-tabs-toggle": "#defaultTabContent"},
+                ),
+                html.div(
+                    # About tab
+                    html.div(
+                        html.h2(
+                            "Powering innovation & trust at 200,000+ companies worldwide",
+                            class_="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white",
+                        ),
+                        html.p(
+                            "Empower Developers, IT Ops, and business teams to collaborate at high velocity. Respond to changes and deliver great customer and employee service experiences fast.",
+                            class_="mb-3 text-gray-500 dark:text-gray-400",
+                        ),
+                        html.a(
+                            "Learn more",
+                            get_icon(Icon.CHEVRON_RIGHT, class_="w-2.5 h-2.5 ms-2 rtl:rotate-180"),
+                            href="#",
+                            class_="inline-flex items-center font-medium text-blue-600 hover:text-blue-800 dark:text-blue-500 dark:hover:text-blue-700",
+                        ),
+                        id="about",
+                        role="tabpanel",
+                        class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
+                        **{"aria-labelledby": "about-tab"},
+                    ),
+                    # Services tab
+                    html.div(
+                        html.h2(
+                            "We invest in the world's potential",
+                            class_="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white",
+                        ),
+                        html.ul(
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Dynamic reports and dashboards", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Templates for everyone", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Development workflow", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Limitless business automation", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            role="list",
+                            class_="space-y-4 text-gray-500 dark:text-gray-400",
+                        ),
+                        id="services",
+                        role="tabpanel",
+                        class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
+                        **{"aria-labelledby": "services-tab"},
+                    ),
+                    # Statistics tab
+                    html.div(
+                        html.dl(
+                            html.div(
+                                html.dt("73M+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Developers", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col",
+                            ),
+                            html.div(
+                                html.dt("100M+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Public repositories", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col",
+                            ),
+                            html.div(
+                                html.dt("1000s", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Open source projects", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col",
+                            ),
+                            class_="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8",
+                        ),
+                        id="statistics",
+                        role="tabpanel",
+                        class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
+                        **{"aria-labelledby": "statistics-tab"},
+                    ),
+                    id="defaultTabContent",
+                ),
+                class_="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700",
+            ),
+            class_="mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
