@@ -216,6 +216,27 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
+
+        # Dismissible badges (chips)
+        html.h2(
+            "Dismissible badges",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Badges with close buttons that can be dismissed using data-dismiss-target.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Badge(label="Default", color=Color.BLUE, dismissible=True, id="badge-dismiss-default"),
+            Badge(label="Dark", color=Color.GRAY, dismissible=True, id="badge-dismiss-dark"),
+            Badge(label="Red", color=Color.RED, dismissible=True, id="badge-dismiss-red"),
+            Badge(label="Green", color=Color.GREEN, dismissible=True, id="badge-dismiss-green"),
+            Badge(label="Yellow", color=Color.YELLOW, dismissible=True, id="badge-dismiss-yellow"),
+            Badge(label="Indigo", color=Color.INDIGO, dismissible=True, id="badge-dismiss-indigo"),
+            Badge(label="Purple", color=Color.PURPLE, dismissible=True, id="badge-dismiss-purple"),
+            Badge(label="Pink", color=Color.PINK, dismissible=True, id="badge-dismiss-pink"),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
