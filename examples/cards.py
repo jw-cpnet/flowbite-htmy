@@ -525,7 +525,7 @@ async def index() -> dict:
                     **{"data-tabs-toggle": "#fullWidthTabContent"},
                 ),
                 html.div(
-                    # Statistics tab
+                    # Statistics tab (default visible)
                     html.div(
                         html.dl(
                             html.div(
@@ -562,7 +562,7 @@ async def index() -> dict:
                         ),
                         id="stats",
                         role="tabpanel",
-                        class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
+                        class_="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
                         **{"aria-labelledby": "stats-tab"},
                     ),
                     # Services tab
