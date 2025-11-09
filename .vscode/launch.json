@@ -78,6 +78,32 @@
             },
             "cwd": "${workspaceFolder}",
             "args": []
+        },
+        {
+            "name": "Python: Card Showcase",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/cards.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Card Showcase (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/cards.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
         }
     ]
 }
