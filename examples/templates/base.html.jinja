@@ -20,9 +20,6 @@
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@2.0.2"></script>
 
-    <!-- Flowbite JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-
     <!-- Dark mode toggle script -->
     <script>
         // On page load, check localStorage and apply theme BEFORE page renders
@@ -100,5 +97,8 @@
         <!-- Main content (htmy-rendered components) -->
         {{ content | safe }}
     </div>
+
+    <!-- Flowbite JavaScript - loaded at end of body for proper initialization -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>

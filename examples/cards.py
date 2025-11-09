@@ -492,13 +492,13 @@ async def index() -> dict:
                     html.li(
                         html.button(
                             "Services",
-                            id="about-tab",
+                            id="services-full-tab",
                             type="button",
                             role="tab",
                             class_="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600",
                             **{
-                                "data-tabs-target": "#about",
-                                "aria-controls": "about",
+                                "data-tabs-target": "#services-full",
+                                "aria-controls": "services-full",
                                 "aria-selected": "false",
                             },
                         ),
@@ -595,10 +595,10 @@ async def index() -> dict:
                             role="list",
                             class_="space-y-4 text-gray-500 dark:text-gray-400",
                         ),
-                        id="about",
+                        id="services-full",
                         role="tabpanel",
                         class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
-                        **{"aria-labelledby": "about-tab"},
+                        **{"aria-labelledby": "services-full-tab"},
                     ),
                     # FAQ tab with accordion
                     html.div(
