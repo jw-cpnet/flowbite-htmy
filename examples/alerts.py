@@ -372,7 +372,7 @@ async def index() -> dict:
             ),
             # Dark/Gray border accent
             html.div(
-                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 dark:text-gray-300"),
+                get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 text-gray-800 dark:text-gray-300"),
                 html.div(
                     "A simple dark alert with an ",
                     html.a(
@@ -406,162 +406,162 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            Alert(
-                message=html.div(
-                    html.div(
-                        info_icon(),
-                        html.h3("This is a info alert", class_="text-lg font-medium"),
-                        class_="flex items-center",
-                    ),
-                    html.div(
-                        "More info about this info alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-                        class_="mt-2 mb-4 text-sm",
-                    ),
-                    html.div(
-                        html.button(
-                            get_icon(Icon.BADGE_CHECK, class_="w-4 h-4 me-2"),
-                            "View more",
-                            type="button",
-                            class_="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                        ),
-                        html.button(
-                            "Dismiss",
-                            type="button",
-                            class_="text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800",
-                            **{"data-dismiss-target": "#alert-additional-content-1", "aria-label": "Close"},
-                        ),
-                        class_="flex",
-                    ),
+            # Info alert with additional content - using bordered style
+            html.div(
+                html.div(
+                    get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 me-2"),
+                    html.span("Info", class_="sr-only"),
+                    html.h3("This is a info alert", class_="text-lg font-medium"),
+                    class_="flex items-center",
                 ),
-                color=Color.INFO,
+                html.div(
+                    "More info about this info alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+                    class_="mt-2 mb-4 text-sm",
+                ),
+                html.div(
+                    html.button(
+                        get_icon(Icon.EYE, class_="me-2 h-3 w-3"),
+                        "View more",
+                        type="button",
+                        class_="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                    ),
+                    html.button(
+                        "Dismiss",
+                        type="button",
+                        class_="text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800",
+                        **{"data-dismiss-target": "#alert-additional-content-1", "aria-label": "Close"},
+                    ),
+                    class_="flex",
+                ),
                 id="alert-additional-content-1",
-                class_="",
+                role="alert",
+                class_="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800",
             ),
-            Alert(
-                message=html.div(
-                    html.div(
-                        info_icon(),
-                        html.h3("This is a danger alert", class_="text-lg font-medium"),
-                        class_="flex items-center",
-                    ),
-                    html.div(
-                        "More info about this danger alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-                        class_="mt-2 mb-4 text-sm",
-                    ),
-                    html.div(
-                        html.button(
-                            get_icon(Icon.BADGE_CHECK, class_="w-4 h-4 me-2"),
-                            "View more",
-                            type="button",
-                            class_="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800",
-                        ),
-                        html.button(
-                            "Dismiss",
-                            type="button",
-                            class_="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-400 dark:hover:text-white dark:focus:ring-red-800",
-                            **{"data-dismiss-target": "#alert-additional-content-2", "aria-label": "Close"},
-                        ),
-                        class_="flex",
-                    ),
+            # Danger alert with additional content
+            html.div(
+                html.div(
+                    get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 me-2"),
+                    html.span("Info", class_="sr-only"),
+                    html.h3("This is a danger alert", class_="text-lg font-medium"),
+                    class_="flex items-center",
                 ),
-                color=Color.DANGER,
+                html.div(
+                    "More info about this info danger goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+                    class_="mt-2 mb-4 text-sm",
+                ),
+                html.div(
+                    html.button(
+                        get_icon(Icon.EYE, class_="me-2 h-3 w-3"),
+                        "View more",
+                        type="button",
+                        class_="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800",
+                    ),
+                    html.button(
+                        "Dismiss",
+                        type="button",
+                        class_="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800",
+                        **{"data-dismiss-target": "#alert-additional-content-2", "aria-label": "Close"},
+                    ),
+                    class_="flex",
+                ),
                 id="alert-additional-content-2",
-                class_="",
+                role="alert",
+                class_="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800",
             ),
-            Alert(
-                message=html.div(
-                    html.div(
-                        info_icon(),
-                        html.h3("This is a success alert", class_="text-lg font-medium"),
-                        class_="flex items-center",
-                    ),
-                    html.div(
-                        "More info about this success alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-                        class_="mt-2 mb-4 text-sm",
-                    ),
-                    html.div(
-                        html.button(
-                            get_icon(Icon.BADGE_CHECK, class_="w-4 h-4 me-2"),
-                            "View more",
-                            type="button",
-                            class_="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800",
-                        ),
-                        html.button(
-                            "Dismiss",
-                            type="button",
-                            class_="text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800",
-                            **{"data-dismiss-target": "#alert-additional-content-3", "aria-label": "Close"},
-                        ),
-                        class_="flex",
-                    ),
+            # Success alert with additional content
+            html.div(
+                html.div(
+                    get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 me-2"),
+                    html.span("Info", class_="sr-only"),
+                    html.h3("This is a success alert", class_="text-lg font-medium"),
+                    class_="flex items-center",
                 ),
-                color=Color.SUCCESS,
+                html.div(
+                    "More info about this info success goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+                    class_="mt-2 mb-4 text-sm",
+                ),
+                html.div(
+                    html.button(
+                        get_icon(Icon.EYE, class_="me-2 h-3 w-3"),
+                        "View more",
+                        type="button",
+                        class_="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800",
+                    ),
+                    html.button(
+                        "Dismiss",
+                        type="button",
+                        class_="text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800",
+                        **{"data-dismiss-target": "#alert-additional-content-3", "aria-label": "Close"},
+                    ),
+                    class_="flex",
+                ),
                 id="alert-additional-content-3",
-                class_="",
+                role="alert",
+                class_="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800",
             ),
-            Alert(
-                message=html.div(
-                    html.div(
-                        info_icon(),
-                        html.h3("This is a warning alert", class_="text-lg font-medium"),
-                        class_="flex items-center",
-                    ),
-                    html.div(
-                        "More info about this warning alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-                        class_="mt-2 mb-4 text-sm",
-                    ),
-                    html.div(
-                        html.button(
-                            get_icon(Icon.BADGE_CHECK, class_="w-4 h-4 me-2"),
-                            "View more",
-                            type="button",
-                            class_="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800",
-                        ),
-                        html.button(
-                            "Dismiss",
-                            type="button",
-                            class_="text-yellow-800 bg-transparent border border-yellow-800 hover:bg-yellow-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-yellow-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-yellow-300 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-gray-800 dark:focus:ring-yellow-800",
-                            **{"data-dismiss-target": "#alert-additional-content-4", "aria-label": "Close"},
-                        ),
-                        class_="flex",
-                    ),
+            # Warning alert with additional content
+            html.div(
+                html.div(
+                    get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 me-2"),
+                    html.span("Info", class_="sr-only"),
+                    html.h3("This is a warning alert", class_="text-lg font-medium"),
+                    class_="flex items-center",
                 ),
-                color=Color.WARNING,
+                html.div(
+                    "More info about this info warning goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+                    class_="mt-2 mb-4 text-sm",
+                ),
+                html.div(
+                    html.button(
+                        get_icon(Icon.EYE, class_="me-2 h-3 w-3"),
+                        "View more",
+                        type="button",
+                        class_="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800",
+                    ),
+                    html.button(
+                        "Dismiss",
+                        type="button",
+                        class_="text-yellow-800 bg-transparent border border-yellow-800 hover:bg-yellow-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-yellow-300 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-gray-800 dark:focus:ring-yellow-800",
+                        **{"data-dismiss-target": "#alert-additional-content-4", "aria-label": "Close"},
+                    ),
+                    class_="flex",
+                ),
                 id="alert-additional-content-4",
-                class_="",
+                role="alert",
+                class_="p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800",
             ),
-            Alert(
-                message=html.div(
-                    html.div(
-                        info_icon(),
-                        html.h3("This is a dark alert", class_="text-lg font-medium"),
-                        class_="flex items-center",
-                    ),
-                    html.div(
-                        "More info about this dark alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-                        class_="mt-2 mb-4 text-sm",
-                    ),
-                    html.div(
-                        html.button(
-                            get_icon(Icon.BADGE_CHECK, class_="w-4 h-4 me-2"),
-                            "View more",
-                            type="button",
-                            class_="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800",
-                        ),
-                        html.button(
-                            "Dismiss",
-                            type="button",
-                            class_="text-gray-800 bg-transparent border border-gray-800 hover:bg-gray-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-gray-600 dark:border-gray-600 dark:text-gray-300 dark:hover:text-white dark:focus:ring-gray-800",
-                            **{"data-dismiss-target": "#alert-additional-content-5", "aria-label": "Close"},
-                        ),
-                        class_="flex",
-                    ),
+            # Dark alert with additional content
+            html.div(
+                html.div(
+                    get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 me-2 text-gray-800 dark:text-gray-300"),
+                    html.span("Info", class_="sr-only"),
+                    html.h3("This is a dark alert", class_="text-lg font-medium text-gray-800 dark:text-gray-300"),
+                    class_="flex items-center",
                 ),
-                color=Color.DARK,
+                html.div(
+                    "More info about this info dark goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+                    class_="mt-2 mb-4 text-sm text-gray-800 dark:text-gray-300",
+                ),
+                html.div(
+                    html.button(
+                        get_icon(Icon.EYE, class_="me-2 h-3 w-3 text-white dark:text-gray-300"),
+                        "View more",
+                        type="button",
+                        class_="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-800",
+                    ),
+                    html.button(
+                        "Dismiss",
+                        type="button",
+                        class_="text-gray-800 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-800 dark:text-gray-300 dark:hover:text-white",
+                        **{"data-dismiss-target": "#alert-additional-content-5", "aria-label": "Close"},
+                    ),
+                    class_="flex",
+                ),
                 id="alert-additional-content-5",
-                class_="",
+                role="alert",
+                class_="p-4 border border-gray-300 rounded-lg bg-gray-50 dark:border-gray-600 dark:bg-gray-800",
             ),
-            class_="space-y-4 mb-12",
+            class_="mb-12",
         ),
     )
 

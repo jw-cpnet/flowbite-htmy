@@ -64,6 +64,7 @@ class Icon(str, Enum):
     USER = "user"
     INFO = "info"
     CLOSE = "close"
+    EYE = "eye"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -249,6 +250,11 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
     Icon.CLOSE: (
         '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">'
         '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
+        "</svg>"
+    ),
+    Icon.EYE: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">'
+        '<path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>'
         "</svg>"
     ),
 }
