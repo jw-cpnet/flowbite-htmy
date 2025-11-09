@@ -14,7 +14,6 @@ from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
-from flowbite_htmy.components import Card
 from flowbite_htmy.icons import Icon, get_icon
 
 app = FastAPI(title="Flowbite-HTMY Card Showcase")
@@ -129,22 +128,36 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            Card(
-                image_src="https://flowbite.com/docs/images/blog/image-1.jpg",
-                image_alt="Meaningful alt text for an image that is not purely decorative",
-                title="Noteworthy technology acquisitions 2021",
-                content=html.div(
+            html.div(
+                html.a(
+                    html.img(
+                        src="https://flowbite.com/docs/images/blog/image-1.jpg",
+                        alt="",
+                        class_="rounded-t-lg",
+                    ),
+                    href="#",
+                ),
+                html.div(
+                    html.a(
+                        html.h5(
+                            "Noteworthy technology acquisitions 2021",
+                            class_="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white",
+                        ),
+                        href="#",
+                    ),
                     html.p(
                         "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
                         class_="mb-3 font-normal text-gray-700 dark:text-gray-400",
                     ),
                     html.a(
                         "Read more",
-                        get_icon(Icon.ARROW_RIGHT, class_="w-3.5 h-3.5 ms-2"),
+                        get_icon(Icon.ARROW_RIGHT, class_="rtl:rotate-180 w-3.5 h-3.5 ms-2"),
                         href="#",
                         class_="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
                     ),
+                    class_="p-5",
                 ),
+                class_="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700",
             ),
             class_="mb-12",
         ),
