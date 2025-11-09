@@ -179,6 +179,43 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
+
+        # Badges with icon only
+        html.h2(
+            "Badges with icon only",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Circular badges containing only icons with screen-reader labels.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Badge(
+                label="Icon description",
+                icon=get_icon(Icon.CHECK, class_="w-2.5 h-2.5"),
+                icon_only=True,
+                color=Color.GRAY,
+            ),
+            Badge(
+                label="Icon description",
+                icon=get_icon(Icon.BADGE_CHECK, class_="w-3 h-3"),
+                icon_only=True,
+                color=Color.BLUE,
+            ),
+            Badge(
+                label="Icon description",
+                icon=get_icon(Icon.USER, class_="w-3 h-3"),
+                icon_only=True,
+                color=Color.GRAY,
+            ),
+            Badge(
+                label="Icon description",
+                icon=get_icon(Icon.INFO, class_="w-3 h-3"),
+                icon_only=True,
+                color=Color.BLUE,
+            ),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
     )
 
     # Render htmy components to HTML string

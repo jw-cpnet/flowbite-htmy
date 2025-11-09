@@ -41,6 +41,9 @@ class Badge:
     icon: SafeStr | None = None
     """Optional SVG icon to display before the label."""
 
+    icon_only: bool = False
+    """If True, only the icon is displayed and label becomes screen-reader only."""
+
     class_: str = ""
     """Additional custom classes."""
 
@@ -57,7 +60,19 @@ class Badge:
         classes = self._build_classes(theme)
 
         # Build content with optional icon
-        content: Any = [self.icon, self.label] if self.icon else self.label
+        content_parts: list[Any] = []
+
+        if self.icon:
+            content_parts.append(self.icon)
+
+        # Add label (screen-reader only if icon_only is True)
+        if self.icon_only:
+            content_parts.append(html.span(self.label, class_="sr-only"))
+        else:
+            content_parts.append(self.label)
+
+        # Use single content if only one part, otherwise use list
+        content: Any = content_parts if len(content_parts) > 1 else self.label
 
         # Render as link if href is provided
         if self.href:
@@ -80,13 +95,17 @@ class Badge:
             Complete class string.
         """
         # Base badge classes
-        base = "font-medium px-2.5 py-0.5"
+        if self.icon_only:
+            # Icon-only badges are circular with fixed dimensions
+            base = "inline-flex items-center justify-center w-6 h-6 font-semibold"
+        else:
+            base = "font-medium px-2.5 py-0.5"
 
-        # Add layout classes for links or icons
-        if self.href:
-            base += " inline-flex items-center justify-center"
-        elif self.icon:
-            base += " inline-flex items-center"
+            # Add layout classes for links or icons
+            if self.href:
+                base += " inline-flex items-center justify-center"
+            elif self.icon:
+                base += " inline-flex items-center"
 
         builder = ClassBuilder(base)
 
@@ -96,8 +115,8 @@ class Badge:
         else:
             builder.add("text-xs")
 
-        # Border radius
-        if self.rounded:
+        # Border radius (icon-only badges are always circular)
+        if self.icon_only or self.rounded:
             builder.add("rounded-full")
         else:
             builder.add("rounded-sm")
