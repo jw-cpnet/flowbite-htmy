@@ -14,7 +14,7 @@ from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
-from flowbite_htmy.icons import Icon, get_icon
+from flowbite_htmy.icons import Icon, Social, get_icon, get_social_icon
 
 app = FastAPI(title="Flowbite-HTMY Card Showcase")
 templates = Jinja2Templates(directory="examples/templates")
@@ -250,6 +250,52 @@ async def index() -> dict:
                     class_="px-5 pb-5",
                 ),
                 class_="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700",
+            ),
+            class_="mb-12",
+        ),
+        # 7. Call to action card
+        html.h2(
+            "Call to action card",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Centered content with download buttons for multiple platforms.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                html.h5(
+                    "Work fast from anywhere",
+                    class_="mb-2 text-3xl font-bold text-gray-900 dark:text-white",
+                ),
+                html.p(
+                    "Stay up to date and move work forward with Flowbite on iOS & Android. Download the app today.",
+                    class_="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400",
+                ),
+                html.div(
+                    html.a(
+                        get_social_icon(Social.APPLE, class_="me-3 w-7 h-7"),
+                        html.div(
+                            html.div("Download on the", class_="mb-1 text-xs"),
+                            html.div("Mac App Store", class_="-mt-1 font-sans text-sm font-semibold"),
+                            class_="text-left rtl:text-right",
+                        ),
+                        href="#",
+                        class_="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700",
+                    ),
+                    html.a(
+                        get_social_icon(Social.GOOGLE_PLAY, class_="me-3 w-7 h-7"),
+                        html.div(
+                            html.div("Get in on", class_="mb-1 text-xs"),
+                            html.div("Google Play", class_="-mt-1 font-sans text-sm font-semibold"),
+                            class_="text-left rtl:text-right",
+                        ),
+                        href="#",
+                        class_="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700",
+                    ),
+                    class_="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse",
+                ),
+                class_="w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700",
             ),
             class_="mb-12",
         ),
