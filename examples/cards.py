@@ -749,6 +749,190 @@ async def index() -> dict:
             ),
             class_="mb-12",
         ),
+        # 10. Card with list
+        html.h2(
+            "Card with list",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Display list items with avatars, names, and values.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                html.div(
+                    html.h5(
+                        "Latest Customers",
+                        class_="text-xl font-bold leading-none text-gray-900 dark:text-white",
+                    ),
+                    html.a(
+                        "View all",
+                        href="#",
+                        class_="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500",
+                    ),
+                    class_="flex items-center justify-between mb-4",
+                ),
+                html.div(
+                    html.ul(
+                        # Customer 1
+                        html.li(
+                            html.div(
+                                html.div(
+                                    html.img(
+                                        src="https://flowbite.com/docs/images/people/profile-picture-1.jpg",
+                                        alt="Neil image",
+                                        class_="w-8 h-8 rounded-full",
+                                    ),
+                                    class_="shrink-0",
+                                ),
+                                html.div(
+                                    html.p(
+                                        "Neil Sims",
+                                        class_="text-sm font-medium text-gray-900 truncate dark:text-white",
+                                    ),
+                                    html.p(
+                                        "email@windster.com",
+                                        class_="text-sm text-gray-500 truncate dark:text-gray-400",
+                                    ),
+                                    class_="flex-1 min-w-0 ms-4",
+                                ),
+                                html.div(
+                                    "$320",
+                                    class_="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white",
+                                ),
+                                class_="flex items-center",
+                            ),
+                            class_="py-3 sm:py-4",
+                        ),
+                        # Customer 2
+                        html.li(
+                            html.div(
+                                html.div(
+                                    html.img(
+                                        src="https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+                                        alt="Bonnie image",
+                                        class_="w-8 h-8 rounded-full",
+                                    ),
+                                    class_="shrink-0",
+                                ),
+                                html.div(
+                                    html.p(
+                                        "Bonnie Green",
+                                        class_="text-sm font-medium text-gray-900 truncate dark:text-white",
+                                    ),
+                                    html.p(
+                                        "email@windster.com",
+                                        class_="text-sm text-gray-500 truncate dark:text-gray-400",
+                                    ),
+                                    class_="flex-1 min-w-0 ms-4",
+                                ),
+                                html.div(
+                                    "$3467",
+                                    class_="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white",
+                                ),
+                                class_="flex items-center",
+                            ),
+                            class_="py-3 sm:py-4",
+                        ),
+                        # Customer 3
+                        html.li(
+                            html.div(
+                                html.div(
+                                    html.img(
+                                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg",
+                                        alt="Michael image",
+                                        class_="w-8 h-8 rounded-full",
+                                    ),
+                                    class_="shrink-0",
+                                ),
+                                html.div(
+                                    html.p(
+                                        "Michael Gough",
+                                        class_="text-sm font-medium text-gray-900 truncate dark:text-white",
+                                    ),
+                                    html.p(
+                                        "email@windster.com",
+                                        class_="text-sm text-gray-500 truncate dark:text-gray-400",
+                                    ),
+                                    class_="flex-1 min-w-0 ms-4",
+                                ),
+                                html.div(
+                                    "$67",
+                                    class_="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white",
+                                ),
+                                class_="flex items-center",
+                            ),
+                            class_="py-3 sm:py-4",
+                        ),
+                        # Customer 4
+                        html.li(
+                            html.div(
+                                html.div(
+                                    html.img(
+                                        src="https://flowbite.com/docs/images/people/profile-picture-4.jpg",
+                                        alt="Lana image",
+                                        class_="w-8 h-8 rounded-full",
+                                    ),
+                                    class_="shrink-0",
+                                ),
+                                html.div(
+                                    html.p(
+                                        "Lana Byrd",
+                                        class_="text-sm font-medium text-gray-900 truncate dark:text-white",
+                                    ),
+                                    html.p(
+                                        "email@windster.com",
+                                        class_="text-sm text-gray-500 truncate dark:text-gray-400",
+                                    ),
+                                    class_="flex-1 min-w-0 ms-4",
+                                ),
+                                html.div(
+                                    "$367",
+                                    class_="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white",
+                                ),
+                                class_="flex items-center",
+                            ),
+                            class_="py-3 sm:py-4",
+                        ),
+                        # Customer 5
+                        html.li(
+                            html.div(
+                                html.div(
+                                    html.img(
+                                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                                        alt="Thomas image",
+                                        class_="w-8 h-8 rounded-full",
+                                    ),
+                                    class_="shrink-0",
+                                ),
+                                html.div(
+                                    html.p(
+                                        "Thomes Lean",
+                                        class_="text-sm font-medium text-gray-900 truncate dark:text-white",
+                                    ),
+                                    html.p(
+                                        "email@windster.com",
+                                        class_="text-sm text-gray-500 truncate dark:text-gray-400",
+                                    ),
+                                    class_="flex-1 min-w-0 ms-4",
+                                ),
+                                html.div(
+                                    "$2367",
+                                    class_="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white",
+                                ),
+                                class_="flex items-center",
+                            ),
+                            class_="pt-3 pb-0 sm:pt-4",
+                        ),
+                        role="list",
+                        class_="divide-y divide-gray-200 dark:divide-gray-700",
+                    ),
+                    class_="flow-root",
+                ),
+                class_="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700",
+            ),
+            class_="mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
