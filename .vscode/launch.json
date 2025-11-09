@@ -2,10 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Basic App",
+            "name": "Python: Buttons Showcase",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/examples/basic_app.py",
+            "program": "${workspaceFolder}/examples/buttons.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "env": {
@@ -14,10 +14,36 @@
             "cwd": "${workspaceFolder}"
         },
         {
-            "name": "Python: Basic App (Debug Mode)",
+            "name": "Python: Buttons Showcase (Debug Mode)",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/examples/basic_app.py",
+            "program": "${workspaceFolder}/examples/buttons.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "name": "Python: Badge Showcase",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/badges.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Badge Showcase (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/badges.py",
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
