@@ -14,7 +14,9 @@ from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
-from flowbite_htmy.icons import Icon, Social, get_icon, get_social_icon
+from flowbite_htmy.components import Badge
+from flowbite_htmy.icons import Icon, Payment, Social, get_icon, get_payment_icon, get_social_icon
+from flowbite_htmy.types import Color
 
 app = FastAPI(title="Flowbite-HTMY Card Showcase")
 templates = Jinja2Templates(directory="examples/templates")
@@ -1138,6 +1140,81 @@ async def index() -> dict:
                     class_="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-b-lg md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700",
                 ),
                 class_="grid mb-8 border border-gray-200 rounded-lg shadow-xs dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800",
+            ),
+            class_="mb-12",
+        ),
+        # 13. Crypto wallet card
+        html.h2(
+            "Crypto wallet card",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Connect wallet card with popular crypto wallet providers.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                html.h5(
+                    "Connect wallet",
+                    class_="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white",
+                ),
+                html.p(
+                    "Connect with one of our available wallet providers or create a new one.",
+                    class_="text-sm font-normal text-gray-500 dark:text-gray-400",
+                ),
+                html.ul(
+                    html.li(
+                        html.a(
+                            get_payment_icon(Payment.METAMASK, class_="h-4"),
+                            html.span("MetaMask", class_="flex-1 ms-3 whitespace-nowrap"),
+                            Badge(label="Popular", color=Color.GRAY, class_="ms-3"),
+                            href="#",
+                            class_="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white",
+                        ),
+                    ),
+                    html.li(
+                        html.a(
+                            get_payment_icon(Payment.COINBASE, class_="h-5"),
+                            html.span("Coinbase Wallet", class_="flex-1 ms-3 whitespace-nowrap"),
+                            href="#",
+                            class_="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white",
+                        ),
+                    ),
+                    html.li(
+                        html.a(
+                            get_payment_icon(Payment.OPERA_WALLET, class_="w-5 h-5"),
+                            html.span("Opera Wallet", class_="flex-1 ms-3 whitespace-nowrap"),
+                            href="#",
+                            class_="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white",
+                        ),
+                    ),
+                    html.li(
+                        html.a(
+                            get_payment_icon(Payment.WALLET_CONNECT, class_="h-5"),
+                            html.span("WalletConnect", class_="flex-1 ms-3 whitespace-nowrap"),
+                            href="#",
+                            class_="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white",
+                        ),
+                    ),
+                    html.li(
+                        html.a(
+                            get_payment_icon(Payment.FORTMATIC, class_="h-4"),
+                            html.span("Fortmatic", class_="flex-1 ms-3 whitespace-nowrap"),
+                            href="#",
+                            class_="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white",
+                        ),
+                    ),
+                    class_="my-4 space-y-3",
+                ),
+                html.div(
+                    html.a(
+                        get_icon(Icon.HELP_CIRCLE, class_="w-3 h-3 me-2"),
+                        "Why do I need to connect with my wallet?",
+                        href="#",
+                        class_="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400",
+                    ),
+                ),
+                class_="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 dark:bg-gray-800 dark:border-gray-700",
             ),
             class_="mb-12",
         ),
