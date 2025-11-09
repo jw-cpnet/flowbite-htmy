@@ -328,9 +328,13 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            Button(label="Loading", color=Color.PRIMARY, loading=True),
-            Button(label="Loading", color=Color.SUCCESS, loading=True),
-            Button(label="Loading", color=Color.DANGER, loading=True),
+            Button(label="Loading...", color=Color.PRIMARY, loading=True),
+            Button(
+                label="Loading...",
+                loading=True,
+                color=Color.NONE,
+                class_="text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700",
+            ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
 
