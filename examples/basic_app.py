@@ -10,6 +10,7 @@ Then visit: http://localhost:8000
 """
 
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
 from htmy import Renderer, html
@@ -485,7 +486,7 @@ async def index() -> dict:
     }
 
 
-@app.get("/clicked")
+@app.get("/clicked", response_class=HTMLResponse)
 async def clicked() -> str:
     """HTMX endpoint - returns rendered htmy component."""
     from flowbite_htmy.components import Alert
@@ -496,7 +497,7 @@ async def clicked() -> str:
         color=Color.SUCCESS,
     )
 
-    # Return raw HTML (fasthx handles HTMLResponse automatically for HTMX requests)
+    # Return raw HTML with HTMLResponse
     return await renderer.render(alert)
 
 
