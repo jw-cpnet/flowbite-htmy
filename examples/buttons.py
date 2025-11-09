@@ -1,11 +1,11 @@
-"""Example FastAPI application using hybrid Jinja + htmy approach.
+"""Button showcase FastAPI application using hybrid Jinja + htmy approach.
 
 This demonstrates the recommended pattern:
 - Jinja templates for page layouts and JavaScript
 - htmy components for UI elements (type-safe, composable)
 - fasthx for integration between FastAPI and both systems
 
-Run with: python examples/basic_app.py
+Run with: python examples/buttons.py
 Then visit: http://localhost:8000
 """
 
@@ -504,8 +504,8 @@ async def clicked() -> str:
 if __name__ == "__main__":
     import uvicorn
 
-    print("🚀 Starting Flowbite-HTMY Hybrid Example")
+    print("🚀 Starting Flowbite-HTMY Button Showcase")
     print("📍 Visit: http://localhost:8000")
     print("✨ Jinja for layouts + htmy for components!")
     print("🌙 Dark mode toggle in top-right corner")
-    uvicorn.run("basic_app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("buttons:app", host="0.0.0.0", port=8000, reload=True)
