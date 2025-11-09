@@ -40,6 +40,9 @@ class Button:
     icon_position: str = "left"
     """Position of the icon relative to the label. Either 'left' or 'right'. Default is 'left'."""
 
+    icon_only: bool = False
+    """If True, only the icon is displayed and label becomes screen-reader only."""
+
     badge: str | None = None
     """Optional badge text/count to display after the label (e.g., notification count)."""
 
@@ -167,8 +170,11 @@ class Button:
         if self.loading:
             content_parts.append(_spinner_svg())
 
-        # Add label
-        content_parts.append(self.label)
+        # Add label (screen-reader only if icon_only is True)
+        if self.icon_only:
+            content_parts.append(html.span(self.label, class_="sr-only"))
+        else:
+            content_parts.append(self.label)
 
         # Add badge after label if provided
         if self.badge:
@@ -241,6 +247,10 @@ class Button:
         return builder.merge(self.class_)
 
     def _get_size_classes(self, is_inner: bool = False) -> str:
+        # Icon-only buttons use uniform padding
+        if self.icon_only and not is_inner:
+            return "text-sm p-2.5"
+
         size_map = {
             Size.XS: "text-xs px-3 py-2",
             Size.SM: "text-sm px-3 py-2",

@@ -256,6 +256,47 @@ async def index() -> dict:
             class_="flex flex-wrap gap-2 mb-12",
         ),
 
+        # Icon buttons
+        html.h2(
+            "Icon buttons",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Icon-only buttons with screen-reader labels for accessibility.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(
+                label="Icon description",
+                icon=get_icon(Icon.ARROW_RIGHT, class_="w-5 h-5"),
+                icon_only=True,
+                color=Color.PRIMARY,
+            ),
+            Button(
+                label="Icon description",
+                icon=get_icon(Icon.ARROW_RIGHT, class_="w-4 h-4"),
+                icon_only=True,
+                pill=True,
+                color=Color.PRIMARY,
+            ),
+            Button(
+                label="Icon description",
+                icon=get_icon(Icon.THUMBS_UP, class_="w-5 h-5"),
+                icon_only=True,
+                variant=ButtonVariant.OUTLINE,
+                color=Color.PRIMARY,
+            ),
+            Button(
+                label="Icon description",
+                icon=get_icon(Icon.THUMBS_UP, class_="w-4 h-4"),
+                icon_only=True,
+                pill=True,
+                variant=ButtonVariant.OUTLINE,
+                color=Color.PRIMARY,
+            ),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
+
         # Colored shadows
         html.h2(
             "Colored shadows",
