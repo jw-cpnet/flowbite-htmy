@@ -161,7 +161,7 @@ async def index() -> dict:
             ),
             class_="mb-12",
         ),
-        # 5. Horizontal card (simplified version - showing just concept)
+        # 5. Horizontal card
         html.h2(
             "Horizontal card",
             class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
@@ -171,7 +171,7 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            html.div(
+            html.a(
                 html.img(
                     src="https://flowbite.com/docs/images/blog/image-4.jpg",
                     alt="",
@@ -186,15 +186,10 @@ async def index() -> dict:
                         "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
                         class_="mb-3 font-normal text-gray-700 dark:text-gray-400",
                     ),
-                    html.a(
-                        "Read more",
-                        get_icon(Icon.ARROW_RIGHT, class_="w-3.5 h-3.5 ms-2"),
-                        href="#",
-                        class_="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                    ),
                     class_="flex flex-col justify-between p-4 leading-normal",
                 ),
-                class_="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700",
+                href="#",
+                class_="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700",
             ),
             class_="mb-12",
         ),
