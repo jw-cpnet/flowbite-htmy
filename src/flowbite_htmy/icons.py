@@ -71,6 +71,7 @@ class Icon(str, Enum):
     STAR = "star"
     CHECK_CIRCLE = "check-circle"
     CHEVRON_RIGHT = "chevron-right"
+    CHEVRON_DOWN = "chevron-down"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -291,6 +292,11 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
     Icon.CHEVRON_RIGHT: (
         '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">'
         '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>'
+        "</svg>"
+    ),
+    Icon.CHEVRON_DOWN: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>'
         "</svg>"
     ),
 }

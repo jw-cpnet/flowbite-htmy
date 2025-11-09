@@ -449,6 +449,306 @@ async def index() -> dict:
             ),
             class_="mb-12",
         ),
+        # 9. Card full width with tabs
+        html.h2(
+            "Card full width with tabs",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Responsive tab selector (dropdown on mobile, button row on desktop).",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                # Mobile dropdown selector
+                html.div(
+                    html.label("Select tab", **{"for": "tabs", "class": "sr-only"}),
+                    html.select(
+                        html.option("Statistics"),
+                        html.option("Services"),
+                        html.option("FAQ"),
+                        id="tabs",
+                        class_="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                    ),
+                    class_="sm:hidden",
+                ),
+                # Desktop tabs
+                html.ul(
+                    html.li(
+                        html.button(
+                            "Statistics",
+                            id="stats-tab",
+                            type="button",
+                            role="tab",
+                            class_="inline-block w-full p-4 rounded-ss-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600",
+                            **{
+                                "data-tabs-target": "#stats",
+                                "aria-controls": "stats",
+                                "aria-selected": "true",
+                            },
+                        ),
+                        class_="w-full",
+                    ),
+                    html.li(
+                        html.button(
+                            "Services",
+                            id="about-tab",
+                            type="button",
+                            role="tab",
+                            class_="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600",
+                            **{
+                                "data-tabs-target": "#about",
+                                "aria-controls": "about",
+                                "aria-selected": "false",
+                            },
+                        ),
+                        class_="w-full",
+                    ),
+                    html.li(
+                        html.button(
+                            "FAQ",
+                            id="faq-tab",
+                            type="button",
+                            role="tab",
+                            class_="inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600",
+                            **{
+                                "data-tabs-target": "#faq",
+                                "aria-controls": "faq",
+                                "aria-selected": "false",
+                            },
+                        ),
+                        class_="w-full",
+                    ),
+                    id="fullWidthTab",
+                    role="tablist",
+                    class_="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400 rtl:divide-x-reverse",
+                    **{"data-tabs-toggle": "#fullWidthTabContent"},
+                ),
+                html.div(
+                    # Statistics tab
+                    html.div(
+                        html.dl(
+                            html.div(
+                                html.dt("73M+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Developers", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col items-center justify-center",
+                            ),
+                            html.div(
+                                html.dt("100M+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Public repositories", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col items-center justify-center",
+                            ),
+                            html.div(
+                                html.dt("1000s", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Open source projects", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col items-center justify-center",
+                            ),
+                            html.div(
+                                html.dt("1B+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Contributors", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col items-center justify-center",
+                            ),
+                            html.div(
+                                html.dt("90+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Top Forbes companies", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col items-center justify-center",
+                            ),
+                            html.div(
+                                html.dt("4M+", class_="mb-2 text-3xl font-extrabold"),
+                                html.dd("Organizations", class_="text-gray-500 dark:text-gray-400"),
+                                class_="flex flex-col items-center justify-center",
+                            ),
+                            class_="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8",
+                        ),
+                        id="stats",
+                        role="tabpanel",
+                        class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
+                        **{"aria-labelledby": "stats-tab"},
+                    ),
+                    # Services tab
+                    html.div(
+                        html.h2(
+                            "We invest in the world's potential",
+                            class_="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white",
+                        ),
+                        html.ul(
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Dynamic reports and dashboards", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Templates for everyone", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Development workflow", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            html.li(
+                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                html.span("Limitless business automation", class_="leading-tight"),
+                                class_="flex space-x-2 rtl:space-x-reverse items-center",
+                            ),
+                            role="list",
+                            class_="space-y-4 text-gray-500 dark:text-gray-400",
+                        ),
+                        id="about",
+                        role="tabpanel",
+                        class_="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800",
+                        **{"aria-labelledby": "about-tab"},
+                    ),
+                    # FAQ tab with accordion
+                    html.div(
+                        html.div(
+                            # FAQ 1
+                            html.h2(
+                                html.button(
+                                    html.span("What is Flowbite?"),
+                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0", **{"data-accordion-icon": ""}),
+                                    type="button",
+                                    class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
+                                    **{
+                                        "data-accordion-target": "#accordion-flush-body-1",
+                                        "aria-expanded": "true",
+                                        "aria-controls": "accordion-flush-body-1",
+                                    },
+                                ),
+                                id="accordion-flush-heading-1",
+                            ),
+                            html.div(
+                                html.div(
+                                    html.p(
+                                        "Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.",
+                                        class_="mb-2 text-gray-500 dark:text-gray-400",
+                                    ),
+                                    html.p(
+                                        "Check out this guide to learn how to ",
+                                        html.a(
+                                            "get started",
+                                            href="/docs/getting-started/introduction/",
+                                            class_="text-blue-600 dark:text-blue-500 hover:underline",
+                                        ),
+                                        " and start developing websites even faster with components on top of Tailwind CSS.",
+                                        class_="text-gray-500 dark:text-gray-400",
+                                    ),
+                                    class_="py-5 border-b border-gray-200 dark:border-gray-700",
+                                ),
+                                id="accordion-flush-body-1",
+                                class_="hidden",
+                                **{"aria-labelledby": "accordion-flush-heading-1"},
+                            ),
+                            # FAQ 2
+                            html.h2(
+                                html.button(
+                                    html.span("Is there a Figma file available?"),
+                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0", **{"data-accordion-icon": ""}),
+                                    type="button",
+                                    class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
+                                    **{
+                                        "data-accordion-target": "#accordion-flush-body-2",
+                                        "aria-expanded": "false",
+                                        "aria-controls": "accordion-flush-body-2",
+                                    },
+                                ),
+                                id="accordion-flush-heading-2",
+                            ),
+                            html.div(
+                                html.div(
+                                    html.p(
+                                        "Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.",
+                                        class_="mb-2 text-gray-500 dark:text-gray-400",
+                                    ),
+                                    html.p(
+                                        "Check out the ",
+                                        html.a(
+                                            "Figma design system",
+                                            href="https://flowbite.com/figma/",
+                                            class_="text-blue-600 dark:text-blue-500 hover:underline",
+                                        ),
+                                        " based on the utility classes from Tailwind CSS and components from Flowbite.",
+                                        class_="text-gray-500 dark:text-gray-400",
+                                    ),
+                                    class_="py-5 border-b border-gray-200 dark:border-gray-700",
+                                ),
+                                id="accordion-flush-body-2",
+                                class_="hidden",
+                                **{"aria-labelledby": "accordion-flush-heading-2"},
+                            ),
+                            # FAQ 3
+                            html.h2(
+                                html.button(
+                                    html.span("What are the differences between Flowbite and Tailwind UI?"),
+                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0", **{"data-accordion-icon": ""}),
+                                    type="button",
+                                    class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
+                                    **{
+                                        "data-accordion-target": "#accordion-flush-body-3",
+                                        "aria-expanded": "false",
+                                        "aria-controls": "accordion-flush-body-3",
+                                    },
+                                ),
+                                id="accordion-flush-heading-3",
+                            ),
+                            html.div(
+                                html.div(
+                                    html.p(
+                                        "The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.",
+                                        class_="mb-2 text-gray-500 dark:text-gray-400",
+                                    ),
+                                    html.p(
+                                        "However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.",
+                                        class_="mb-2 text-gray-500 dark:text-gray-400",
+                                    ),
+                                    html.p(
+                                        "Learn more about these technologies:",
+                                        class_="mb-2 text-gray-500 dark:text-gray-400",
+                                    ),
+                                    html.ul(
+                                        html.li(
+                                            html.a(
+                                                "Flowbite Pro",
+                                                href="https://flowbite.com/pro/",
+                                                class_="text-blue-600 dark:text-blue-500 hover:underline",
+                                            )
+                                        ),
+                                        html.li(
+                                            html.a(
+                                                "Tailwind UI",
+                                                href="https://tailwindui.com/",
+                                                class_="text-blue-600 dark:text-blue-500 hover:underline",
+                                                rel="nofollow",
+                                            )
+                                        ),
+                                        class_="ps-5 text-gray-500 list-disc dark:text-gray-400",
+                                    ),
+                                    class_="py-5 border-b border-gray-200 dark:border-gray-700",
+                                ),
+                                id="accordion-flush-body-3",
+                                class_="hidden",
+                                **{"aria-labelledby": "accordion-flush-heading-3"},
+                            ),
+                            id="accordion-flush",
+                            **{
+                                "data-accordion": "collapse",
+                                "data-active-classes": "bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
+                                "data-inactive-classes": "text-gray-500 dark:text-gray-400",
+                            },
+                        ),
+                        id="faq",
+                        role="tabpanel",
+                        class_="hidden p-4 bg-white rounded-lg dark:bg-gray-800",
+                        **{"aria-labelledby": "faq-tab"},
+                    ),
+                    id="fullWidthTabContent",
+                    class_="border-t border-gray-200 dark:border-gray-600",
+                ),
+                class_="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700",
+            ),
+            class_="mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
