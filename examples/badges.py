@@ -154,6 +154,31 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
+
+        # Notification badge
+        html.h2(
+            "Notification badge",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Position a badge absolutely on a button to show notification counts.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            # Button with notification badge positioned absolutely
+            html.button(
+                get_icon(Icon.ENVELOPE, class_="w-5 h-5"),
+                html.span("Notifications", class_="sr-only"),
+                # Notification badge
+                html.div(
+                    "20",
+                    class_="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900",
+                ),
+                type="button",
+                class_="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+            ),
+            class_="flex flex-wrap gap-2 mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
