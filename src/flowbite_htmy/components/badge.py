@@ -34,6 +34,9 @@ class Badge:
     border: bool = False
     """Add border with matching color (outlined badge style)."""
 
+    href: str | None = None
+    """Optional URL to make the badge a clickable link."""
+
     class_: str = ""
     """Additional custom classes."""
 
@@ -44,11 +47,14 @@ class Badge:
             context: Rendering context.
 
         Returns:
-            Badge HTML component (span element).
+            Badge HTML component (span or anchor element).
         """
         theme = ThemeContext.from_context(context)
         classes = self._build_classes(theme)
 
+        # Render as link if href is provided
+        if self.href:
+            return html.a(self.label, href=self.href, class_=classes)
         return html.span(self.label, class_=classes)
 
     def _build_classes(self, theme: ThemeContext) -> str:
@@ -61,7 +67,13 @@ class Badge:
             Complete class string.
         """
         # Base badge classes
-        builder = ClassBuilder("font-medium px-2.5 py-0.5")
+        base = "font-medium px-2.5 py-0.5"
+
+        # Add link-specific classes
+        if self.href:
+            base += " inline-flex items-center justify-center"
+
+        builder = ClassBuilder(base)
 
         # Size
         if self.large:
@@ -149,24 +161,27 @@ class Badge:
         """Get border classes for outlined badge style.
 
         Returns:
-            Border class string with color-specific borders.
+            Border class string with color-specific borders and optional hover states.
         """
+        # Add hover classes if this is a link
+        hover = "hover:bg-blue-200" if self.href else ""
+
         border_map = {
-            Color.PRIMARY: "bg-blue-100 text-blue-800 border border-blue-400 dark:bg-gray-700 dark:text-blue-400 dark:border-blue-400",
-            Color.SECONDARY: "bg-gray-100 text-gray-800 border border-gray-500 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-500",
-            Color.SUCCESS: "bg-green-100 text-green-800 border border-green-400 dark:bg-gray-700 dark:text-green-400 dark:border-green-400",
-            Color.DANGER: "bg-red-100 text-red-800 border border-red-400 dark:bg-gray-700 dark:text-red-400 dark:border-red-400",
-            Color.WARNING: "bg-yellow-100 text-yellow-800 border border-yellow-300 dark:bg-gray-700 dark:text-yellow-300 dark:border-yellow-300",
-            Color.INFO: "bg-cyan-100 text-cyan-800 border border-cyan-400 dark:bg-gray-700 dark:text-cyan-400 dark:border-cyan-400",
-            Color.DARK: "bg-gray-100 text-gray-800 border border-gray-500 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-500",
+            Color.PRIMARY: f"bg-blue-100 text-blue-800 border border-blue-400 {hover} dark:bg-gray-700 dark:text-blue-400 dark:border-blue-400",
+            Color.SECONDARY: f"bg-gray-100 text-gray-800 border border-gray-500 {hover} dark:bg-gray-700 dark:text-gray-400 dark:border-gray-500",
+            Color.SUCCESS: f"bg-green-100 text-green-800 border border-green-400 {hover} dark:bg-gray-700 dark:text-green-400 dark:border-green-400",
+            Color.DANGER: f"bg-red-100 text-red-800 border border-red-400 {hover} dark:bg-gray-700 dark:text-red-400 dark:border-red-400",
+            Color.WARNING: f"bg-yellow-100 text-yellow-800 border border-yellow-300 {hover} dark:bg-gray-700 dark:text-yellow-300 dark:border-yellow-300",
+            Color.INFO: f"bg-cyan-100 text-cyan-800 border border-cyan-400 {hover} dark:bg-gray-700 dark:text-cyan-400 dark:border-cyan-400",
+            Color.DARK: f"bg-gray-100 text-gray-800 border border-gray-500 {hover} dark:bg-gray-700 dark:text-gray-400 dark:border-gray-500",
             # Direct color names
-            Color.BLUE: "bg-blue-100 text-blue-800 border border-blue-400 dark:bg-gray-700 dark:text-blue-400 dark:border-blue-400",
-            Color.GREEN: "bg-green-100 text-green-800 border border-green-400 dark:bg-gray-700 dark:text-green-400 dark:border-green-400",
-            Color.RED: "bg-red-100 text-red-800 border border-red-400 dark:bg-gray-700 dark:text-red-400 dark:border-red-400",
-            Color.YELLOW: "bg-yellow-100 text-yellow-800 border border-yellow-300 dark:bg-gray-700 dark:text-yellow-300 dark:border-yellow-300",
-            Color.INDIGO: "bg-indigo-100 text-indigo-800 border border-indigo-400 dark:bg-gray-700 dark:text-indigo-400 dark:border-indigo-400",
-            Color.PURPLE: "bg-purple-100 text-purple-800 border border-purple-400 dark:bg-gray-700 dark:text-purple-400 dark:border-purple-400",
-            Color.PINK: "bg-pink-100 text-pink-800 border border-pink-400 dark:bg-gray-700 dark:text-pink-400 dark:border-pink-400",
-            Color.GRAY: "bg-gray-100 text-gray-800 border border-gray-500 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-500",
+            Color.BLUE: f"bg-blue-100 text-blue-800 border border-blue-400 {hover} dark:bg-gray-700 dark:text-blue-400 dark:border-blue-400",
+            Color.GREEN: f"bg-green-100 text-green-800 border border-green-400 {hover} dark:bg-gray-700 dark:text-green-400 dark:border-green-400",
+            Color.RED: f"bg-red-100 text-red-800 border border-red-400 {hover} dark:bg-gray-700 dark:text-red-400 dark:border-red-400",
+            Color.YELLOW: f"bg-yellow-100 text-yellow-800 border border-yellow-300 {hover} dark:bg-gray-700 dark:text-yellow-300 dark:border-yellow-300",
+            Color.INDIGO: f"bg-indigo-100 text-indigo-800 border border-indigo-400 {hover} dark:bg-gray-700 dark:text-indigo-400 dark:border-indigo-400",
+            Color.PURPLE: f"bg-purple-100 text-purple-800 border border-purple-400 {hover} dark:bg-gray-700 dark:text-purple-400 dark:border-purple-400",
+            Color.PINK: f"bg-pink-100 text-pink-800 border border-pink-400 {hover} dark:bg-gray-700 dark:text-pink-400 dark:border-pink-400",
+            Color.GRAY: f"bg-gray-100 text-gray-800 border border-gray-500 {hover} dark:bg-gray-700 dark:text-gray-400 dark:border-gray-500",
         }
         return border_map.get(self.color, border_map[Color.PRIMARY])
