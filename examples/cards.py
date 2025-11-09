@@ -193,6 +193,66 @@ async def index() -> dict:
             ),
             class_="mb-12",
         ),
+        # 6. E-commerce card
+        html.h2(
+            "E-commerce card",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
+        ),
+        html.p(
+            "Product cards with ratings, pricing, and add-to-cart functionality.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            html.div(
+                html.a(
+                    html.img(
+                        src="https://flowbite.com/docs/images/products/apple-watch.png",
+                        alt="product image",
+                        class_="p-8 rounded-t-lg",
+                    ),
+                    href="#",
+                ),
+                html.div(
+                    html.a(
+                        html.h5(
+                            "Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport",
+                            class_="text-xl font-semibold tracking-tight text-gray-900 dark:text-white",
+                        ),
+                        href="#",
+                    ),
+                    html.div(
+                        html.div(
+                            get_icon(Icon.STAR, class_="w-4 h-4 text-yellow-300"),
+                            get_icon(Icon.STAR, class_="w-4 h-4 text-yellow-300"),
+                            get_icon(Icon.STAR, class_="w-4 h-4 text-yellow-300"),
+                            get_icon(Icon.STAR, class_="w-4 h-4 text-yellow-300"),
+                            get_icon(Icon.STAR, class_="w-4 h-4 text-gray-200 dark:text-gray-600"),
+                            class_="flex items-center space-x-1 rtl:space-x-reverse",
+                        ),
+                        html.span(
+                            "5.0",
+                            class_="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3",
+                        ),
+                        class_="flex items-center mt-2.5 mb-5",
+                    ),
+                    html.div(
+                        html.span(
+                            "$599",
+                            class_="text-3xl font-bold text-gray-900 dark:text-white",
+                        ),
+                        html.a(
+                            "Add to cart",
+                            href="#",
+                            class_="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                        ),
+                        class_="flex items-center justify-between",
+                    ),
+                    class_="px-5 pb-5",
+                ),
+                class_="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700",
+            ),
+            class_="mb-12",
+        ),
     )
 
     # Render htmy components to HTML string
