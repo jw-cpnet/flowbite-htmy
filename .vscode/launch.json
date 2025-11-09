@@ -104,6 +104,32 @@
             },
             "cwd": "${workspaceFolder}",
             "args": []
+        },
+        {
+            "name": "Python: Avatar Showcase",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/avatars.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Avatar Showcase (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/avatars.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
         }
     ]
 }

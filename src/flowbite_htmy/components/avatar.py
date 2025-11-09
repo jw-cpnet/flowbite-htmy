@@ -84,9 +84,8 @@ class Avatar:
             Div element with initials.
         """
         container_classes = self._build_placeholder_classes(theme)
-        text_classes = "font-medium text-gray-600"
-        if theme.dark_mode:
-            text_classes += " dark:text-gray-300"
+        # Dark mode classes always included
+        text_classes = "font-medium text-gray-600 dark:text-gray-300"
 
         # initials is guaranteed to be not None here due to the elif check
         initials_text = self.initials if self.initials else ""
@@ -106,24 +105,16 @@ class Avatar:
         """
         container_classes = self._build_placeholder_classes(theme)
 
-        # Default user icon SVG
-        from htmy import Tag
+        # Default user icon SVG - using SafeStr for proper SVG path rendering
+        from htmy import SafeStr
 
-        path = Tag(
-            "path",
-            fill_rule="evenodd",
-            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z",
-            clip_rule="evenodd",
-        )
-        icon = html.svg(
-            path,
-            class_="absolute w-12 h-12 text-gray-400 -left-1",
-            fill="currentColor",
-            viewBox="0 0 20 20",
-            xmlns="http://www.w3.org/2000/svg",
+        svg_content = SafeStr(
+            '<svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">'
+            '<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>'
+            '</svg>'
         )
 
-        return html.div(icon, class_=container_classes)
+        return html.div(svg_content, class_=container_classes)
 
     def _build_image_classes(self, theme: ThemeContext) -> str:
         """Build classes for image avatar.
@@ -146,12 +137,9 @@ class Avatar:
         else:
             builder.add("rounded-sm")
 
-        # Border
+        # Border (dark mode classes always included)
         if self.bordered:
-            border_classes = "p-1 ring-2 ring-gray-300"
-            if theme.dark_mode:
-                border_classes += " dark:ring-gray-500"
-            builder.add(border_classes)
+            builder.add("p-1 ring-2 ring-gray-300 dark:ring-gray-500")
 
         return builder.merge(self.class_)
 
@@ -178,9 +166,8 @@ class Avatar:
         else:
             builder.add("rounded-sm")
 
-        # Dark mode
-        if theme.dark_mode:
-            builder.add("dark:bg-gray-600")
+        # Dark mode classes (always include - Tailwind activates based on dark mode state)
+        builder.add("dark:bg-gray-600")
 
         return builder.merge(self.class_)
 

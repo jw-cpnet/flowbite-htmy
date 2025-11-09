@@ -65,11 +65,10 @@ flowbite_htmy/
 │   ├── alert.py               # Alert component
 │   ├── badge.py               # Badge component
 │   ├── button.py              # Button component
-│   ├── card.py                # Card component
-│   ├── dropdown.py            # Dropdown component
-│   ├── modal.py               # Modal component
-│   ├── navbar.py              # Navbar component
-│   ├── table.py               # Table component
+│   ├── dropdown.py            # Dropdown component (future)
+│   ├── modal.py               # Modal component (future)
+│   ├── navbar.py              # Navbar component (future)
+│   ├── table.py               # Table component (future)
 │   └── ...                    # Additional components
 ├── layouts/
 │   ├── __init__.py
@@ -310,23 +309,24 @@ async def test_button_with_htmx():
 **2. Integration Tests** - Test component composition:
 ```python
 @pytest.mark.asyncio
-async def test_card_with_button():
-    """Test card containing a button."""
-    from flowbite_htmy.components import Card, Button
+async def test_alert_with_button():
+    """Test alert containing a button."""
+    from flowbite_htmy.components import Alert, Button
 
-    card = Card(
-        title="User Profile",
-        content=(
-            html.p("User details here"),
-            Button(label="Edit", color=Color.PRIMARY)
-        )
+    alert = Alert(
+        title="Action Required",
+        message=html.div(
+            html.p("Please review your settings."),
+            Button(label="Review", color=Color.PRIMARY, size=Size.SM)
+        ),
+        color=Color.INFO
     )
 
     renderer = Renderer()
-    html = await renderer.render(card)
+    html = await renderer.render(alert)
 
-    assert "User Profile" in html
-    assert "Edit" in html
+    assert "Action Required" in html
+    assert "Review" in html
     assert "btn-primary" in html
 ```
 
@@ -401,10 +401,11 @@ Focus on the most commonly used, JavaScript-free components:
 1. **Button** - Primary interactive element
 2. **Badge** - Simple indicator component
 3. **Alert** - Notification/message component
-4. **Card** - Content container
-5. **Avatar** - User image/placeholder
+4. **Avatar** - User image/placeholder
 
 **Rationale**: These are purely CSS-based, don't require Flowbite JS, and demonstrate the component patterns.
+
+**Note**: Card was removed - too generic to be a useful component. Use raw HTML for card patterns (see examples/cards.py for various card layouts).
 
 ### Phase 2 - Layout Components
 6. **Navbar** - Navigation header

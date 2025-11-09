@@ -36,6 +36,35 @@ This library implements Flowbite UI components as htmy components:
    - Return Component directly
    - Currently unused but available for future simple components
 
+### ⚠️ CRITICAL: When to Create a Component
+
+**Before creating a new component, validate it passes these tests:**
+
+❌ **DO NOT create a component if:**
+- It's just a wrapper around a single `<div>` with classes (not valuable abstraction)
+- Users still need to write all the verbose HTML inside (no convenience gained)
+- The pattern is too generic (e.g., "Card" - every card is different)
+- It forces users into rigid structure when raw HTML is more flexible
+- The showcase examples bypass the component and use raw HTML instead
+
+✅ **DO create a component if:**
+- It provides **genuine convenience** (reduces boilerplate significantly)
+- It enforces **consistent patterns** (e.g., Button sizes, Badge variants)
+- It handles **complex logic** internally (e.g., dark mode classes, icon positioning)
+- It provides **type safety** for specific use cases (e.g., Color enum, Size enum)
+- The **showcase uses the component** and demonstrates its value
+
+**Example - Good Components:**
+- `Button` - Handles variants (default, outline, gradient), sizes, icon positioning, HTMX attributes
+- `Badge` - Enforces color consistency, handles pill/bordered variants, icon placement
+- `Alert` - Manages dismissible state, icon positioning, border variants
+
+**Example - Bad Components:**
+- `Card` with composition API - Just wraps `children` in a `<div>`, no real value
+- Generic containers that don't enforce patterns or reduce code
+
+**The Golden Rule:** If the showcase for a component doesn't use the component itself, the component is probably not valuable.
+
 ### Key Utilities
 
 **ClassBuilder** (`base/classes.py`):
