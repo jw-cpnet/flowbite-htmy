@@ -607,7 +607,7 @@ async def index() -> dict:
                             html.h2(
                                 html.button(
                                     html.span("What is Flowbite?"),
-                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0", **{"data-accordion-icon": ""}),
+                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"),
                                     type="button",
                                     class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
                                     **{
@@ -644,7 +644,7 @@ async def index() -> dict:
                             html.h2(
                                 html.button(
                                     html.span("Is there a Figma file available?"),
-                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0", **{"data-accordion-icon": ""}),
+                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"),
                                     type="button",
                                     class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
                                     **{
@@ -681,7 +681,7 @@ async def index() -> dict:
                             html.h2(
                                 html.button(
                                     html.span("What are the differences between Flowbite and Tailwind UI?"),
-                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0", **{"data-accordion-icon": ""}),
+                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"),
                                     type="button",
                                     class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
                                     **{
