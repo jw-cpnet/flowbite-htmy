@@ -100,5 +100,39 @@
 
     <!-- Flowbite JavaScript - loaded at end of body for proper initialization -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- Initialize Flowbite components after DOM loads -->
+    <script>
+        // Flowbite 3.x requires explicit initialization for modals
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all modal elements and initialize them
+            const modalElements = document.querySelectorAll('[id$="-modal"]');
+
+            modalElements.forEach(function(modalEl) {
+                const modalId = modalEl.id;
+
+                // Check if modal is already initialized
+                if (window.FlowbiteInstances && window.FlowbiteInstances.getInstance('Modal', modalId)) {
+                    return; // Already initialized
+                }
+
+                // Initialize the modal with Flowbite
+                if (typeof Modal !== 'undefined') {
+                    const modal = new Modal(modalEl, {
+                        backdrop: modalEl.getAttribute('data-modal-backdrop') || 'dynamic',
+                        closable: true,
+                        onHide: () => {
+                            console.log('Modal hidden: ' + modalId);
+                        },
+                        onShow: () => {
+                            console.log('Modal shown: ' + modalId);
+                        }
+                    });
+
+                    console.log('Initialized modal: ' + modalId);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
