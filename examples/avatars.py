@@ -406,44 +406,30 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                    alt="Extra small avatar",
-                    size=Size.XS,
-                ),
-                class_="me-4",
+            html.img(
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                alt="Extra small avatar",
+                class_="w-6 h-6 rounded-sm",
             ),
-            html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                    alt="Small avatar",
-                    size=Size.SM,
-                ),
-                class_="me-4",
+            html.img(
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                alt="Small avatar",
+                class_="w-8 h-8 rounded-sm",
             ),
-            html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                    alt="Medium avatar",
-                    size=Size.MD,
-                ),
-                class_="me-4",
+            html.img(
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                alt="Medium avatar",
+                class_="w-10 h-10 rounded-sm",
             ),
-            html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                    alt="Large avatar",
-                    size=Size.LG,
-                ),
-                class_="me-4",
+            html.img(
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                alt="Large avatar",
+                class_="w-20 h-20 rounded-sm",
             ),
-            html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                    alt="Extra large avatar",
-                    size=Size.XL,
-                ),
+            html.img(
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                alt="Extra large avatar",
+                class_="rounded-sm w-36 h-36",
             ),
             class_="flex items-center mb-12",
         ),
