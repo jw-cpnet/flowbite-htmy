@@ -108,3 +108,58 @@ async def test_avatar_placeholder_icon(renderer: Renderer) -> None:
     assert "bg-gray-100" in html
     assert "text-gray-400" in html
     assert "rounded-full" in html
+
+
+# Tests for passthrough attributes
+
+
+@pytest.mark.asyncio
+async def test_avatar_with_data_attributes(renderer: Renderer) -> None:
+    """Test avatar with data-* passthrough attributes."""
+    avatar = Avatar(
+        src="/images/user.jpg",
+        alt="User",
+        attrs={"data-tooltip-target": "user-tooltip", "data-testid": "avatar-1"},
+    )
+    html = await renderer.render(avatar)
+
+    assert 'data-tooltip-target="user-tooltip"' in html
+    assert 'data-testid="avatar-1"' in html
+
+
+@pytest.mark.asyncio
+async def test_avatar_with_id_attribute(renderer: Renderer) -> None:
+    """Test avatar with id passthrough attribute."""
+    avatar = Avatar(
+        src="/images/user.jpg",
+        attrs={"id": "avatarButton", "data-dropdown-toggle": "userDropdown"},
+    )
+    html = await renderer.render(avatar)
+
+    assert 'id="avatarButton"' in html
+    assert 'data-dropdown-toggle="userDropdown"' in html
+
+
+@pytest.mark.asyncio
+async def test_avatar_initials_with_aria_attributes(renderer: Renderer) -> None:
+    """Test avatar initials with aria-* passthrough attributes."""
+    avatar = Avatar(
+        initials="JD",
+        attrs={"aria-label": "John Doe avatar", "role": "img"},
+    )
+    html = await renderer.render(avatar)
+
+    assert "JD" in html
+    assert 'aria-label="John Doe avatar"' in html
+    assert 'role="img"' in html
+
+
+@pytest.mark.asyncio
+async def test_avatar_placeholder_with_custom_attrs(renderer: Renderer) -> None:
+    """Test placeholder icon with custom attributes."""
+    avatar = Avatar(attrs={"id": "placeholder-1", "data-user-id": "123"})
+    html = await renderer.render(avatar)
+
+    assert 'id="placeholder-1"' in html
+    assert 'data-user-id="123"' in html
+    assert "svg" in html  # Still renders placeholder

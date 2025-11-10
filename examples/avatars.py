@@ -110,7 +110,7 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            # Avatar 1 with tooltip
+            # Avatar 1 with tooltip (using Avatar component with passthrough attrs)
             html.div(
                 html.div(
                     "Jese Leos",
@@ -119,15 +119,15 @@ async def index() -> dict:
                     role="tooltip",
                     class_="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700",
                 ),
-                html.img(
+                Avatar(
                     src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
                     alt="Jese Leos avatar",
-                    class_="w-10 h-10 rounded-full",
-                    **{"data-tooltip-target": "tooltip-jese"},
+                    class_="w-10 h-10",
+                    attrs={"data-tooltip-target": "tooltip-jese"},
                 ),
                 class_="me-4",
             ),
-            # Avatar 2 with tooltip
+            # Avatar 2 with tooltip (using Avatar component with passthrough attrs)
             html.div(
                 html.div(
                     "Roberta Casas",
@@ -136,15 +136,15 @@ async def index() -> dict:
                     role="tooltip",
                     class_="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700",
                 ),
-                html.img(
+                Avatar(
                     src="https://flowbite.com/docs/images/people/profile-picture-4.jpg",
                     alt="Roberta Casas avatar",
-                    class_="w-10 h-10 rounded-full",
-                    **{"data-tooltip-target": "tooltip-roberta"},
+                    class_="w-10 h-10",
+                    attrs={"data-tooltip-target": "tooltip-roberta"},
                 ),
                 class_="me-4",
             ),
-            # Avatar 3 with tooltip
+            # Avatar 3 with tooltip (using Avatar component with passthrough attrs)
             html.div(
                 html.div(
                     "Bonnie Green",
@@ -153,11 +153,11 @@ async def index() -> dict:
                     role="tooltip",
                     class_="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700",
                 ),
-                html.img(
+                Avatar(
                     src="https://flowbite.com/docs/images/people/profile-picture-3.jpg",
                     alt="Bonnie Green avatar",
-                    class_="w-10 h-10 rounded-full",
-                    **{"data-tooltip-target": "tooltip-bonnie"},
+                    class_="w-10 h-10",
+                    attrs={"data-tooltip-target": "tooltip-bonnie"},
                 ),
             ),
             class_="flex mb-12",
@@ -337,13 +337,13 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            html.img(
+            Avatar(
                 src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
                 alt="User dropdown",
-                id="avatarButton",
-                type="button",
-                class_="w-10 h-10 rounded-full cursor-pointer",
-                **{
+                class_="w-10 h-10 cursor-pointer",
+                attrs={
+                    "id": "avatarButton",
+                    "type": "button",
                     "data-dropdown-toggle": "userDropdown",
                     "data-dropdown-placement": "bottom-start",
                 },

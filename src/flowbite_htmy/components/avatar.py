@@ -1,6 +1,7 @@
 """Avatar component for Flowbite."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Any
 
 from htmy import Component, Context, html
 
@@ -15,9 +16,14 @@ class Avatar:
     A component for displaying user profile pictures or placeholder initials.
     Supports different sizes, bordered style, and both circular and rounded square shapes.
 
+    Supports passthrough attributes for tooltips, dropdowns, and accessibility:
+        >>> Avatar(src="...", **{"data-tooltip-target": "tooltip-id"})
+        >>> Avatar(src="...", id="avatarButton", **{"data-dropdown-toggle": "menu"})
+
     Example:
         >>> Avatar(src="/images/user.jpg", alt="User", size=Size.LG)
         >>> Avatar(initials="JD", bordered=True)
+        >>> Avatar(initials="JL", class_="w-12 h-12")  # Override size with class_
     """
 
     src: str | None = None
@@ -30,7 +36,7 @@ class Avatar:
     """User initials to display when no image is provided (e.g., 'JD')."""
 
     size: Size = Size.MD
-    """Avatar size."""
+    """Avatar size (only used if size classes not in class_)."""
 
     bordered: bool = False
     """Add ring border around avatar."""
@@ -39,7 +45,10 @@ class Avatar:
     """Use circular shape (rounded-full). If False, uses rounded-sm."""
 
     class_: str = ""
-    """Additional custom classes."""
+    """Additional custom classes (can override size)."""
+
+    attrs: dict[str, Any] = field(default_factory=dict)
+    """Passthrough HTML attributes (id, data-*, aria-*, etc.)."""
 
     def htmy(self, context: Context) -> Component:
         """Render the avatar component.
@@ -72,7 +81,7 @@ class Avatar:
             Image element.
         """
         classes = self._build_image_classes(theme)
-        return html.img(src=self.src, alt=self.alt, class_=classes)
+        return html.img(src=self.src, alt=self.alt, class_=classes, **self.attrs)
 
     def _render_initials(self, theme: ThemeContext) -> Component:
         """Render avatar with initials.
@@ -92,6 +101,7 @@ class Avatar:
         return html.div(
             html.span(initials_text, class_=text_classes),
             class_=container_classes,
+            **self.attrs,
         )
 
     def _render_placeholder(self, theme: ThemeContext) -> Component:
@@ -114,7 +124,7 @@ class Avatar:
             '</svg>'
         )
 
-        return html.div(svg_content, class_=container_classes)
+        return html.div(svg_content, class_=container_classes, **self.attrs)
 
     def _build_image_classes(self, theme: ThemeContext) -> str:
         """Build classes for image avatar.
