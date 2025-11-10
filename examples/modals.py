@@ -10,10 +10,9 @@ Then visit: http://localhost:8000
 """
 
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
-from htmy import Renderer, SafeStr, html
+from htmy import Renderer, html
 
 from flowbite_htmy.components import Button, Modal, PopupModal
 from flowbite_htmy.icons import Icon, get_icon
