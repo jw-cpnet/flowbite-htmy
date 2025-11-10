@@ -90,6 +90,9 @@ class Button:
     class_: str = ""
     """Additional custom classes."""
 
+    attrs: dict[str, Any] | None = None
+    """Additional HTML attributes to pass through (e.g., data-*, aria-*, id)."""
+
     # Class variables for color mappings
     _DEFAULT_COLORS: ClassVar[Mapping[Color, str]] = {
         Color.PRIMARY: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
@@ -201,19 +204,25 @@ class Button:
             else:
                 button_content = html.span(button_content, class_=inner_span_classes)
 
+        # Build button attributes
+        button_attrs: dict[str, Any] = {
+            "type": self.type,
+            "disabled": is_disabled or None,
+            "class": classes,
+            "hx-get": self.hx_get,
+            "hx-post": self.hx_post,
+            "hx-target": self.hx_target,
+            "hx-swap": self.hx_swap,
+            "hx-trigger": self.hx_trigger,
+        }
+
+        # Merge passthrough attributes
+        if self.attrs:
+            button_attrs.update(self.attrs)
+
         # Render button (unpack list if needed)
         args = button_content if isinstance(button_content, list) else [button_content]
-        return html.button(
-            *args,
-            type=self.type,
-            disabled=is_disabled or None,
-            class_=classes,
-            hx_get=self.hx_get,
-            hx_post=self.hx_post,
-            hx_target=self.hx_target,
-            hx_swap=self.hx_swap,
-            hx_trigger=self.hx_trigger,
-        )
+        return html.button(*args, **button_attrs)
 
     def _build_classes(self, theme: ThemeContext) -> str:
         """Build CSS classes for the button."""

@@ -4,6 +4,7 @@ from flowbite_htmy.components.alert import Alert
 from flowbite_htmy.components.avatar import Avatar
 from flowbite_htmy.components.badge import Badge
 from flowbite_htmy.components.button import Button
+from flowbite_htmy.components.modal import Modal
 
 # Future components will be imported here as they're implemented
 
@@ -12,4 +13,5 @@ __all__ = [
     "Avatar",
     "Badge",
     "Button",
+    "Modal",
 ]

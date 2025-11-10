@@ -130,6 +130,32 @@
             },
             "cwd": "${workspaceFolder}",
             "args": []
+        },
+        {
+            "name": "Python: Modal Showcase",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/modals.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Modal Showcase (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/modals.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
         }
     ]
 }
