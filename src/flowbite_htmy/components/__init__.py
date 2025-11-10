@@ -6,6 +6,7 @@ from flowbite_htmy.components.badge import Badge
 from flowbite_htmy.components.button import Button
 from flowbite_htmy.components.input import Input
 from flowbite_htmy.components.modal import Modal
+from flowbite_htmy.components.pagination import Pagination
 from flowbite_htmy.components.popup_modal import PopupModal
 from flowbite_htmy.components.select import Select
 
@@ -18,6 +19,7 @@ __all__ = [
     "Button",
     "Input",
     "Modal",
+    "Pagination",
     "PopupModal",
     "Select",
 ]
