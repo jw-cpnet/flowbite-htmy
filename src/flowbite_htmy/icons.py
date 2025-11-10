@@ -76,6 +76,8 @@ class Icon(str, Enum):
     CHEVRON_RIGHT = "chevron-right"
     CHEVRON_DOWN = "chevron-down"
     HELP_CIRCLE = "help-circle"
+    EXCLAMATION_CIRCLE = "exclamation-circle"
+    PLUS = "plus"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -325,6 +327,16 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
     Icon.HELP_CIRCLE: (
         '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">'
         '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>'
+        "</svg>"
+    ),
+    Icon.EXCLAMATION_CIRCLE: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>'
+        "</svg>"
+    ),
+    Icon.PLUS: (
+        '<svg class="{class_}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">'
+        '<path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>'
         "</svg>"
     ),
 }

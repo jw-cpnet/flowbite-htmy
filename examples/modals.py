@@ -16,6 +16,7 @@ from fasthx.jinja import Jinja
 from htmy import Renderer, SafeStr, html
 
 from flowbite_htmy.components import Button, Modal, PopupModal
+from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color, Size
 
 app = FastAPI(title="Flowbite-HTMY Modal Showcase")
@@ -142,12 +143,9 @@ async def index() -> dict:
         PopupModal(
             id="popup-modal",
             message="Are you sure you want to delete this product?",
-            icon=SafeStr(
-                """
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                </svg>
-                """
+            icon=get_icon(
+                Icon.EXCLAMATION_CIRCLE,
+                class_="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200",
             ),
             confirm_button=Button(
                 label="Yes, I'm sure",
@@ -257,9 +255,7 @@ async def index() -> dict:
             footer=Button(
                 label="Add new product",
                 color=Color.PRIMARY,
-                icon=SafeStr(
-                    '<svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>'
-                ),
+                icon=get_icon(Icon.PLUS, class_="me-1 -ms-1 w-5 h-5"),
                 attrs={"type": "submit"},
             ),
         ),
@@ -357,10 +353,8 @@ async def index() -> dict:
             title="Success!",
             size=Size.SM,
             children=html.div(
-                SafeStr(
-                    '<svg class="mx-auto mb-4 text-green-500 w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">'
-                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>'
-                    '</svg>'
+                get_icon(
+                    Icon.CHECK, class_="mx-auto mb-4 text-green-500 w-12 h-12"
                 ),
                 html.p(
                     "Your changes have been saved successfully!",
