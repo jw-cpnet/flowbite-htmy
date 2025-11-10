@@ -182,6 +182,32 @@
             },
             "cwd": "${workspaceFolder}",
             "args": []
+        },
+        {
+            "name": "Python: Select Showcase",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/selects.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Select Showcase (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/selects.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
         }
     ]
 }

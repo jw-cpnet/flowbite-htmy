@@ -7,6 +7,7 @@ from flowbite_htmy.components.button import Button
 from flowbite_htmy.components.input import Input
 from flowbite_htmy.components.modal import Modal
 from flowbite_htmy.components.popup_modal import PopupModal
+from flowbite_htmy.components.select import Select
 
 # Future components will be imported here as they're implemented
 
@@ -18,4 +19,5 @@ __all__ = [
     "Input",
     "Modal",
     "PopupModal",
+    "Select",
 ]
