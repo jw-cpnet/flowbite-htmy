@@ -337,70 +337,62 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            html.button(
-                html.img(
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
-                    alt="User dropdown",
-                    class_="w-10 h-10 rounded-full",
-                ),
+            html.img(
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                alt="User dropdown",
+                id="avatarButton",
                 type="button",
-                id="user-menu-button",
-                class_="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600",
+                class_="w-10 h-10 rounded-full cursor-pointer",
                 **{
-                    "data-dropdown-toggle": "user-dropdown",
-                    "data-dropdown-placement": "bottom",
+                    "data-dropdown-toggle": "userDropdown",
+                    "data-dropdown-placement": "bottom-start",
                 },
             ),
             # Dropdown menu
             html.div(
                 html.div(
+                    html.div("Bonnie Green"),
                     html.div(
-                        html.span(
-                            "Bonnie Green",
-                            class_="block text-sm text-gray-900 dark:text-white",
-                        ),
-                        html.span(
-                            "name@flowbite.com",
-                            class_="block text-sm text-gray-500 truncate dark:text-gray-400",
-                        ),
-                        class_="px-4 py-3",
+                        "name@flowbite.com",
+                        class_="font-medium truncate",
                     ),
-                    html.ul(
-                        html.li(
-                            html.a(
-                                "Dashboard",
-                                href="#",
-                                class_="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white",
-                            ),
-                        ),
-                        html.li(
-                            html.a(
-                                "Settings",
-                                href="#",
-                                class_="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white",
-                            ),
-                        ),
-                        html.li(
-                            html.a(
-                                "Earnings",
-                                href="#",
-                                class_="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white",
-                            ),
-                        ),
-                        class_="py-2",
-                        **{"aria-labelledby": "user-menu-button"},
-                    ),
-                    html.div(
+                    class_="px-4 py-3 text-sm text-gray-900 dark:text-white",
+                ),
+                html.ul(
+                    html.li(
                         html.a(
-                            "Sign out",
+                            "Dashboard",
                             href="#",
-                            class_="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white",
+                            class_="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white",
                         ),
+                    ),
+                    html.li(
+                        html.a(
+                            "Settings",
+                            href="#",
+                            class_="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white",
+                        ),
+                    ),
+                    html.li(
+                        html.a(
+                            "Earnings",
+                            href="#",
+                            class_="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white",
+                        ),
+                    ),
+                    class_="py-2 text-sm text-gray-700 dark:text-gray-200",
+                    **{"aria-labelledby": "avatarButton"},
+                ),
+                html.div(
+                    html.a(
+                        "Sign out",
+                        href="#",
+                        class_="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white",
                     ),
                     class_="py-1",
                 ),
-                id="user-dropdown",
-                class_="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600",
+                id="userDropdown",
+                class_="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600",
             ),
             class_="mb-12",
         ),
