@@ -243,30 +243,55 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
+            # First stacked group - 4 avatars
             html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-1.jpg",
-                    alt="User 1",
-                    class_="border-2 border-white dark:border-gray-800",
+                html.img(
+                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
                 ),
-                Avatar(
+                html.img(
                     src="https://flowbite.com/docs/images/people/profile-picture-2.jpg",
-                    alt="User 2",
-                    class_="border-2 border-white dark:border-gray-800",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
                 ),
-                Avatar(
+                html.img(
                     src="https://flowbite.com/docs/images/people/profile-picture-3.jpg",
-                    alt="User 3",
-                    class_="border-2 border-white dark:border-gray-800",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
                 ),
-                Avatar(
+                html.img(
                     src="https://flowbite.com/docs/images/people/profile-picture-4.jpg",
-                    alt="User 4",
-                    class_="border-2 border-white dark:border-gray-800",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
                 ),
                 class_="flex -space-x-4 rtl:space-x-reverse",
             ),
-            class_="mb-12",
+            # Second stacked group - 3 avatars + counter
+            html.div(
+                html.img(
+                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
+                ),
+                html.img(
+                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
+                ),
+                html.img(
+                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+                    alt="",
+                    class_="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800",
+                ),
+                html.a(
+                    "+99",
+                    href="#",
+                    class_="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800",
+                ),
+                class_="flex -space-x-4 rtl:space-x-reverse",
+            ),
+            class_="flex mb-12",
         ),
         # 8. Avatar with text
         html.h2(
@@ -429,44 +454,6 @@ async def index() -> dict:
                 ),
             ),
             class_="flex items-center mb-12",
-        ),
-        # 11. Stacked with counter
-        html.h2(
-            "Stacked with counter",
-            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4",
-        ),
-        html.p(
-            "Show a counter for additional users when stacking avatars.",
-            class_="text-gray-600 dark:text-gray-400 mb-6",
-        ),
-        html.div(
-            html.div(
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-1.jpg",
-                    alt="User 1",
-                    class_="border-2 border-white dark:border-gray-800",
-                ),
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg",
-                    alt="User 2",
-                    class_="border-2 border-white dark:border-gray-800",
-                ),
-                Avatar(
-                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg",
-                    alt="User 3",
-                    class_="border-2 border-white dark:border-gray-800",
-                ),
-                html.a(
-                    html.div(
-                        "+99",
-                        class_="relative inline-flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800",
-                    ),
-                    href="#",
-                    class_="flex items-center justify-center",
-                ),
-                class_="flex -space-x-4 rtl:space-x-reverse",
-            ),
-            class_="mb-12",
         ),
     )
 
