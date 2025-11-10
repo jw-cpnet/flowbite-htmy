@@ -234,6 +234,32 @@
             },
             "cwd": "${workspaceFolder}",
             "args": []
+        },
+        {
+            "name": "Python: Checkbox Showcase",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/checkboxes.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Checkbox Showcase (Debug Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/checkboxes.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONDONTWRITEBYTECODE": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
         }
     ]
 }
