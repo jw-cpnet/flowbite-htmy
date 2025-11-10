@@ -52,15 +52,15 @@ async def index() -> dict:
         Modal(
             id="default-modal",
             title="Terms of Service",
-            children=SafeStr(
-                """
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                </p>
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    The European Union's General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                </p>
-                """
+            children=html.div(
+                html.p(
+                    "With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.",
+                    class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
+                ),
+                html.p(
+                    "The European Union's General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.",
+                    class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
+                ),
             ),
             footer=html.div(
                 Button(
@@ -97,15 +97,15 @@ async def index() -> dict:
             id="static-modal",
             title="Static modal",
             static_backdrop=True,
-            children=SafeStr(
-                """
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                </p>
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    The European Union's General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                </p>
-                """
+            children=html.div(
+                html.p(
+                    "With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.",
+                    class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
+                ),
+                html.p(
+                    "The European Union's General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.",
+                    class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
+                ),
             ),
             footer=html.div(
                 Button(
@@ -182,35 +182,77 @@ async def index() -> dict:
             id="crud-modal",
             title="Create New Product",
             size=Size.SM,
-            children=SafeStr(
-                """
-                <form>
-                    <div class="grid gap-4 mb-4 grid-cols-2">
-                        <div class="col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option selected="">Select category</option>
-                                <option value="TV">TV/Monitors</option>
-                                <option value="PC">PC</option>
-                                <option value="GA">Gaming/Console</option>
-                                <option value="PH">Phones</option>
-                            </select>
-                        </div>
-                        <div class="col-span-2">
-                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Description</label>
-                            <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>
-                        </div>
-                    </div>
-                </form>
-                """
+            children=html.form(
+                html.div(
+                    # Name field
+                    html.div(
+                        html.label(
+                            "Name",
+                            **{"for": "name"},
+                            class_="block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                        ),
+                        html.input_(
+                            type="text",
+                            name="name",
+                            id="name",
+                            class_="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500",
+                            placeholder="Type product name",
+                            required=True,
+                        ),
+                        class_="col-span-2",
+                    ),
+                    # Price field
+                    html.div(
+                        html.label(
+                            "Price",
+                            **{"for": "price"},
+                            class_="block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                        ),
+                        html.input_(
+                            type="number",
+                            name="price",
+                            id="price",
+                            class_="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500",
+                            placeholder="$2999",
+                            required=True,
+                        ),
+                        class_="col-span-2 sm:col-span-1",
+                    ),
+                    # Category field
+                    html.div(
+                        html.label(
+                            "Category",
+                            **{"for": "category"},
+                            class_="block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                        ),
+                        html.select(
+                            html.option("Select category", selected=True),
+                            html.option("TV/Monitors", value="TV"),
+                            html.option("PC", value="PC"),
+                            html.option("Gaming/Console", value="GA"),
+                            html.option("Phones", value="PH"),
+                            id="category",
+                            class_="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500",
+                        ),
+                        class_="col-span-2 sm:col-span-1",
+                    ),
+                    # Description field
+                    html.div(
+                        html.label(
+                            "Product Description",
+                            **{"for": "description"},
+                            class_="block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                        ),
+                        html.textarea(
+                            id="description",
+                            rows=4,
+                            class_="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                            placeholder="Write product description here",
+                        ),
+                        class_="col-span-2",
+                    ),
+                    class_="grid gap-4 mb-4 grid-cols-2",
+                ),
             ),
             footer=Button(
                 label="Add new product",
@@ -258,12 +300,9 @@ async def index() -> dict:
             id="small-modal",
             title="Small modal",
             size=Size.SM,
-            children=SafeStr(
-                """
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    This is a small modal with max-width of 28rem (max-w-md).
-                </p>
-                """
+            children=html.p(
+                "This is a small modal with max-width of 28rem (max-w-md).",
+                class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
             ),
         ),
         # Medium modal (default)
@@ -271,12 +310,9 @@ async def index() -> dict:
             id="medium-modal",
             title="Medium modal (default)",
             size=Size.MD,
-            children=SafeStr(
-                """
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    This is the default medium modal with max-width of 42rem (max-w-2xl).
-                </p>
-                """
+            children=html.p(
+                "This is the default medium modal with max-width of 42rem (max-w-2xl).",
+                class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
             ),
         ),
         # Large modal
@@ -284,12 +320,9 @@ async def index() -> dict:
             id="large-modal",
             title="Large modal",
             size=Size.LG,
-            children=SafeStr(
-                """
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    This is a large modal with max-width of 56rem (max-w-4xl). Perfect for detailed content.
-                </p>
-                """
+            children=html.p(
+                "This is a large modal with max-width of 56rem (max-w-4xl). Perfect for detailed content.",
+                class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
             ),
         ),
         # Extra large modal
@@ -297,12 +330,9 @@ async def index() -> dict:
             id="xl-modal",
             title="Extra large modal",
             size=Size.XL,
-            children=SafeStr(
-                """
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    This is an extra large modal with max-width of 64rem (max-w-5xl). Great for dashboards or complex forms.
-                </p>
-                """
+            children=html.p(
+                "This is an extra large modal with max-width of 64rem (max-w-5xl). Great for dashboards or complex forms.",
+                class_="text-base leading-relaxed text-gray-500 dark:text-gray-400",
             ),
         ),
         # Confirmation modal (simple, no footer)
@@ -326,17 +356,17 @@ async def index() -> dict:
             id="notification-modal",
             title="Success!",
             size=Size.SM,
-            children=SafeStr(
-                """
-                <div class="text-center">
-                    <svg class="mx-auto mb-4 text-green-500 w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <p class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                        Your changes have been saved successfully!
-                    </p>
-                </div>
-                """
+            children=html.div(
+                SafeStr(
+                    '<svg class="mx-auto mb-4 text-green-500 w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">'
+                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>'
+                    '</svg>'
+                ),
+                html.p(
+                    "Your changes have been saved successfully!",
+                    class_="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400",
+                ),
+                class_="text-center",
             ),
         ),
         class_="space-y-8",
