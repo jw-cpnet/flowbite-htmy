@@ -8,7 +8,7 @@ __version__ = "0.1.0"
 __author__ = "Jian"
 
 # Flowbite and dependency versions
-FLOWBITE_VERSION = "2.5.1"
+FLOWBITE_VERSION = "3.1.2"
 HTMX_VERSION = "2.0.2"
 TAILWIND_VERSION = "3.4.0"
 
