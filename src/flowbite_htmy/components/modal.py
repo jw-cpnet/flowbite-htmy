@@ -104,8 +104,9 @@ class Modal:
                 self._render_close_button(),  # type: ignore[arg-type]
                 class_=header_classes,
             ),
-            # Body
-            html.div(self.children, class_=body_classes),  # type: ignore[arg-type]
+            # Body - children are rendered directly (no wrapper div)
+            # This allows forms and other elements to control their own padding
+            self.children,  # type: ignore[arg-type]
         ]
 
         # Add footer if provided
