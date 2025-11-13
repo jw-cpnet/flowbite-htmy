@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
 
-    <!-- Tailwind CSS v3 Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS v3.4.0 Full Build -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css" rel="stylesheet">
     <script>
         // Configure Tailwind to use class-based dark mode
-        tailwind.config = {
-            darkMode: 'class'
+        if (typeof tailwind !== 'undefined') {
+            tailwind.config = {
+                darkMode: 'class'
+            }
         }
     </script>
 
