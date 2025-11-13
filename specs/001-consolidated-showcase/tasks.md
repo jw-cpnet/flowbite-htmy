@@ -60,21 +60,21 @@
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Create examples/showcase.py with FastAPI app initialization and component routes constant
-- [ ] T015 [US1] Implement build_navigation() function in examples/showcase.py to generate sidebar menu using Button components
-- [ ] T016 [US1] Implement homepage route (GET /) in examples/showcase.py with component gallery
-- [ ] T017 [US1] Implement buttons route (GET /buttons) in examples/showcase.py
-- [ ] T018 [P] [US1] Implement badges route (GET /badges) in examples/showcase.py
-- [ ] T019 [P] [US1] Implement alerts route (GET /alerts) in examples/showcase.py
-- [ ] T020 [P] [US1] Implement avatars route (GET /avatars) in examples/showcase.py
-- [ ] T021 [P] [US1] Implement cards route (GET /cards) in examples/showcase.py
-- [ ] T022 [P] [US1] Implement checkboxes route (GET /checkboxes) in examples/showcase.py
-- [ ] T023 [P] [US1] Implement inputs route (GET /inputs) in examples/showcase.py
-- [ ] T024 [P] [US1] Implement modals route (GET /modals) in examples/showcase.py
-- [ ] T025 [P] [US1] Implement paginations route (GET /paginations) in examples/showcase.py
-- [ ] T026 [P] [US1] Implement selects route (GET /selects) in examples/showcase.py
-- [ ] T027 [US1] Add 404 error handler in examples/showcase.py with custom HTML response
-- [ ] T028 [US1] Add main block in examples/showcase.py with uvicorn.run() for direct execution
+- [X] T014 [US1] Create examples/showcase.py with FastAPI app initialization and component routes constant
+- [X] T015 [US1] Implement build_navigation() function in examples/showcase.py to generate sidebar menu using Button components
+- [X] T016 [US1] Implement homepage route (GET /) in examples/showcase.py with component gallery
+- [X] T017 [US1] Implement buttons route (GET /buttons) in examples/showcase.py
+- [X] T018 [P] [US1] Implement badges route (GET /badges) in examples/showcase.py
+- [X] T019 [P] [US1] Implement alerts route (GET /alerts) in examples/showcase.py
+- [X] T020 [P] [US1] Implement avatars route (GET /avatars) in examples/showcase.py
+- [X] T021 [P] [US1] Implement cards route (GET /cards) in examples/showcase.py
+- [X] T022 [P] [US1] Implement checkboxes route (GET /checkboxes) in examples/showcase.py
+- [X] T023 [P] [US1] Implement inputs route (GET /inputs) in examples/showcase.py
+- [X] T024 [P] [US1] Implement modals route (GET /modals) in examples/showcase.py
+- [X] T025 [P] [US1] Implement paginations route (GET /paginations) in examples/showcase.py
+- [X] T026 [P] [US1] Implement selects route (GET /selects) in examples/showcase.py
+- [X] T027 [US1] Add 404 error handler in examples/showcase.py with custom HTML response
+- [X] T028 [US1] Add main block in examples/showcase.py with uvicorn.run() for direct execution
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - all component pages accessible through navigation menu
 
