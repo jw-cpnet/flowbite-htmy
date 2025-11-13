@@ -24,13 +24,13 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the badge showcase page using Jinja layout + htmy components."""
+def build_badges_showcase():
+    """Build comprehensive badge showcase content.
 
-    # Build comprehensive badge showcase
-    badges_section = html.div(
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
+    return html.div(
         # Default badges
         html.h2(
             "Default badges",
@@ -51,7 +51,6 @@ async def index() -> dict:
             Badge(label="Pink", color=Color.PINK),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Large badges
         html.h2(
             "Large badges",
@@ -72,7 +71,6 @@ async def index() -> dict:
             Badge(label="Pink", color=Color.PINK, large=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Badge pills
         html.h2(
             "Badge pills",
@@ -93,7 +91,6 @@ async def index() -> dict:
             Badge(label="Pink", color=Color.PINK, rounded=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Bordered badges
         html.h2(
             "Bordered badges",
@@ -114,7 +111,6 @@ async def index() -> dict:
             Badge(label="Pink", color=Color.PINK, border=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Badges as links
         html.h2(
             "Badges as links",
@@ -129,7 +125,6 @@ async def index() -> dict:
             Badge(label="Badge link", color=Color.BLUE, border=True, large=True, href="#"),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Badges with icon
         html.h2(
             "Badges with icon",
@@ -154,7 +149,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Notification badge
         html.h2(
             "Notification badge",
@@ -179,7 +173,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Badges with icon only
         html.h2(
             "Badges with icon only",
@@ -216,7 +209,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Dismissible badges (chips)
         html.h2(
             "Dismissible badges",
@@ -238,6 +230,14 @@ async def index() -> dict:
             class_="flex flex-wrap gap-2 mb-12",
         ),
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the badge showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    badges_section = build_badges_showcase()
 
     # Render htmy components to HTML string
     content_html = await renderer.render(badges_section)

@@ -22,13 +22,13 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the select showcase page using Jinja layout + htmy components."""
+def build_selects_showcase():
+    """Build comprehensive selects showcase content.
 
-    # Build comprehensive select showcase
-    selects_section = html.div(
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
+    return html.div(
         # Default select
         html.h2(
             "Default select",
@@ -297,6 +297,14 @@ async def index() -> dict:
         ),
         class_="max-w-4xl mx-auto p-8",
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the select showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    selects_section = build_selects_showcase()
 
     return {
         "title": "Select Component Showcase - Flowbite HTMY",

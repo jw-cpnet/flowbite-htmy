@@ -15,7 +15,6 @@ from fasthx.jinja import Jinja
 from htmy import Renderer, html
 
 from flowbite_htmy.components.avatar import Avatar
-from flowbite_htmy.types import Size
 
 app = FastAPI(title="Flowbite-HTMY Avatar Showcase")
 templates = Jinja2Templates(directory="examples/templates")
@@ -23,13 +22,13 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the avatar showcase page using Jinja layout + htmy components."""
+def build_avatars_showcase():
+    """Build comprehensive avatars showcase content.
 
-    # Build comprehensive avatar showcase
-    avatars_section = html.div(
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
+    return html.div(
         # 1. Default avatar
         html.h2(
             "Default avatar",
@@ -434,6 +433,14 @@ async def index() -> dict:
             class_="flex items-center mb-12",
         ),
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the avatar showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    avatars_section = build_avatars_showcase()
 
     # Render htmy components to HTML string
     content_html = await renderer.render(avatars_section)

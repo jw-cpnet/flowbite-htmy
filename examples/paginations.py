@@ -22,13 +22,13 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the pagination showcase page using Jinja layout + htmy components."""
+def build_paginations_showcase():
+    """Build comprehensive paginations showcase content.
 
-    # Build comprehensive pagination showcase
-    paginations_section = html.div(
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
+    return html.div(
         # Default pagination
         html.h2(
             "Default pagination",
@@ -299,6 +299,14 @@ async def index() -> dict:
         ),
         class_="max-w-4xl mx-auto p-8",
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the pagination showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    paginations_section = build_paginations_showcase()
 
     return {
         "title": "Pagination Component Showcase - Flowbite HTMY",

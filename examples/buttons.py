@@ -25,13 +25,13 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the button showcase page using Jinja layout + htmy components."""
+def build_buttons_showcase():
+    """Build comprehensive button showcase content.
 
-    # Build comprehensive button showcase
-    buttons_section = html.div(
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
+    return html.div(
         # Default buttons
         html.h2(
             "Default buttons",
@@ -52,7 +52,6 @@ async def index() -> dict:
             Button(label="Purple", color=Color.PURPLE),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Button pills
         html.h2(
             "Button pills",
@@ -73,7 +72,6 @@ async def index() -> dict:
             Button(label="Purple", color=Color.PURPLE, pill=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Gradient monochrome
         html.h2(
             "Gradient monochrome",
@@ -94,7 +92,6 @@ async def index() -> dict:
             Button(label="Purple", color=Color.PURPLE, variant=ButtonVariant.GRADIENT),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Gradient duotone
         html.h2(
             "Gradient duotone",
@@ -114,7 +111,6 @@ async def index() -> dict:
             Button(label="Red to Yellow", color="red-yellow", variant=ButtonVariant.GRADIENT),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Gradient outline
         html.h2(
             "Outlined gradient",
@@ -125,16 +121,25 @@ async def index() -> dict:
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         html.div(
-            Button(label="Purple to blue", color="purple-blue", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(
+                label="Purple to blue", color="purple-blue", variant=ButtonVariant.GRADIENT_OUTLINE
+            ),
             Button(label="Cyan to blue", color="cyan-blue", variant=ButtonVariant.GRADIENT_OUTLINE),
-            Button(label="Green to blue", color="green-blue", variant=ButtonVariant.GRADIENT_OUTLINE),
-            Button(label="Purple to pink", color="purple-pink", variant=ButtonVariant.GRADIENT_OUTLINE),
-            Button(label="Pink to orange", color="pink-orange", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(
+                label="Green to blue", color="green-blue", variant=ButtonVariant.GRADIENT_OUTLINE
+            ),
+            Button(
+                label="Purple to pink", color="purple-pink", variant=ButtonVariant.GRADIENT_OUTLINE
+            ),
+            Button(
+                label="Pink to orange", color="pink-orange", variant=ButtonVariant.GRADIENT_OUTLINE
+            ),
             Button(label="Teal to Lime", color="teal-lime", variant=ButtonVariant.GRADIENT_OUTLINE),
-            Button(label="Red to Yellow", color="red-yellow", variant=ButtonVariant.GRADIENT_OUTLINE),
+            Button(
+                label="Red to Yellow", color="red-yellow", variant=ButtonVariant.GRADIENT_OUTLINE
+            ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Outline buttons
         html.h2(
             "Outline buttons",
@@ -153,7 +158,6 @@ async def index() -> dict:
             Button(label="Purple", color=Color.PURPLE, variant=ButtonVariant.OUTLINE),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Button sizes
         html.h2(
             "Button sizes",
@@ -171,7 +175,6 @@ async def index() -> dict:
             Button(label="Extra large", color=Color.PRIMARY, size=Size.XL),
             class_="flex flex-wrap items-center gap-2 mb-12",
         ),
-
         # Button sizes with icon
         html.h2(
             "Button sizes with icon",
@@ -214,7 +217,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap items-center gap-2 mb-12",
         ),
-
         # Buttons with icon
         html.h2(
             "Buttons with icon",
@@ -238,7 +240,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Button with badge
         html.h2(
             "Button with badge",
@@ -256,7 +257,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Icon buttons
         html.h2(
             "Icon buttons",
@@ -297,7 +297,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Colored shadows
         html.h2(
             "Colored shadows",
@@ -318,7 +317,6 @@ async def index() -> dict:
             Button(label="Purple", color=Color.PURPLE, variant=ButtonVariant.GRADIENT, shadow=True),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Loading state
         html.h2(
             "Loading state",
@@ -338,7 +336,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Social login buttons
         html.h2(
             "Social login buttons",
@@ -381,7 +378,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # Payment buttons
         html.h2(
             "Payment buttons",
@@ -448,7 +444,6 @@ async def index() -> dict:
             ),
             class_="flex flex-wrap gap-2 mb-12",
         ),
-
         # HTMX interactive example
         html.h2(
             "Interactive HTMX Button",
@@ -474,6 +469,14 @@ async def index() -> dict:
             class_="mt-4 p-4 rounded-lg bg-gray-100 dark:bg-gray-800",
         ),
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the button showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    buttons_section = build_buttons_showcase()
 
     # Render htmy components to HTML string
     content_html = await renderer.render(buttons_section)

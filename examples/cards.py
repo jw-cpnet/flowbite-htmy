@@ -22,13 +22,13 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the card showcase page using Jinja layout + htmy components."""
+def build_cards_showcase():
+    """Build comprehensive cards showcase content.
 
-    # Build comprehensive card showcase
-    cards_section = html.div(
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
+    return html.div(
         # 1. Default card
         html.h2(
             "Default card",
@@ -277,7 +277,9 @@ async def index() -> dict:
                         get_social_icon(Social.APPLE, class_="me-3 w-7 h-7"),
                         html.div(
                             html.div("Download on the", class_="mb-1 text-xs"),
-                            html.div("Mac App Store", class_="-mt-1 font-sans text-sm font-semibold"),
+                            html.div(
+                                "Mac App Store", class_="-mt-1 font-sans text-sm font-semibold"
+                            ),
                             class_="text-left rtl:text-right",
                         ),
                         href="#",
@@ -391,22 +393,34 @@ async def index() -> dict:
                         ),
                         html.ul(
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Dynamic reports and dashboards", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Templates for everyone", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Development workflow", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Limitless business automation", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
@@ -428,12 +442,17 @@ async def index() -> dict:
                             ),
                             html.div(
                                 html.dt("100M+", class_="mb-2 text-3xl font-extrabold"),
-                                html.dd("Public repositories", class_="text-gray-500 dark:text-gray-400"),
+                                html.dd(
+                                    "Public repositories", class_="text-gray-500 dark:text-gray-400"
+                                ),
                                 class_="flex flex-col",
                             ),
                             html.div(
                                 html.dt("1000s", class_="mb-2 text-3xl font-extrabold"),
-                                html.dd("Open source projects", class_="text-gray-500 dark:text-gray-400"),
+                                html.dd(
+                                    "Open source projects",
+                                    class_="text-gray-500 dark:text-gray-400",
+                                ),
                                 class_="flex flex-col",
                             ),
                             class_="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8",
@@ -535,12 +554,17 @@ async def index() -> dict:
                             ),
                             html.div(
                                 html.dt("100M+", class_="mb-2 text-3xl font-extrabold"),
-                                html.dd("Public repositories", class_="text-gray-500 dark:text-gray-400"),
+                                html.dd(
+                                    "Public repositories", class_="text-gray-500 dark:text-gray-400"
+                                ),
                                 class_="flex flex-col items-center justify-center",
                             ),
                             html.div(
                                 html.dt("1000s", class_="mb-2 text-3xl font-extrabold"),
-                                html.dd("Open source projects", class_="text-gray-500 dark:text-gray-400"),
+                                html.dd(
+                                    "Open source projects",
+                                    class_="text-gray-500 dark:text-gray-400",
+                                ),
                                 class_="flex flex-col items-center justify-center",
                             ),
                             html.div(
@@ -550,7 +574,10 @@ async def index() -> dict:
                             ),
                             html.div(
                                 html.dt("90+", class_="mb-2 text-3xl font-extrabold"),
-                                html.dd("Top Forbes companies", class_="text-gray-500 dark:text-gray-400"),
+                                html.dd(
+                                    "Top Forbes companies",
+                                    class_="text-gray-500 dark:text-gray-400",
+                                ),
                                 class_="flex flex-col items-center justify-center",
                             ),
                             html.div(
@@ -573,22 +600,34 @@ async def index() -> dict:
                         ),
                         html.ul(
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Dynamic reports and dashboards", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Templates for everyone", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Development workflow", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
                             html.li(
-                                get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500"),
+                                get_icon(
+                                    Icon.CHECK_CIRCLE,
+                                    class_="shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500",
+                                ),
                                 html.span("Limitless business automation", class_="leading-tight"),
                                 class_="flex space-x-2 rtl:space-x-reverse items-center",
                             ),
@@ -607,7 +646,9 @@ async def index() -> dict:
                             html.h2(
                                 html.button(
                                     html.span("What is Flowbite?"),
-                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"),
+                                    get_icon(
+                                        Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"
+                                    ),
                                     type="button",
                                     class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
                                     **{
@@ -644,7 +685,9 @@ async def index() -> dict:
                             html.h2(
                                 html.button(
                                     html.span("Is there a Figma file available?"),
-                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"),
+                                    get_icon(
+                                        Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"
+                                    ),
                                     type="button",
                                     class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
                                     **{
@@ -680,8 +723,12 @@ async def index() -> dict:
                             # FAQ 3
                             html.h2(
                                 html.button(
-                                    html.span("What are the differences between Flowbite and Tailwind UI?"),
-                                    get_icon(Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"),
+                                    html.span(
+                                        "What are the differences between Flowbite and Tailwind UI?"
+                                    ),
+                                    get_icon(
+                                        Icon.CHEVRON_DOWN, class_="w-3 h-3 rotate-180 shrink-0"
+                                    ),
                                     type="button",
                                     class_="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400",
                                     **{
@@ -951,43 +998,87 @@ async def index() -> dict:
                 html.div(
                     html.span("$", class_="text-3xl font-semibold"),
                     html.span("49", class_="text-5xl font-extrabold tracking-tight"),
-                    html.span("/month", class_="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400"),
+                    html.span(
+                        "/month", class_="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400"
+                    ),
                     class_="flex items-baseline text-gray-900 dark:text-white",
                 ),
                 html.ul(
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"),
-                        html.span("2 team members", class_="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500",
+                        ),
+                        html.span(
+                            "2 team members",
+                            class_="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3",
+                        ),
                         class_="flex items-center",
                     ),
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"),
-                        html.span("20GB Cloud storage", class_="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500",
+                        ),
+                        html.span(
+                            "20GB Cloud storage",
+                            class_="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3",
+                        ),
                         class_="flex",
                     ),
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"),
-                        html.span("Integration help", class_="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500",
+                        ),
+                        html.span(
+                            "Integration help",
+                            class_="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3",
+                        ),
                         class_="flex",
                     ),
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500"),
-                        html.span("Sketch Files", class_="text-base font-normal leading-tight text-gray-500 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500",
+                        ),
+                        html.span(
+                            "Sketch Files",
+                            class_="text-base font-normal leading-tight text-gray-500 ms-3",
+                        ),
                         class_="flex line-through decoration-gray-500",
                     ),
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500"),
-                        html.span("API Access", class_="text-base font-normal leading-tight text-gray-500 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500",
+                        ),
+                        html.span(
+                            "API Access",
+                            class_="text-base font-normal leading-tight text-gray-500 ms-3",
+                        ),
                         class_="flex line-through decoration-gray-500",
                     ),
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500"),
-                        html.span("Complete documentation", class_="text-base font-normal leading-tight text-gray-500 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500",
+                        ),
+                        html.span(
+                            "Complete documentation",
+                            class_="text-base font-normal leading-tight text-gray-500 ms-3",
+                        ),
                         class_="flex line-through decoration-gray-500",
                     ),
                     html.li(
-                        get_icon(Icon.CHECK_CIRCLE, class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500"),
-                        html.span("24×7 phone & email support", class_="text-base font-normal leading-tight text-gray-500 ms-3"),
+                        get_icon(
+                            Icon.CHECK_CIRCLE,
+                            class_="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500",
+                        ),
+                        html.span(
+                            "24×7 phone & email support",
+                            class_="text-base font-normal leading-tight text-gray-500 ms-3",
+                        ),
                         class_="flex line-through decoration-gray-500",
                     ),
                     role="list",
@@ -1021,7 +1112,7 @@ async def index() -> dict:
                             class_="text-lg font-semibold text-gray-900 dark:text-white",
                         ),
                         html.p(
-                            "If you care for your time, I hands down would go with this.\"",
+                            'If you care for your time, I hands down would go with this."',
                             class_="my-4",
                         ),
                         class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
@@ -1052,7 +1143,7 @@ async def index() -> dict:
                             class_="text-lg font-semibold text-gray-900 dark:text-white",
                         ),
                         html.p(
-                            "Designing with Figma components that can be easily translated to the utility classes of Tailwind CSS is a huge timesaver!\"",
+                            'Designing with Figma components that can be easily translated to the utility classes of Tailwind CSS is a huge timesaver!"',
                             class_="my-4",
                         ),
                         class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
@@ -1083,7 +1174,7 @@ async def index() -> dict:
                             class_="text-lg font-semibold text-gray-900 dark:text-white",
                         ),
                         html.p(
-                            "Aesthetically, the well designed components are beautiful and will undoubtedly level up your next application.\"",
+                            'Aesthetically, the well designed components are beautiful and will undoubtedly level up your next application."',
                             class_="my-4",
                         ),
                         class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
@@ -1114,7 +1205,7 @@ async def index() -> dict:
                             class_="text-lg font-semibold text-gray-900 dark:text-white",
                         ),
                         html.p(
-                            "You have many examples that can be used to create a fast prototype for your team.\"",
+                            'You have many examples that can be used to create a fast prototype for your team."',
                             class_="my-4",
                         ),
                         class_="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400",
@@ -1220,6 +1311,14 @@ async def index() -> dict:
             class_="mb-12",
         ),
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the card showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    cards_section = build_cards_showcase()
 
     # Render htmy components to HTML string
     content_html = await renderer.render(cards_section)

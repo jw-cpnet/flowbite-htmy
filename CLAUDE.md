@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Note**: For project principles and governance, see `.specify/memory/constitution.md`. This file explains HOW to work with the codebase; the constitution defines WHAT we do and why.
+
 ## Project Overview
 
 flowbite-htmy is a Python library that recreates Flowbite UI components using htmy for type-safe, maintainable server-side rendering with FastAPI and HTMX. The project follows a strict Test-Driven Development (TDD) approach.
@@ -354,3 +356,10 @@ Use Basic Memory MCP tools to:
 ---
 
 *This file provides quick context for AI assistants. All detailed documentation is in Basic Memory knowledge base.*
+
+## Active Technologies
+- Python 3.11+ + FastAPI 0.104.0+, fasthx 0.1.0+, htmy 0.1.0+, Jinja2 3.1+, flowbite-htmy (current), uvicorn (ASGI server) (001-consolidated-showcase)
+- N/A (showcase application, no data persistence) (001-consolidated-showcase)
+
+## Recent Changes
+- 001-consolidated-showcase: Added Python 3.11+ + FastAPI 0.104.0+, fasthx 0.1.0+, htmy 0.1.0+, Jinja2 3.1+, flowbite-htmy (current), uvicorn (ASGI server)

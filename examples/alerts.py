@@ -24,17 +24,18 @@ jinja = Jinja(templates)
 renderer = Renderer()
 
 
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the alert showcase page using Jinja layout + htmy components."""
+def build_alerts_showcase():
+    """Build comprehensive alerts showcase content.
+
+    Extracted for reuse in consolidated showcase application.
+    Returns htmy Component ready for rendering.
+    """
 
     # Helper to get info icon with proper sizing
     def info_icon() -> str:
         return get_icon(Icon.INFO, class_="w-4 h-4")
 
-    # Build comprehensive alert showcase
-    alerts_section = html.div(
+    return html.div(
         # 1. Default alerts
         html.h2(
             "Default alerts",
@@ -226,7 +227,9 @@ async def index() -> dict:
             Alert(
                 message=html.span(
                     "A simple info alert with an ",
-                    html.a("example link", href="#", class_="font-medium underline hover:no-underline"),
+                    html.a(
+                        "example link", href="#", class_="font-medium underline hover:no-underline"
+                    ),
                     ". Give it a click if you like.",
                 ),
                 color=Color.INFO,
@@ -237,7 +240,9 @@ async def index() -> dict:
             Alert(
                 message=html.span(
                     "A simple danger alert with an ",
-                    html.a("example link", href="#", class_="font-medium underline hover:no-underline"),
+                    html.a(
+                        "example link", href="#", class_="font-medium underline hover:no-underline"
+                    ),
                     ". Give it a click if you like.",
                 ),
                 color=Color.DANGER,
@@ -248,7 +253,9 @@ async def index() -> dict:
             Alert(
                 message=html.span(
                     "A simple success alert with an ",
-                    html.a("example link", href="#", class_="font-medium underline hover:no-underline"),
+                    html.a(
+                        "example link", href="#", class_="font-medium underline hover:no-underline"
+                    ),
                     ". Give it a click if you like.",
                 ),
                 color=Color.SUCCESS,
@@ -259,7 +266,9 @@ async def index() -> dict:
             Alert(
                 message=html.span(
                     "A simple warning alert with an ",
-                    html.a("example link", href="#", class_="font-medium underline hover:no-underline"),
+                    html.a(
+                        "example link", href="#", class_="font-medium underline hover:no-underline"
+                    ),
                     ". Give it a click if you like.",
                 ),
                 color=Color.WARNING,
@@ -270,7 +279,9 @@ async def index() -> dict:
             Alert(
                 message=html.span(
                     "A simple dark alert with an ",
-                    html.a("example link", href="#", class_="font-medium underline hover:no-underline"),
+                    html.a(
+                        "example link", href="#", class_="font-medium underline hover:no-underline"
+                    ),
                     ". Give it a click if you like.",
                 ),
                 color=Color.DARK,
@@ -295,7 +306,11 @@ async def index() -> dict:
                 get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
                 html.div(
                     "A simple info alert with an ",
-                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    html.a(
+                        "example link",
+                        href="#",
+                        class_="font-semibold underline hover:no-underline",
+                    ),
                     ". Give it a click if you like.",
                     class_="ms-3 text-sm font-medium",
                 ),
@@ -315,7 +330,11 @@ async def index() -> dict:
                 get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
                 html.div(
                     "A simple danger alert with an ",
-                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    html.a(
+                        "example link",
+                        href="#",
+                        class_="font-semibold underline hover:no-underline",
+                    ),
                     ". Give it a click if you like.",
                     class_="ms-3 text-sm font-medium",
                 ),
@@ -335,7 +354,11 @@ async def index() -> dict:
                 get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
                 html.div(
                     "A simple success alert with an ",
-                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    html.a(
+                        "example link",
+                        href="#",
+                        class_="font-semibold underline hover:no-underline",
+                    ),
                     ". Give it a click if you like.",
                     class_="ms-3 text-sm font-medium",
                 ),
@@ -355,7 +378,11 @@ async def index() -> dict:
                 get_icon(Icon.INFO, class_="shrink-0 w-4 h-4"),
                 html.div(
                     "A simple warning alert with an ",
-                    html.a("example link", href="#", class_="font-semibold underline hover:no-underline"),
+                    html.a(
+                        "example link",
+                        href="#",
+                        class_="font-semibold underline hover:no-underline",
+                    ),
                     ". Give it a click if you like.",
                     class_="ms-3 text-sm font-medium",
                 ),
@@ -429,7 +456,10 @@ async def index() -> dict:
                         "Dismiss",
                         type="button",
                         class_="text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800",
-                        **{"data-dismiss-target": "#alert-additional-content-1", "aria-label": "Close"},
+                        **{
+                            "data-dismiss-target": "#alert-additional-content-1",
+                            "aria-label": "Close",
+                        },
                     ),
                     class_="flex",
                 ),
@@ -460,7 +490,10 @@ async def index() -> dict:
                         "Dismiss",
                         type="button",
                         class_="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800",
-                        **{"data-dismiss-target": "#alert-additional-content-2", "aria-label": "Close"},
+                        **{
+                            "data-dismiss-target": "#alert-additional-content-2",
+                            "aria-label": "Close",
+                        },
                     ),
                     class_="flex",
                 ),
@@ -491,7 +524,10 @@ async def index() -> dict:
                         "Dismiss",
                         type="button",
                         class_="text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800",
-                        **{"data-dismiss-target": "#alert-additional-content-3", "aria-label": "Close"},
+                        **{
+                            "data-dismiss-target": "#alert-additional-content-3",
+                            "aria-label": "Close",
+                        },
                     ),
                     class_="flex",
                 ),
@@ -522,7 +558,10 @@ async def index() -> dict:
                         "Dismiss",
                         type="button",
                         class_="text-yellow-800 bg-transparent border border-yellow-800 hover:bg-yellow-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-yellow-300 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-gray-800 dark:focus:ring-yellow-800",
-                        **{"data-dismiss-target": "#alert-additional-content-4", "aria-label": "Close"},
+                        **{
+                            "data-dismiss-target": "#alert-additional-content-4",
+                            "aria-label": "Close",
+                        },
                     ),
                     class_="flex",
                 ),
@@ -533,9 +572,14 @@ async def index() -> dict:
             # Dark alert with additional content
             html.div(
                 html.div(
-                    get_icon(Icon.INFO, class_="shrink-0 w-4 h-4 me-2 text-gray-800 dark:text-gray-300"),
+                    get_icon(
+                        Icon.INFO, class_="shrink-0 w-4 h-4 me-2 text-gray-800 dark:text-gray-300"
+                    ),
                     html.span("Info", class_="sr-only"),
-                    html.h3("This is a dark alert", class_="text-lg font-medium text-gray-800 dark:text-gray-300"),
+                    html.h3(
+                        "This is a dark alert",
+                        class_="text-lg font-medium text-gray-800 dark:text-gray-300",
+                    ),
                     class_="flex items-center",
                 ),
                 html.div(
@@ -553,7 +597,10 @@ async def index() -> dict:
                         "Dismiss",
                         type="button",
                         class_="text-gray-800 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-800 dark:text-gray-300 dark:hover:text-white",
-                        **{"data-dismiss-target": "#alert-additional-content-5", "aria-label": "Close"},
+                        **{
+                            "data-dismiss-target": "#alert-additional-content-5",
+                            "aria-label": "Close",
+                        },
                     ),
                     class_="flex",
                 ),
@@ -564,6 +611,14 @@ async def index() -> dict:
             class_="mb-12",
         ),
     )
+
+
+@app.get("/")
+@jinja.page("base.html.jinja")
+async def index() -> dict:
+    """Render the alert showcase page using Jinja layout + htmy components."""
+    # Use extracted showcase function
+    alerts_section = build_alerts_showcase()
 
     # Render htmy components to HTML string
     content_html = await renderer.render(alerts_section)
