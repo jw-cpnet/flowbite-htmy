@@ -159,9 +159,7 @@ class Pagination:
         # Page number links
         page_numbers = self._calculate_visible_pages(total_pages)
         for page_num in page_numbers:
-            items.append(
-                self._render_page_link(page_num, height_class, text_class, padding_class)
-            )
+            items.append(self._render_page_link(page_num, height_class, text_class, padding_class))
 
         # Next button
         items.append(self._render_next_button(total_pages, height_class, text_class, padding_class))
@@ -215,9 +213,7 @@ class Pagination:
         is_disabled = self.current_page >= total_pages
 
         # Build classes
-        builder = ClassBuilder(
-            f"flex items-center justify-center {padding_class} {height_class}"
-        )
+        builder = ClassBuilder(f"flex items-center justify-center {padding_class} {height_class}")
         builder.add("leading-tight rounded-e-lg")
 
         if is_disabled:
@@ -275,9 +271,7 @@ class Pagination:
                 )
             )
         else:
-            return html.li(
-                html.a(str(page_num), href=url, class_=builder.build())
-            )
+            return html.li(html.a(str(page_num), href=url, class_=builder.build()))
 
     def _calculate_visible_pages(self, total_pages: int) -> list[int]:
         """Calculate which page numbers to show based on max_visible_pages."""

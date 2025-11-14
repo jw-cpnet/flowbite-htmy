@@ -1,7 +1,6 @@
 """Utility for building Tailwind CSS class strings."""
 
 
-
 class ClassBuilder:
     """Utility for building Tailwind CSS class strings.
 

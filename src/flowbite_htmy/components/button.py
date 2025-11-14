@@ -192,9 +192,7 @@ class Button:
 
         # For gradient outline, wrap content in a span
         if self.variant == ButtonVariant.GRADIENT_OUTLINE:
-            inner_span_classes = (
-                "relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0"
-            )
+            inner_span_classes = "relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0"
             inner_span_classes += " " + self._get_size_classes(is_inner=True)
             inner_span_classes += " " + self._get_shape_classes()
 
@@ -330,7 +328,7 @@ class Button:
         # Get color classes, default to blue
         badge_colors = badge_color_map.get(
             self.color if isinstance(self.color, Color) else Color.PRIMARY,
-            "text-blue-800 bg-blue-200"
+            "text-blue-800 bg-blue-200",
         )
 
         return f"inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold {badge_colors} rounded-full"

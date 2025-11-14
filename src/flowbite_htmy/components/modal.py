@@ -132,7 +132,7 @@ class Modal:
             'fill="none" viewBox="0 0 14 14">'
             '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" '
             'stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>'
-            '</svg>'
+            "</svg>"
         )
 
         return html.button(
@@ -174,6 +174,5 @@ class Modal:
     def _build_footer_classes(self, theme: ThemeContext) -> str:
         """Build CSS classes for modal footer."""
         return (
-            "flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b "
-            "dark:border-gray-600"
+            "flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
         )

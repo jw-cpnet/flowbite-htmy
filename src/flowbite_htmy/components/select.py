@@ -211,9 +211,7 @@ class Select:
 
         # Add placeholder option if provided
         if self.placeholder:
-            option_elements.append(
-                html.option(self.placeholder, selected=True)
-            )
+            option_elements.append(html.option(self.placeholder, selected=True))
 
         # Add regular options
         for option in self.options:

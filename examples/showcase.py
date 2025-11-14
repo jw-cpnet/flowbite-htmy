@@ -29,6 +29,7 @@ from checkboxes import build_checkboxes_showcase
 from inputs import build_inputs_showcase
 from modals import build_modals_showcase
 from paginations import build_paginations_showcase
+from radios import build_radios_showcase
 from selects import build_selects_showcase
 from showcase_types import ComponentRoute, PageContext
 from flowbite_htmy.components import Button
@@ -98,18 +99,25 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "order": 8,
     },
     {
+        "name": "radios",
+        "path": "/radios",
+        "title": "Radio Buttons",
+        "description": "Radio buttons with validation states",
+        "order": 9,
+    },
+    {
         "name": "paginations",
         "path": "/paginations",
         "title": "Paginations",
         "description": "Page navigation with info text",
-        "order": 9,
+        "order": 10,
     },
     {
         "name": "selects",
         "path": "/selects",
         "title": "Selects",
         "description": "Dropdown selection fields",
-        "order": 10,
+        "order": 11,
     },
 ]
 
@@ -323,8 +331,23 @@ async def modals_page() -> PageContext:
     content_html = await renderer.render(build_modals_showcase())
 
     return {
-        "current_page": "modals",
-        "title": "Modals - Flowbite-HTMY Showcase",
+        "title": "Modals - Flowbite HTMY Showcase",
+        "active_page": "modals",
+        "navigation": navigation_html,
+        "content": content_html,
+    }
+
+
+@app.get("/radios")
+@jinja.page("showcase-layout.html.jinja")
+async def radios_page() -> PageContext:
+    """Render radio button component showcase page."""
+    navigation_html = await renderer.render(build_navigation("radios"))
+    content_html = await renderer.render(build_radios_showcase())
+
+    return {
+        "title": "Radio Buttons - Flowbite HTMY Showcase",
+        "active_page": "radios",
         "navigation": navigation_html,
         "content": content_html,
     }

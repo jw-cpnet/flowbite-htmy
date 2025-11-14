@@ -165,9 +165,7 @@ class Checkbox:
             )
 
         # Focus ring
-        builder.add(
-            "dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2"
-        )
+        builder.add("dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2")
 
         # Disabled state
         if self.disabled:
