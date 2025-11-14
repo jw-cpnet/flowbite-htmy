@@ -10,7 +10,10 @@ from flowbite_htmy.types import ToastVariant
 def build_toasts_showcase():
     """Build comprehensive toast showcase content."""
     return html.div(
-        html.h1("Toast Notifications", class_="text-4xl font-bold mb-8"),
+        html.h1(
+            "Toast Notifications",
+            class_="text-4xl font-bold mb-8 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Toast notifications for temporary messages with icons, colors, and actions.",
             class_="text-lg text-gray-600 dark:text-gray-400 mb-8",
@@ -28,7 +31,10 @@ def build_toasts_showcase():
 def _section_basic_variants():
     """T072: Showcase all 4 toast variants."""
     return html.div(
-        html.h2("Basic Variants", class_="text-2xl font-bold mb-4"),
+        html.h2(
+            "Basic Variants",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Toast notifications in four variants: success, danger, warning, and info.",
             class_="text-gray-600 dark:text-gray-400 mb-4",
@@ -62,7 +68,10 @@ def _section_basic_variants():
 def _section_custom_icons():
     """T073: Showcase custom icon override."""
     return html.div(
-        html.h2("Custom Icons", class_="text-2xl font-bold mb-4"),
+        html.h2(
+            "Custom Icons",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Override default variant icons with custom icons from the Icon library.",
             class_="text-gray-600 dark:text-gray-400 mb-4",
@@ -88,7 +97,10 @@ def _section_custom_icons():
 def _section_dismissible():
     """T074: Showcase dismissible=True and False."""
     return html.div(
-        html.h2("Dismissible Control", class_="text-2xl font-bold mb-4"),
+        html.h2(
+            "Dismissible Control",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Control whether toasts show a close button with dismissible parameter.",
             class_="text-gray-600 dark:text-gray-400 mb-4",
@@ -97,7 +109,7 @@ def _section_dismissible():
             html.div(
                 html.h3(
                     "Dismissible (with close button)",
-                    class_="text-lg font-semibold mb-2",
+                    class_="text-lg font-semibold mb-2 text-gray-900 dark:text-white",
                 ),
                 Toast(
                     message="You can close this notification",
@@ -109,7 +121,7 @@ def _section_dismissible():
             html.div(
                 html.h3(
                     "Non-dismissible (no close button)",
-                    class_="text-lg font-semibold mb-2 mt-4",
+                    class_="text-lg font-semibold mb-2 mt-4 text-gray-900 dark:text-white",
                 ),
                 Toast(
                     message="Critical: Action required. This cannot be dismissed.",
@@ -126,7 +138,10 @@ def _section_dismissible():
 def _section_interactive():
     """T075: Showcase action buttons with HTMX."""
     return html.div(
-        html.h2("Interactive Toasts", class_="text-2xl font-bold mb-4"),
+        html.h2(
+            "Interactive Toasts",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Toasts with action buttons for user interactions (Reply, Undo, View).",
             class_="text-gray-600 dark:text-gray-400 mb-4",
@@ -170,7 +185,10 @@ def _section_interactive():
 def _section_rich_content():
     """T076: Showcase avatars and formatted content."""
     return html.div(
-        html.h2("Rich Content", class_="text-2xl font-bold mb-4"),
+        html.h2(
+            "Rich Content",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Toasts with avatars for chat messages, user notifications, and social interactions.",
             class_="text-gray-600 dark:text-gray-400 mb-4",
@@ -205,7 +223,10 @@ def _section_rich_content():
 def _section_custom_styling():
     """T077: Showcase class_ parameter customization."""
     return html.div(
-        html.h2("Custom Styling", class_="text-2xl font-bold mb-4"),
+        html.h2(
+            "Custom Styling",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Apply custom CSS classes to toasts for application-specific styling.",
             class_="text-gray-600 dark:text-gray-400 mb-4",
