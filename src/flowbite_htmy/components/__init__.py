@@ -11,6 +11,7 @@ from flowbite_htmy.components.pagination import Pagination
 from flowbite_htmy.components.popup_modal import PopupModal
 from flowbite_htmy.components.radio import Radio
 from flowbite_htmy.components.select import Select
+from flowbite_htmy.components.textarea import Textarea
 
 # Future components will be imported here as they're implemented
 
@@ -26,4 +27,5 @@ __all__ = [
     "PopupModal",
     "Radio",
     "Select",
+    "Textarea",
 ]

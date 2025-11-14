@@ -31,6 +31,7 @@ from modals import build_modals_showcase
 from paginations import build_paginations_showcase
 from radios import build_radios_showcase
 from selects import build_selects_showcase
+from textareas import build_textareas_showcase
 from showcase_types import ComponentRoute, PageContext
 from flowbite_htmy.components import Button
 from flowbite_htmy.types import ButtonVariant, Color
@@ -118,6 +119,13 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "title": "Selects",
         "description": "Dropdown selection fields",
         "order": 11,
+    },
+    {
+        "name": "textareas",
+        "path": "/textareas",
+        "title": "Textareas",
+        "description": "Multi-line text input fields",
+        "order": 12,
     },
 ]
 
@@ -378,6 +386,21 @@ async def selects_page() -> PageContext:
     return {
         "current_page": "selects",
         "title": "Selects - Flowbite-HTMY Showcase",
+        "navigation": navigation_html,
+        "content": content_html,
+    }
+
+
+@app.get("/textareas")
+@jinja.page("showcase-layout.html.jinja")
+async def textareas_page() -> PageContext:
+    """Render textarea component showcase page."""
+    navigation_html = await renderer.render(build_navigation("textareas"))
+    content_html = await renderer.render(build_textareas_showcase())
+
+    return {
+        "current_page": "textareas",
+        "title": "Textareas - Flowbite-HTMY Showcase",
         "navigation": navigation_html,
         "content": content_html,
     }
