@@ -77,7 +77,7 @@ def _section_custom_icons():
             Toast(
                 message="File uploaded to cloud storage",
                 variant=ToastVariant.INFO,
-                icon=Icon.CLOUD_UPLOAD,  # Custom icon for upload
+                icon=Icon.ARROW_RIGHT,  # Custom icon for upload
                 id="toast-custom-icon-2",
             ),
             class_="space-y-4",
