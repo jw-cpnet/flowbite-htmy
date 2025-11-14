@@ -363,6 +363,7 @@ Use Basic Memory MCP tools to:
 - Python 3.11+ + htmy (component rendering), Flowbite CSS 2.5.1 (styling), ClassBuilder (class construction), ThemeContext (dark mode) (002-phase-2b-radio)
 - N/A (stateless UI component) (002-phase-2b-radio)
 - Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Flowbite CSS 2.5.1 (001-textarea)
+- Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Icon system, Button component (optional), Avatar component (optional), Flowbite CSS 2.5.1, Flowbite JavaScript (optional) (003-toast)
 
 ## Recent Changes
 - 001-consolidated-showcase: Added Python 3.11+ + FastAPI 0.104.0+, fasthx 0.1.0+, htmy 0.1.0+, Jinja2 3.1+, flowbite-htmy (current), uvicorn (ASGI server)
