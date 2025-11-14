@@ -2,9 +2,9 @@
 
 from htmy import html
 
-from flowbite_htmy.components import Toast, ToastActionButton
+from flowbite_htmy.components import Button, Toast, ToastActionButton
 from flowbite_htmy.icons import Icon
-from flowbite_htmy.types import ToastVariant
+from flowbite_htmy.types import Color, ToastVariant
 
 
 def build_toasts_showcase():
@@ -18,6 +18,7 @@ def build_toasts_showcase():
             "Toast notifications for temporary messages with icons, colors, and actions.",
             class_="text-lg text-gray-600 dark:text-gray-400 mb-8",
         ),
+        _section_htmx_demo(),
         _section_basic_variants(),
         _section_custom_icons(),
         _section_dismissible(),
@@ -25,6 +26,65 @@ def build_toasts_showcase():
         _section_rich_content(),
         _section_custom_styling(),
         class_="space-y-12",
+    )
+
+
+def _section_htmx_demo():
+    """HTMX demo: Click button to trigger toast in bottom-right corner."""
+    return html.div(
+        html.h2(
+            "HTMX Demo - Live Toast Notifications",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
+        html.p(
+            "Click the buttons below to trigger toast notifications that appear in the bottom-right corner. "
+            "Toasts are rendered server-side with HTMX and dynamically inserted into the page.",
+            class_="text-gray-600 dark:text-gray-400 mb-4",
+        ),
+        html.div(
+            Button(
+                label="Show Success Toast",
+                color=Color.SUCCESS,
+                hx_get="/toast-demo/success",
+                hx_target="#toast-container",
+                hx_swap="afterbegin",
+            ),
+            Button(
+                label="Show Error Toast",
+                color=Color.DANGER,
+                hx_get="/toast-demo/danger",
+                hx_target="#toast-container",
+                hx_swap="afterbegin",
+                class_="ml-2",
+            ),
+            Button(
+                label="Show Warning Toast",
+                color=Color.WARNING,
+                hx_get="/toast-demo/warning",
+                hx_target="#toast-container",
+                hx_swap="afterbegin",
+                class_="ml-2",
+            ),
+            Button(
+                label="Show Info Toast",
+                color=Color.INFO,
+                hx_get="/toast-demo/info",
+                hx_target="#toast-container",
+                hx_swap="afterbegin",
+                class_="ml-2",
+            ),
+            class_="mb-4",
+        ),
+        # Toast container positioned in bottom-right corner
+        html.div(
+            id="toast-container",
+            class_="fixed bottom-4 right-4 z-50 space-y-2",
+        ),
+        html.p(
+            "💡 Tip: Click multiple buttons to see toasts stack in the bottom-right corner. "
+            "Each toast can be dismissed individually.",
+            class_="text-sm text-gray-500 dark:text-gray-400 italic mt-2",
+        ),
     )
 
 

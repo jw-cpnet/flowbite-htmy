@@ -444,6 +444,58 @@ async def clicked() -> str:
     return await renderer.render(alert)
 
 
+@app.get("/toast-demo/success", response_class=HTMLResponse)
+async def toast_demo_success() -> str:
+    """HTMX endpoint - returns success toast."""
+    from flowbite_htmy.components import Toast
+    from flowbite_htmy.types import ToastVariant
+
+    toast = Toast(
+        message="Operation completed successfully!",
+        variant=ToastVariant.SUCCESS,
+    )
+    return await renderer.render(toast)
+
+
+@app.get("/toast-demo/danger", response_class=HTMLResponse)
+async def toast_demo_danger() -> str:
+    """HTMX endpoint - returns danger/error toast."""
+    from flowbite_htmy.components import Toast
+    from flowbite_htmy.types import ToastVariant
+
+    toast = Toast(
+        message="An error occurred. Please try again.",
+        variant=ToastVariant.DANGER,
+    )
+    return await renderer.render(toast)
+
+
+@app.get("/toast-demo/warning", response_class=HTMLResponse)
+async def toast_demo_warning() -> str:
+    """HTMX endpoint - returns warning toast."""
+    from flowbite_htmy.components import Toast
+    from flowbite_htmy.types import ToastVariant
+
+    toast = Toast(
+        message="Warning: Please review your changes before saving.",
+        variant=ToastVariant.WARNING,
+    )
+    return await renderer.render(toast)
+
+
+@app.get("/toast-demo/info", response_class=HTMLResponse)
+async def toast_demo_info() -> str:
+    """HTMX endpoint - returns info toast."""
+    from flowbite_htmy.components import Toast
+    from flowbite_htmy.types import ToastVariant
+
+    toast = Toast(
+        message="New updates are available for download.",
+        variant=ToastVariant.INFO,
+    )
+    return await renderer.render(toast)
+
+
 @app.exception_handler(404)
 async def not_found_handler(request: Request, exc: Exception) -> HTMLResponse:
     """Custom 404 error page with links to all available routes."""
