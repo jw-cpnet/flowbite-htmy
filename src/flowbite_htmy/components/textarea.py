@@ -149,12 +149,19 @@ class Textarea:
                 **{"for": self.id},
                 class_=label_classes,
             ),
+        ]
+
+        # Build textarea
+        # Note: Pass value as child only if it exists, otherwise pass no children
+        # to avoid htmy adding newlines which cause caret to start on line 2
+        textarea_children = [self.value] if self.value else []
+        content.append(
             html.textarea(
-                self.value or "",  # Textarea content (empty string if None)
+                *textarea_children,
                 **textarea_attrs,
                 class_=textarea_classes,
-            ),
-        ]
+            )
+        )
 
         # Add helper text if provided
         if self.helper_text:
