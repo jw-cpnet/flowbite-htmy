@@ -360,6 +360,21 @@ async def selects_page() -> PageContext:
     }
 
 
+@app.get("/clicked", response_class=HTMLResponse)
+async def clicked() -> str:
+    """HTMX endpoint - returns rendered htmy Alert component."""
+    from flowbite_htmy.components import Alert
+
+    alert = Alert(
+        title="Success!",
+        message="Button clicked! This Alert component was rendered server-side with htmy and returned via HTMX.",
+        color=Color.SUCCESS,
+    )
+
+    # Return raw HTML with HTMLResponse
+    return await renderer.render(alert)
+
+
 @app.exception_handler(404)
 async def not_found_handler(request: Request, exc: Exception) -> HTMLResponse:
     """Custom 404 error page with links to all available routes."""
