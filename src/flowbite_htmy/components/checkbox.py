@@ -114,7 +114,7 @@ class Checkbox:
                 ),
                 html.div(
                     html.label(
-                        self.label,
+                        self.label,  # type: ignore[arg-type]
                         for_=self.id,
                         class_=label_classes,
                     ),
@@ -132,7 +132,7 @@ class Checkbox:
             return html.div(
                 html.input_(**input_attrs),
                 html.label(
-                    self.label,
+                    self.label,  # type: ignore[arg-type]
                     for_=self.id,
                     class_=label_classes,
                 ),
