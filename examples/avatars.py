@@ -1,25 +1,8 @@
-"""Avatar showcase FastAPI application using hybrid Jinja + htmy approach.
+"""Avatars showcase content for consolidated app."""
 
-This demonstrates the recommended pattern:
-- Jinja templates for page layouts and JavaScript
-- htmy components for UI elements (type-safe, composable)
-- fasthx for integration between FastAPI and both systems
-
-Run with: python examples/avatars.py
-Then visit: http://localhost:8000
-"""
-
-from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Renderer, html
-
+from htmy import html
 from flowbite_htmy.components.avatar import Avatar
-
-app = FastAPI(title="Flowbite-HTMY Avatar Showcase")
-templates = Jinja2Templates(directory="examples/templates")
-jinja = Jinja(templates)
-renderer = Renderer()
+from flowbite_htmy.types import Size
 
 
 def build_avatars_showcase():
@@ -433,31 +416,3 @@ def build_avatars_showcase():
             class_="flex items-center mb-12",
         ),
     )
-
-
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the avatar showcase page using Jinja layout + htmy components."""
-    # Use extracted showcase function
-    avatars_section = build_avatars_showcase()
-
-    # Render htmy components to HTML string
-    content_html = await renderer.render(avatars_section)
-
-    # Return context for Jinja template
-    return {
-        "title": "Flowbite-HTMY Avatar Showcase",
-        "subtitle": "User profile pictures and placeholders - all Flowbite styles supported",
-        "content": content_html,
-    }
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    print("🚀 Starting Flowbite-HTMY Avatar Showcase")
-    print("📍 Visit: http://localhost:8000")
-    print("✨ Jinja for layouts + htmy for components!")
-    print("🌙 Dark mode toggle in top-right corner")
-    uvicorn.run("avatars:app", host="0.0.0.0", port=8000, reload=True)

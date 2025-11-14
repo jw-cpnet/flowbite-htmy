@@ -1,27 +1,9 @@
-"""Alert showcase FastAPI application using hybrid Jinja + htmy approach.
+"""Alerts showcase content for consolidated app."""
 
-This demonstrates the recommended pattern:
-- Jinja templates for page layouts and JavaScript
-- htmy components for UI elements (type-safe, composable)
-- fasthx for integration between FastAPI and both systems
-
-Run with: python examples/alerts.py
-Then visit: http://localhost:8000
-"""
-
-from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Renderer, html
-
+from htmy import html
 from flowbite_htmy.components import Alert
 from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color
-
-app = FastAPI(title="Flowbite-HTMY Alert Showcase")
-templates = Jinja2Templates(directory="examples/templates")
-jinja = Jinja(templates)
-renderer = Renderer()
 
 
 def build_alerts_showcase():
@@ -611,31 +593,3 @@ def build_alerts_showcase():
             class_="mb-12",
         ),
     )
-
-
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the alert showcase page using Jinja layout + htmy components."""
-    # Use extracted showcase function
-    alerts_section = build_alerts_showcase()
-
-    # Render htmy components to HTML string
-    content_html = await renderer.render(alerts_section)
-
-    # Return context for Jinja template
-    return {
-        "title": "Flowbite-HTMY Alert Showcase",
-        "subtitle": "Comprehensive alert variants - all Flowbite styles supported",
-        "content": content_html,
-    }
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    print("🚀 Starting Flowbite-HTMY Alert Showcase")
-    print("📍 Visit: http://localhost:8000")
-    print("✨ Jinja for layouts + htmy for components!")
-    print("🌙 Dark mode toggle in top-right corner")
-    uvicorn.run("alerts:app", host="0.0.0.0", port=8000, reload=True)

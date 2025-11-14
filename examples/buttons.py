@@ -1,36 +1,14 @@
-"""Button showcase FastAPI application using hybrid Jinja + htmy approach.
+"""Button showcase content for consolidated app."""
 
-This demonstrates the recommended pattern:
-- Jinja templates for page layouts and JavaScript
-- htmy components for UI elements (type-safe, composable)
-- fasthx for integration between FastAPI and both systems
-
-Run with: python examples/buttons.py
-Then visit: http://localhost:8000
-"""
-
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Renderer, html
+from htmy import html
 
 from flowbite_htmy.components import Button
 from flowbite_htmy.icons import Icon, Payment, Social, get_icon, get_payment_icon, get_social_icon
 from flowbite_htmy.types import ButtonVariant, Color, Size
 
-app = FastAPI(title="Flowbite-HTMY Button Showcase")
-templates = Jinja2Templates(directory="examples/templates")
-jinja = Jinja(templates)
-renderer = Renderer()
-
 
 def build_buttons_showcase():
-    """Build comprehensive button showcase content.
-
-    Extracted for reuse in consolidated showcase application.
-    Returns htmy Component ready for rendering.
-    """
+    """Build comprehensive button showcase content."""
     return html.div(
         # Default buttons
         html.h2(
@@ -469,46 +447,3 @@ def build_buttons_showcase():
             class_="mt-4 p-4 rounded-lg bg-gray-100 dark:bg-gray-800",
         ),
     )
-
-
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the button showcase page using Jinja layout + htmy components."""
-    # Use extracted showcase function
-    buttons_section = build_buttons_showcase()
-
-    # Render htmy components to HTML string
-    content_html = await renderer.render(buttons_section)
-
-    # Return context for Jinja template
-    return {
-        "title": "Flowbite-HTMY Button Showcase",
-        "subtitle": "Comprehensive button variants - all Flowbite styles supported",
-        "content": content_html,
-    }
-
-
-@app.get("/clicked", response_class=HTMLResponse)
-async def clicked() -> str:
-    """HTMX endpoint - returns rendered htmy component."""
-    from flowbite_htmy.components import Alert
-
-    alert = Alert(
-        title="Success!",
-        message="Button clicked! This Alert component was rendered server-side with htmy and returned via HTMX.",
-        color=Color.SUCCESS,
-    )
-
-    # Return raw HTML with HTMLResponse
-    return await renderer.render(alert)
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    print("🚀 Starting Flowbite-HTMY Button Showcase")
-    print("📍 Visit: http://localhost:8000")
-    print("✨ Jinja for layouts + htmy for components!")
-    print("🌙 Dark mode toggle in top-right corner")
-    uvicorn.run("buttons:app", host="0.0.0.0", port=8000, reload=True)

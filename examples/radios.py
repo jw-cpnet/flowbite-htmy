@@ -1,14 +1,9 @@
-"""Radio button component showcase application."""
+"""Radio button showcase content for consolidated app."""
 
-from fasthx import Jinja
-from fastapi import FastAPI
 from htmy import html
 
 from flowbite_htmy.components import Radio
 from flowbite_htmy.types import ValidationState
-
-app = FastAPI()
-jinja = Jinja(app)
 
 
 def build_radios_showcase():
@@ -16,7 +11,8 @@ def build_radios_showcase():
     return html.div(
         # Section 1: Basic Radio Groups
         html.h2(
-            "Basic Radio Groups", class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white"
+            "Basic Radio Groups",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
         ),
         html.p(
             "Simple radio button groups for single-selection forms.",
@@ -30,7 +26,12 @@ def build_radios_showcase():
                     class_="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
                 ),
                 html.div(
-                    Radio(label="Credit Card", name="payment", value="credit", checked=True),
+                    Radio(
+                        label="Credit Card",
+                        name="payment",
+                        value="credit",
+                        checked=True,
+                    ),
                     Radio(label="PayPal", name="payment", value="paypal"),
                     Radio(label="Bank Transfer", name="payment", value="bank"),
                     Radio(label="Cryptocurrency", name="payment", value="crypto"),
@@ -51,8 +52,16 @@ def build_radios_showcase():
                         value="standard",
                         checked=True,
                     ),
-                    Radio(label="Express Shipping (2-3 days)", name="shipping", value="express"),
-                    Radio(label="Overnight Shipping (1 day)", name="shipping", value="overnight"),
+                    Radio(
+                        label="Express Shipping (2-3 days)",
+                        name="shipping",
+                        value="express",
+                    ),
+                    Radio(
+                        label="Overnight Shipping (1 day)",
+                        name="shipping",
+                        value="overnight",
+                    ),
                     class_="space-y-2",
                 ),
                 class_="mb-6",
@@ -61,7 +70,8 @@ def build_radios_showcase():
         ),
         # Section 2: Validation States
         html.h2(
-            "Validation States", class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white"
+            "Validation States",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
         ),
         html.p(
             "Radio buttons with error, success, and default validation states.",
@@ -104,7 +114,10 @@ def build_radios_showcase():
             class_="bg-white dark:bg-gray-800 rounded-lg p-6 mb-8 shadow",
         ),
         # Section 3: Disabled States
-        html.h2("Disabled States", class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white"),
+        html.h2(
+            "Disabled States",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
+        ),
         html.p(
             "Radio buttons in disabled states with reduced opacity.",
             class_="mb-4 text-gray-600 dark:text-gray-400",
@@ -117,7 +130,9 @@ def build_radios_showcase():
                 ),
                 html.div(
                     Radio(label="Free Plan", name="plan", value="free", checked=True),
-                    Radio(label="Pro Plan - $9/month", name="plan", value="pro"),
+                    Radio(
+                        label="Pro Plan - $9/month", name="plan", value="pro"
+                    ),
                     Radio(
                         label="Enterprise Plan - Contact Sales",
                         name="plan",
@@ -137,59 +152,10 @@ def build_radios_showcase():
             ),
             class_="bg-white dark:bg-gray-800 rounded-lg p-6 mb-8 shadow",
         ),
-        # Section 4: HTMX Integration
-        html.h2("HTMX Integration", class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white"),
-        html.p(
-            "Radio buttons that trigger dynamic server updates.",
-            class_="mb-4 text-gray-600 dark:text-gray-400",
-        ),
-        html.div(
-            html.div(
-                html.h3(
-                    "Color Theme Selection",
-                    class_="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200",
-                ),
-                html.div(
-                    Radio(
-                        label="Light Theme",
-                        name="theme",
-                        value="light",
-                        hx_get="/update-theme?theme=light",
-                        hx_target="#theme-preview",
-                        hx_swap="innerHTML",
-                        checked=True,
-                    ),
-                    Radio(
-                        label="Dark Theme",
-                        name="theme",
-                        value="dark",
-                        hx_get="/update-theme?theme=dark",
-                        hx_target="#theme-preview",
-                        hx_swap="innerHTML",
-                    ),
-                    Radio(
-                        label="Auto (System Preference)",
-                        name="theme",
-                        value="auto",
-                        hx_get="/update-theme?theme=auto",
-                        hx_target="#theme-preview",
-                        hx_swap="innerHTML",
-                    ),
-                    class_="space-y-2 mb-4",
-                ),
-                html.div(
-                    html.p(
-                        "Selected: Light Theme", class_="text-sm text-gray-600 dark:text-gray-400"
-                    ),
-                    id="theme-preview",
-                    class_="p-3 bg-gray-100 dark:bg-gray-700 rounded",
-                ),
-            ),
-            class_="bg-white dark:bg-gray-800 rounded-lg p-6 mb-8 shadow",
-        ),
-        # Section 5: Helper Text Examples
+        # Section 4: Helper Text Examples
         html.h2(
-            "Helper Text Examples", class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white"
+            "Helper Text Examples",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
         ),
         html.p(
             "Radio buttons with informative helper text.",
@@ -232,9 +198,10 @@ def build_radios_showcase():
             ),
             class_="bg-white dark:bg-gray-800 rounded-lg p-6 mb-8 shadow",
         ),
-        # Section 6: Accessibility (Empty Label with aria-label)
+        # Section 5: Accessibility (Empty Label with aria-label)
         html.h2(
-            "Accessibility Examples", class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white"
+            "Accessibility Examples",
+            class_="text-2xl font-bold mb-4 text-gray-900 dark:text-white",
         ),
         html.p(
             "Radio buttons with aria-label for accessibility (no visible label).",
@@ -283,31 +250,3 @@ def build_radios_showcase():
         ),
         class_="space-y-8",
     )
-
-
-@app.get("/")
-async def index():
-    """Render radio showcase."""
-    section = build_radios_showcase()
-    return await jinja.render_template(
-        "radio-layout.html.jinja",
-        {"content": await jinja.render(section)},
-    )
-
-
-@app.get("/update-theme")
-async def update_theme(theme: str):
-    """HTMX endpoint for theme selection demo."""
-    theme_messages = {
-        "light": "Selected: Light Theme ☀️",
-        "dark": "Selected: Dark Theme 🌙",
-        "auto": "Selected: Auto (System Preference) 🔄",
-    }
-    message = theme_messages.get(theme, f"Selected: {theme}")
-    return html.p(message, class_="text-sm text-gray-600 dark:text-gray-400")
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)

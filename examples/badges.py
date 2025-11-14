@@ -1,35 +1,14 @@
-"""Badge showcase FastAPI application using hybrid Jinja + htmy approach.
+"""Badge showcase content for consolidated app."""
 
-This demonstrates the recommended pattern:
-- Jinja templates for page layouts and JavaScript
-- htmy components for UI elements (type-safe, composable)
-- fasthx for integration between FastAPI and both systems
-
-Run with: python examples/badges.py
-Then visit: http://localhost:8000
-"""
-
-from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Renderer, html
+from htmy import html
 
 from flowbite_htmy.components import Badge
 from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color
 
-app = FastAPI(title="Flowbite-HTMY Badge Showcase")
-templates = Jinja2Templates(directory="examples/templates")
-jinja = Jinja(templates)
-renderer = Renderer()
-
 
 def build_badges_showcase():
-    """Build comprehensive badge showcase content.
-
-    Extracted for reuse in consolidated showcase application.
-    Returns htmy Component ready for rendering.
-    """
+    """Build comprehensive badge showcase content."""
     return html.div(
         # Default badges
         html.h2(
@@ -230,31 +209,3 @@ def build_badges_showcase():
             class_="flex flex-wrap gap-2 mb-12",
         ),
     )
-
-
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the badge showcase page using Jinja layout + htmy components."""
-    # Use extracted showcase function
-    badges_section = build_badges_showcase()
-
-    # Render htmy components to HTML string
-    content_html = await renderer.render(badges_section)
-
-    # Return context for Jinja template
-    return {
-        "title": "Flowbite-HTMY Badge Showcase",
-        "subtitle": "Comprehensive badge variants - all Flowbite styles supported",
-        "content": content_html,
-    }
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    print("🚀 Starting Flowbite-HTMY Badge Showcase")
-    print("📍 Visit: http://localhost:8000")
-    print("✨ Jinja for layouts + htmy for components!")
-    print("🌙 Dark mode toggle in top-right corner")
-    uvicorn.run("badges:app", host="0.0.0.0", port=8000, reload=True)

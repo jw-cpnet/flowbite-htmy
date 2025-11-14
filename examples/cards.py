@@ -1,25 +1,8 @@
-"""Card showcase FastAPI application using hybrid Jinja + htmy approach.
+"""Cards showcase content for consolidated app."""
 
-This demonstrates the recommended pattern:
-- Jinja templates for page layouts and JavaScript
-- htmy components for UI elements (type-safe, composable)
-- fasthx for integration between FastAPI and both systems
-
-Run with: python examples/cards.py
-Then visit: http://localhost:8000
-"""
-
-from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Renderer, html
-
+from htmy import html
+from flowbite_htmy.components import Select
 from flowbite_htmy.icons import Icon, Payment, Social, get_icon, get_payment_icon, get_social_icon
-
-app = FastAPI(title="Flowbite-HTMY Card Showcase")
-templates = Jinja2Templates(directory="examples/templates")
-jinja = Jinja(templates)
-renderer = Renderer()
 
 
 def build_cards_showcase():
@@ -1311,31 +1294,3 @@ def build_cards_showcase():
             class_="mb-12",
         ),
     )
-
-
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the card showcase page using Jinja layout + htmy components."""
-    # Use extracted showcase function
-    cards_section = build_cards_showcase()
-
-    # Render htmy components to HTML string
-    content_html = await renderer.render(cards_section)
-
-    # Return context for Jinja template
-    return {
-        "title": "Flowbite-HTMY Card Showcase",
-        "subtitle": "Versatile card components - all Flowbite styles supported",
-        "content": content_html,
-    }
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    print("🚀 Starting Flowbite-HTMY Card Showcase")
-    print("📍 Visit: http://localhost:8000")
-    print("✨ Jinja for layouts + htmy for components!")
-    print("🌙 Dark mode toggle in top-right corner")
-    uvicorn.run("cards:app", host="0.0.0.0", port=8000, reload=True)

@@ -1,25 +1,8 @@
-"""Select showcase FastAPI application using hybrid Jinja + htmy approach.
+"""Selects showcase content for consolidated app."""
 
-This demonstrates the recommended pattern:
-- Jinja templates for page layouts and JavaScript
-- htmy components for UI elements (type-safe, composable)
-- fasthx for integration between FastAPI and both systems
-
-Run with: python examples/selects.py
-Then visit: http://localhost:8000
-"""
-
-from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Renderer, html
-
+from htmy import html
 from flowbite_htmy.components import Select
-
-app = FastAPI(title="Flowbite-HTMY Select Showcase")
-templates = Jinja2Templates(directory="examples/templates")
-jinja = Jinja(templates)
-renderer = Renderer()
+from flowbite_htmy.types import Size
 
 
 def build_selects_showcase():
@@ -297,22 +280,3 @@ def build_selects_showcase():
         ),
         class_="max-w-4xl mx-auto p-8",
     )
-
-
-@app.get("/")
-@jinja.page("base.html.jinja")
-async def index() -> dict:
-    """Render the select showcase page using Jinja layout + htmy components."""
-    # Use extracted showcase function
-    selects_section = build_selects_showcase()
-
-    return {
-        "title": "Select Component Showcase - Flowbite HTMY",
-        "content": await renderer.render(selects_section),
-    }
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
