@@ -32,6 +32,7 @@ from paginations import build_paginations_showcase
 from radios import build_radios_showcase
 from selects import build_selects_showcase
 from textareas import build_textareas_showcase
+from toasts import build_toasts_showcase
 from showcase_types import ComponentRoute, PageContext
 from flowbite_htmy.components import Button
 from flowbite_htmy.types import ButtonVariant, Color
@@ -126,6 +127,13 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "title": "Textareas",
         "description": "Multi-line text input fields",
         "order": 12,
+    },
+    {
+        "name": "toasts",
+        "path": "/toasts",
+        "title": "Toasts",
+        "description": "Temporary notification messages with actions",
+        "order": 13,
     },
 ]
 
@@ -401,6 +409,21 @@ async def textareas_page() -> PageContext:
     return {
         "current_page": "textareas",
         "title": "Textareas - Flowbite-HTMY Showcase",
+        "navigation": navigation_html,
+        "content": content_html,
+    }
+
+
+@app.get("/toasts")
+@jinja.page("showcase-layout.html.jinja")
+async def toasts_page() -> PageContext:
+    """Render toast component showcase page."""
+    navigation_html = await renderer.render(build_navigation("toasts"))
+    content_html = await renderer.render(build_toasts_showcase())
+
+    return {
+        "current_page": "toasts",
+        "title": "Toasts - Flowbite-HTMY Showcase",
         "navigation": navigation_html,
         "content": content_html,
     }
