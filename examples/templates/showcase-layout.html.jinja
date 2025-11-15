@@ -115,12 +115,35 @@
             }
         });
 
-        // Re-initialize after HTMX swaps content (for dynamically added toasts)
-        document.body.addEventListener('htmx:afterSwap', function(event) {
-            if (typeof initFlowbite === 'function') {
-                initFlowbite();
-                console.log('Flowbite re-initialized after HTMX swap');
-            }
+        // Targeted initialization for dynamically added toasts (more reliable)
+        document.body.addEventListener('htmx:afterSettle', function(event) {
+            // The event.detail.target contains the element that received the swapped content
+            const swappedElement = event.detail.target;
+
+            // Find all dismiss triggers inside the newly swapped content
+            const dismissTriggers = swappedElement.querySelectorAll('[data-dismiss-target]');
+
+            dismissTriggers.forEach(function(trigger) {
+                const targetSelector = trigger.getAttribute('data-dismiss-target');
+                const targetEl = document.querySelector(targetSelector);
+
+                if (!targetEl) {
+                    console.warn('Dismiss target not found:', targetSelector);
+                    return;
+                }
+
+                // Check if already initialized (avoid duplicate instances)
+                if (trigger.hasAttribute('data-dismiss-initialized')) {
+                    return;
+                }
+
+                // Manually create Dismiss instance for this specific trigger/target pair
+                if (typeof Dismiss !== 'undefined') {
+                    new Dismiss(targetEl, trigger);
+                    trigger.setAttribute('data-dismiss-initialized', 'true');
+                    console.log('Initialized dismiss for:', targetSelector);
+                }
+            });
         });
     </script>
 </body>
