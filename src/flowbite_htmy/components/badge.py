@@ -149,8 +149,9 @@ class Badge:
             builder.add(color_classes)
 
             # Dark mode classes (only for non-bordered badges)
+            # Always include dark: classes - Tailwind handles activation
             dark_classes = self._get_dark_classes()
-            if theme.dark_mode and dark_classes:
+            if dark_classes:
                 builder.add(dark_classes)
 
         return builder.merge(self.class_)
