@@ -115,6 +115,12 @@
             }
         });
 
+        // Toast management configuration
+        const TOAST_CONFIG = {
+            maxToasts: 5,           // Maximum toasts in container
+            autoDismissDelay: 5000  // Auto-dismiss after 5 seconds (0 = disabled)
+        };
+
         // Listen for server-triggered initialization via HX-Trigger-After-Settle header
         // Server passes the exact toast_id to initialize - no DOM scanning needed!
         document.body.addEventListener("initialize_toast_dismiss", function(evt) {
@@ -147,11 +153,42 @@
 
             // Create Dismiss instance for this specific toast
             if (typeof Dismiss !== 'undefined') {
-                new Dismiss(targetEl, dismissTrigger);
+                const dismissInstance = new Dismiss(targetEl, dismissTrigger);
                 dismissTrigger.setAttribute('data-dismiss-initialized', 'true');
                 console.log('✓ Initialized dismiss via server trigger:', toastId);
+
+                // Auto-dismiss after delay (if enabled)
+                if (TOAST_CONFIG.autoDismissDelay > 0) {
+                    setTimeout(function() {
+                        if (targetEl && getComputedStyle(targetEl).display !== 'none') {
+                            dismissInstance.hide();
+                            console.log('⏱ Auto-dismissed toast:', toastId);
+                        }
+                    }, TOAST_CONFIG.autoDismissDelay);
+                }
             }
+
+            // Enforce max toasts limit
+            enforceMaxToasts();
         });
+
+        // Enforce maximum number of toasts in container
+        function enforceMaxToasts() {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toasts = Array.from(container.querySelectorAll('[role="alert"]'))
+                .filter(toast => getComputedStyle(toast).display !== 'none');
+
+            if (toasts.length > TOAST_CONFIG.maxToasts) {
+                // Remove oldest toasts (from the end, since we use afterbegin)
+                const toastsToRemove = toasts.slice(TOAST_CONFIG.maxToasts);
+                toastsToRemove.forEach(function(toast) {
+                    toast.style.display = 'none';
+                    console.log('🗑 Removed old toast (max limit):', toast.id);
+                });
+            }
+        }
     </script>
 </body>
 </html>
