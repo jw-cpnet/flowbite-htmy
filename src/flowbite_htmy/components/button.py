@@ -67,7 +67,7 @@ class Button:
     disabled: bool = False
     """Whether the button is disabled."""
 
-    type: str = "button"
+    type_: str = "button"
     """Button type attribute (button, submit, reset)."""
 
     # HTMX attributes
@@ -219,7 +219,7 @@ class Button:
 
         # Build button attributes
         button_attrs: dict[str, Any] = {
-            "type": self.type,
+            "type": self.type_,
             "disabled": is_disabled or None,
             "class": classes,
             "hx-get": self.hx_get,
