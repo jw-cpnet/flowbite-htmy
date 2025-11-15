@@ -452,8 +452,14 @@ async def toast_demo_success():
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    # Create toast with explicit ID
-    toast_id = f"toast-demo-success-{id(Toast)}"
+    # Create toast instance first, then use its ID
+    toast = Toast(
+        message="Operation completed successfully!",
+        variant=ToastVariant.SUCCESS,
+    )
+    # Use instance ID for unique toast identifier
+    toast_id = f"toast-demo-success-{id(toast)}"
+    # Re-create with explicit ID
     toast = Toast(
         message="Operation completed successfully!",
         variant=ToastVariant.SUCCESS,
@@ -479,7 +485,11 @@ async def toast_demo_danger():
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    toast_id = f"toast-demo-danger-{id(Toast)}"
+    toast = Toast(
+        message="An error occurred. Please try again.",
+        variant=ToastVariant.DANGER,
+    )
+    toast_id = f"toast-demo-danger-{id(toast)}"
     toast = Toast(
         message="An error occurred. Please try again.",
         variant=ToastVariant.DANGER,
@@ -503,7 +513,11 @@ async def toast_demo_warning():
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    toast_id = f"toast-demo-warning-{id(Toast)}"
+    toast = Toast(
+        message="Warning: Please review your changes before saving.",
+        variant=ToastVariant.WARNING,
+    )
+    toast_id = f"toast-demo-warning-{id(toast)}"
     toast = Toast(
         message="Warning: Please review your changes before saving.",
         variant=ToastVariant.WARNING,
@@ -527,7 +541,11 @@ async def toast_demo_info():
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    toast_id = f"toast-demo-info-{id(Toast)}"
+    toast = Toast(
+        message="New updates are available for download.",
+        variant=ToastVariant.INFO,
+    )
+    toast_id = f"toast-demo-info-{id(toast)}"
     toast = Toast(
         message="New updates are available for download.",
         variant=ToastVariant.INFO,
