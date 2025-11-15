@@ -448,18 +448,13 @@ async def clicked() -> str:
 async def toast_demo_success():
     """HTMX endpoint - returns success toast with HX-Trigger header."""
     import json
+    import uuid
     from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    # Create toast instance first, then use its ID
-    toast = Toast(
-        message="Operation completed successfully!",
-        variant=ToastVariant.SUCCESS,
-    )
-    # Use instance ID for unique toast identifier
-    toast_id = f"toast-demo-success-{id(toast)}"
-    # Re-create with explicit ID
+    # Use UUID for guaranteed unique toast ID
+    toast_id = f"toast-demo-success-{uuid.uuid4().hex[:12]}"
     toast = Toast(
         message="Operation completed successfully!",
         variant=ToastVariant.SUCCESS,
@@ -481,15 +476,12 @@ async def toast_demo_success():
 async def toast_demo_danger():
     """HTMX endpoint - returns danger toast with HX-Trigger header."""
     import json
+    import uuid
     from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    toast = Toast(
-        message="An error occurred. Please try again.",
-        variant=ToastVariant.DANGER,
-    )
-    toast_id = f"toast-demo-danger-{id(toast)}"
+    toast_id = f"toast-demo-danger-{uuid.uuid4().hex[:12]}"
     toast = Toast(
         message="An error occurred. Please try again.",
         variant=ToastVariant.DANGER,
@@ -509,15 +501,12 @@ async def toast_demo_danger():
 async def toast_demo_warning():
     """HTMX endpoint - returns warning toast with HX-Trigger header."""
     import json
+    import uuid
     from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    toast = Toast(
-        message="Warning: Please review your changes before saving.",
-        variant=ToastVariant.WARNING,
-    )
-    toast_id = f"toast-demo-warning-{id(toast)}"
+    toast_id = f"toast-demo-warning-{uuid.uuid4().hex[:12]}"
     toast = Toast(
         message="Warning: Please review your changes before saving.",
         variant=ToastVariant.WARNING,
@@ -537,15 +526,12 @@ async def toast_demo_warning():
 async def toast_demo_info():
     """HTMX endpoint - returns info toast with HX-Trigger header."""
     import json
+    import uuid
     from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
-    toast = Toast(
-        message="New updates are available for download.",
-        variant=ToastVariant.INFO,
-    )
-    toast_id = f"toast-demo-info-{id(toast)}"
+    toast_id = f"toast-demo-info-{uuid.uuid4().hex[:12]}"
     toast = Toast(
         message="New updates are available for download.",
         variant=ToastVariant.INFO,
