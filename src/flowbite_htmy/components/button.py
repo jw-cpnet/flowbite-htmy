@@ -86,6 +86,21 @@ class Button:
     hx_trigger: str | None = None
     """HTMX hx-trigger attribute."""
 
+    hx_put: str | None = None
+    """HTMX hx-put attribute."""
+
+    hx_delete: str | None = None
+    """HTMX hx-delete attribute."""
+
+    hx_patch: str | None = None
+    """HTMX hx-patch attribute."""
+
+    hx_push_url: str | bool | None = None
+    """HTMX hx-push-url attribute."""
+
+    hx_select: str | None = None
+    """HTMX hx-select attribute."""
+
     # Custom styling
     class_: str = ""
     """Additional custom classes."""
@@ -212,6 +227,11 @@ class Button:
             "hx-target": self.hx_target,
             "hx-swap": self.hx_swap,
             "hx-trigger": self.hx_trigger,
+            "hx-put": self.hx_put,
+            "hx-delete": self.hx_delete,
+            "hx-patch": self.hx_patch,
+            "hx-push-url": self.hx_push_url,
+            "hx-select": self.hx_select,
         }
 
         # Merge passthrough attributes
