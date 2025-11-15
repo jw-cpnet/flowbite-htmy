@@ -115,42 +115,43 @@
             }
         });
 
-        // Global function for toast-specific initialization (called via hx-on::after-settle)
-        window.initializeToastDismiss = function(event) {
-            // The container receives the new toast via hx-swap="afterbegin"
-            // So the FIRST child is always the newest toast
-            const container = document.getElementById('toast-container');
-            if (!container) return;
+        // Listen for server-triggered initialization via HX-Trigger-After-Settle header
+        // Server passes the exact toast_id to initialize - no DOM scanning needed!
+        document.body.addEventListener("initialize_toast_dismiss", function(evt) {
+            const toastId = evt.detail.toast_id;
 
-            // Get only the first child (newest toast added via afterbegin)
-            const newestToast = container.firstElementChild;
-            if (!newestToast) return;
-
-            // Find dismiss button ONLY in the newest toast
-            const dismissTrigger = newestToast.querySelector('[data-dismiss-target]');
-            if (!dismissTrigger) return;
-
-            // Check if already initialized
-            if (dismissTrigger.hasAttribute('data-dismiss-initialized')) {
-                console.log('Toast already initialized, skipping');
+            if (!toastId) {
+                console.warn('No toast_id provided in initialize_toast_dismiss event');
                 return;
             }
 
-            const targetSelector = dismissTrigger.getAttribute('data-dismiss-target');
-            const targetEl = document.querySelector(targetSelector);
-
+            // Find the specific toast by ID (server told us exactly which one)
+            const targetEl = document.getElementById(toastId);
             if (!targetEl) {
-                console.warn('Dismiss target not found:', targetSelector);
+                console.warn('Toast not found:', toastId);
                 return;
             }
 
-            // Manually create Dismiss instance for this specific trigger/target pair
+            // Find dismiss button in this specific toast
+            const dismissTrigger = targetEl.querySelector('[data-dismiss-target]');
+            if (!dismissTrigger) {
+                console.warn('No dismiss button in toast:', toastId);
+                return;
+            }
+
+            // Check if already initialized (prevent duplicates)
+            if (dismissTrigger.hasAttribute('data-dismiss-initialized')) {
+                console.log('Toast already initialized, skipping:', toastId);
+                return;
+            }
+
+            // Create Dismiss instance for this specific toast
             if (typeof Dismiss !== 'undefined') {
                 new Dismiss(targetEl, dismissTrigger);
                 dismissTrigger.setAttribute('data-dismiss-initialized', 'true');
-                console.log('Initialized dismiss for newest toast:', targetSelector);
+                console.log('✓ Initialized dismiss via server trigger:', toastId);
             }
-        };
+        });
     </script>
 </body>
 </html>

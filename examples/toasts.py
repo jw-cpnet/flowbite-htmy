@@ -75,11 +75,11 @@ def _section_htmx_demo():
             ),
             class_="mb-4",
         ),
-        # Toast container positioned in bottom-right corner with hx-on for reliable initialization
+        # Toast container positioned in bottom-right corner
+        # Server triggers initialization via HX-Trigger-After-Settle header
         html.div(
             id="toast-container",
             class_="fixed bottom-4 right-4 z-50 space-y-2",
-            **{"hx-on::after-settle": "initializeToastDismiss(event)"},
         ),
         html.p(
             "💡 Tip: Click multiple buttons to see toasts stack in the bottom-right corner. "

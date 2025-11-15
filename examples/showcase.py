@@ -444,56 +444,103 @@ async def clicked() -> str:
     return await renderer.render(alert)
 
 
-@app.get("/toast-demo/success", response_class=HTMLResponse)
-async def toast_demo_success() -> str:
-    """HTMX endpoint - returns success toast."""
+@app.get("/toast-demo/success")
+async def toast_demo_success():
+    """HTMX endpoint - returns success toast with HX-Trigger header."""
+    import json
+    from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
+    # Create toast with explicit ID
+    toast_id = f"toast-demo-success-{id(Toast)}"
     toast = Toast(
         message="Operation completed successfully!",
         variant=ToastVariant.SUCCESS,
+        id=toast_id,
     )
-    return await renderer.render(toast)
+
+    html = await renderer.render(toast)
+
+    # Return with HX-Trigger-After-Settle header to tell client which toast to initialize
+    response = Response(content=html, media_type="text/html")
+    response.headers["HX-Trigger-After-Settle"] = json.dumps({
+        "initialize_toast_dismiss": {"toast_id": toast_id}
+    })
+
+    return response
 
 
-@app.get("/toast-demo/danger", response_class=HTMLResponse)
-async def toast_demo_danger() -> str:
-    """HTMX endpoint - returns danger/error toast."""
+@app.get("/toast-demo/danger")
+async def toast_demo_danger():
+    """HTMX endpoint - returns danger toast with HX-Trigger header."""
+    import json
+    from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
+    toast_id = f"toast-demo-danger-{id(Toast)}"
     toast = Toast(
         message="An error occurred. Please try again.",
         variant=ToastVariant.DANGER,
+        id=toast_id,
     )
-    return await renderer.render(toast)
+
+    html = await renderer.render(toast)
+    response = Response(content=html, media_type="text/html")
+    response.headers["HX-Trigger-After-Settle"] = json.dumps({
+        "initialize_toast_dismiss": {"toast_id": toast_id}
+    })
+
+    return response
 
 
-@app.get("/toast-demo/warning", response_class=HTMLResponse)
-async def toast_demo_warning() -> str:
-    """HTMX endpoint - returns warning toast."""
+@app.get("/toast-demo/warning")
+async def toast_demo_warning():
+    """HTMX endpoint - returns warning toast with HX-Trigger header."""
+    import json
+    from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
+    toast_id = f"toast-demo-warning-{id(Toast)}"
     toast = Toast(
         message="Warning: Please review your changes before saving.",
         variant=ToastVariant.WARNING,
+        id=toast_id,
     )
-    return await renderer.render(toast)
+
+    html = await renderer.render(toast)
+    response = Response(content=html, media_type="text/html")
+    response.headers["HX-Trigger-After-Settle"] = json.dumps({
+        "initialize_toast_dismiss": {"toast_id": toast_id}
+    })
+
+    return response
 
 
-@app.get("/toast-demo/info", response_class=HTMLResponse)
-async def toast_demo_info() -> str:
-    """HTMX endpoint - returns info toast."""
+@app.get("/toast-demo/info")
+async def toast_demo_info():
+    """HTMX endpoint - returns info toast with HX-Trigger header."""
+    import json
+    from fastapi import Response
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
+    toast_id = f"toast-demo-info-{id(Toast)}"
     toast = Toast(
         message="New updates are available for download.",
         variant=ToastVariant.INFO,
+        id=toast_id,
     )
-    return await renderer.render(toast)
+
+    html = await renderer.render(toast)
+    response = Response(content=html, media_type="text/html")
+    response.headers["HX-Trigger-After-Settle"] = json.dumps({
+        "initialize_toast_dismiss": {"toast_id": toast_id}
+    })
+
+    return response
 
 
 @app.exception_handler(404)
