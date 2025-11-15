@@ -271,11 +271,11 @@ When updating, check for breaking changes and update all components.
 ## Phase 1 Components (✅ COMPLETE)
 
 All Phase 1 components implemented with TDD:
-1. ✅ **Button** - Primary interactive element (100% coverage)
-2. ✅ **Badge** - Simple indicator (98% coverage)
-3. ✅ **Alert** - Notification/message (98% coverage)
-4. ✅ **Card** - Content container (96% coverage)
-5. ✅ **Avatar** - User image/placeholder (94% coverage)
+1. ✅ **Button** - Primary interactive element (78% coverage, enhanced Nov 2025)
+2. ✅ **Badge** - Simple indicator (76% coverage, fixed Nov 2025)
+3. ✅ **Alert** - Notification/message (80% coverage)
+4. ✅ **Card** - Content container (removed - too generic)
+5. ✅ **Avatar** - User image/placeholder (98% coverage, reference quality)
 
 These are CSS-only components demonstrating core patterns.
 
@@ -294,6 +294,8 @@ builder.add("dark:bg-gray-800 dark:text-white")
 ```
 
 Tailwind's `dark:` prefix handles activation automatically based on dark mode state.
+
+**Component Review (Nov 2025)**: Badge component was found to have conditional dark mode (`if theme.dark_mode and dark_classes:`). This anti-pattern was fixed - dark classes now always included. See [Component Quality Standards](docs/component-quality-standards.md) for detailed anti-patterns and corrections.
 
 ### Color Variants
 ```python
