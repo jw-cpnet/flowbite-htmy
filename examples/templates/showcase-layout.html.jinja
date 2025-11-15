@@ -107,31 +107,20 @@
 
     <!-- Initialize Flowbite components -->
     <script>
+        // Initialize on page load (Flowbite JS loaded above makes initFlowbite global)
         document.addEventListener('DOMContentLoaded', function() {
-            const modalElements = document.querySelectorAll('[id$="-modal"]');
+            if (typeof initFlowbite === 'function') {
+                initFlowbite();
+                console.log('Flowbite components initialized');
+            }
+        });
 
-            modalElements.forEach(function(modalEl) {
-                const modalId = modalEl.id;
-
-                if (window.FlowbiteInstances && window.FlowbiteInstances.getInstance('Modal', modalId)) {
-                    return;
-                }
-
-                if (typeof Modal !== 'undefined') {
-                    const modal = new Modal(modalEl, {
-                        backdrop: modalEl.getAttribute('data-modal-backdrop') || 'dynamic',
-                        closable: true,
-                        onHide: () => {
-                            console.log('Modal hidden: ' + modalId);
-                        },
-                        onShow: () => {
-                            console.log('Modal shown: ' + modalId);
-                        }
-                    });
-
-                    console.log('Initialized modal: ' + modalId);
-                }
-            });
+        // Re-initialize after HTMX swaps content (for dynamically added toasts)
+        document.body.addEventListener('htmx:afterSwap', function(event) {
+            if (typeof initFlowbite === 'function') {
+                initFlowbite();
+                console.log('Flowbite re-initialized after HTMX swap');
+            }
         });
     </script>
 </body>
