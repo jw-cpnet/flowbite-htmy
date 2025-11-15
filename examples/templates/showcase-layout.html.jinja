@@ -115,36 +115,42 @@
             }
         });
 
-        // Targeted initialization for dynamically added toasts (more reliable)
-        document.body.addEventListener('htmx:afterSettle', function(event) {
-            // The event.detail.target contains the element that received the swapped content
-            const swappedElement = event.detail.target;
+        // Global function for toast-specific initialization (called via hx-on::after-settle)
+        window.initializeToastDismiss = function(event) {
+            // The container receives the new toast via hx-swap="afterbegin"
+            // So the FIRST child is always the newest toast
+            const container = document.getElementById('toast-container');
+            if (!container) return;
 
-            // Find all dismiss triggers inside the newly swapped content
-            const dismissTriggers = swappedElement.querySelectorAll('[data-dismiss-target]');
+            // Get only the first child (newest toast added via afterbegin)
+            const newestToast = container.firstElementChild;
+            if (!newestToast) return;
 
-            dismissTriggers.forEach(function(trigger) {
-                const targetSelector = trigger.getAttribute('data-dismiss-target');
-                const targetEl = document.querySelector(targetSelector);
+            // Find dismiss button ONLY in the newest toast
+            const dismissTrigger = newestToast.querySelector('[data-dismiss-target]');
+            if (!dismissTrigger) return;
 
-                if (!targetEl) {
-                    console.warn('Dismiss target not found:', targetSelector);
-                    return;
-                }
+            // Check if already initialized
+            if (dismissTrigger.hasAttribute('data-dismiss-initialized')) {
+                console.log('Toast already initialized, skipping');
+                return;
+            }
 
-                // Check if already initialized (avoid duplicate instances)
-                if (trigger.hasAttribute('data-dismiss-initialized')) {
-                    return;
-                }
+            const targetSelector = dismissTrigger.getAttribute('data-dismiss-target');
+            const targetEl = document.querySelector(targetSelector);
 
-                // Manually create Dismiss instance for this specific trigger/target pair
-                if (typeof Dismiss !== 'undefined') {
-                    new Dismiss(targetEl, trigger);
-                    trigger.setAttribute('data-dismiss-initialized', 'true');
-                    console.log('Initialized dismiss for:', targetSelector);
-                }
-            });
-        });
+            if (!targetEl) {
+                console.warn('Dismiss target not found:', targetSelector);
+                return;
+            }
+
+            // Manually create Dismiss instance for this specific trigger/target pair
+            if (typeof Dismiss !== 'undefined') {
+                new Dismiss(targetEl, dismissTrigger);
+                dismissTrigger.setAttribute('data-dismiss-initialized', 'true');
+                console.log('Initialized dismiss for newest toast:', targetSelector);
+            }
+        };
     </script>
 </body>
 </html>
