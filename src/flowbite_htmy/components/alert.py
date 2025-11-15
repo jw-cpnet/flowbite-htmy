@@ -134,6 +134,7 @@ class Alert:
             builder.add(border_classes)
 
         # Dark mode classes
+        # Always include dark: classes - Tailwind handles activation
         dark_classes = self._get_dark_classes()
         if dark_classes:
             builder.add(dark_classes)
