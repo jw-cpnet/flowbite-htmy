@@ -321,6 +321,8 @@ SIZE_CLASSES = {
 - **Line Length**: 100 chars (ruff config)
 - **Python Version**: 3.11+ (uses modern type hints)
 
+**See also**: [Component Quality Standards](docs/component-quality-standards.md) - Comprehensive checklist and best practices for component development and review
+
 ## Project Memory
 
 Development progress is tracked in Basic Memory at:
@@ -364,6 +366,8 @@ Use Basic Memory MCP tools to:
 - N/A (stateless UI component) (002-phase-2b-radio)
 - Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Flowbite CSS 2.5.1 (001-textarea)
 - Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Icon system, Button component (optional), Avatar component (optional), Flowbite CSS 2.5.1, Flowbite JavaScript (optional) (003-toast)
+- Python 3.11+ (existing project requirement) + htmy 0.1.0+, FastAPI 0.104.0+, fasthx 0.1.0+, Jinja2 3.1+ (004-component-review)
+- N/A (stateless UI component library) (004-component-review)
 
 ## Recent Changes
 - 001-consolidated-showcase: Added Python 3.11+ + FastAPI 0.104.0+, fasthx 0.1.0+, htmy 0.1.0+, Jinja2 3.1+, flowbite-htmy (current), uvicorn (ASGI server)
