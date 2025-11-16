@@ -32,6 +32,7 @@ from paginations import build_paginations_showcase
 from radios import build_radios_showcase
 from selects import build_selects_showcase
 from showcase_types import ComponentRoute, PageContext
+from tabs import build_tabs_showcase
 from textareas import build_textareas_showcase
 from toasts import build_toasts_showcase
 
@@ -142,6 +143,13 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "title": "Accordions",
         "description": "Collapsible panels with FAQ and content sections",
         "order": 14,
+    },
+    {
+        "name": "tabs",
+        "path": "/tabs",
+        "title": "Tabs",
+        "description": "Tabbed navigation with variants, HTMX, and icons",
+        "order": 15,
     },
 ]
 
@@ -447,6 +455,21 @@ async def accordions_page() -> PageContext:
     return {
         "current_page": "accordions",
         "title": "Accordions - Flowbite-HTMY Showcase",
+        "navigation": navigation_html,
+        "content": content_html,
+    }
+
+
+@app.get("/tabs")
+@jinja.page("showcase-layout.html.jinja")
+async def tabs_page() -> PageContext:
+    """Render tabs component showcase page."""
+    navigation_html = await renderer.render(build_navigation("tabs"))
+    content_html = await renderer.render(build_tabs_showcase())
+
+    return {
+        "current_page": "tabs",
+        "title": "Tabs - Flowbite-HTMY Showcase",
         "navigation": navigation_html,
         "content": content_html,
     }

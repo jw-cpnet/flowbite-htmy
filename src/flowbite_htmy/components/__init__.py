@@ -13,6 +13,7 @@ from flowbite_htmy.components.popup_modal import PopupModal
 from flowbite_htmy.components.radio import Radio
 from flowbite_htmy.components.select import Select
 from flowbite_htmy.components.textarea import Textarea
+from flowbite_htmy.components.tabs import IconPosition, Tab, Tabs, TabVariant
 from flowbite_htmy.components.toast import Toast, ToastActionButton
 
 # Future components will be imported here as they're implemented
@@ -26,6 +27,7 @@ __all__ = [
     "Badge",
     "Button",
     "Checkbox",
+    "IconPosition",
     "Input",
     "Modal",
     "Pagination",
@@ -33,6 +35,9 @@ __all__ = [
     "PopupModal",
     "Radio",
     "Select",
+    "Tab",
+    "Tabs",
+    "TabVariant",
     "Textarea",
     "Toast",
     "ToastActionButton",

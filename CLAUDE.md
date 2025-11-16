@@ -395,6 +395,7 @@ Use Basic Memory MCP tools to:
 - Python 3.11+ (existing project requirement) + htmy 0.1.0+, FastAPI 0.104.0+, fasthx 0.1.0+, Jinja2 3.1+ (004-component-review)
 - N/A (stateless UI component library) (004-component-review)
 - Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Flowbite CSS 2.5.1, Flowbite JavaScript (initAccordions), HTMX 2.0.2 (005-accordion)
+- Python 3.11+ (existing project requirement) + htmy 0.1.0+, ClassBuilder, ThemeContext, Icon system (get_icon()), Color enum, Flowbite CSS 2.5.1, Flowbite JavaScript, HTMX 2.0.2 (006-tabs)
 
 ## Recent Changes
 - 001-consolidated-showcase: Added Python 3.11+ + FastAPI 0.104.0+, fasthx 0.1.0+, htmy 0.1.0+, Jinja2 3.1+, flowbite-htmy (current), uvicorn (ASGI server)
