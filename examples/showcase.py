@@ -644,6 +644,45 @@ async def not_found_handler(request: Request, exc: Exception) -> HTMLResponse:
     return HTMLResponse(content=html_content, status_code=404)
 
 
+@app.get("/api/dashboard", response_class=HTMLResponse)
+async def dashboard_content() -> str:
+    """HTMX endpoint for tabs dashboard content (loaded once)."""
+    content = html.div(
+        html.h3("Dashboard Loaded!", class_="text-xl font-bold mb-2 text-gray-900 dark:text-white"),
+        html.p(
+            "This content was loaded via HTMX when you activated this tab.",
+            class_="text-sm text-gray-500 dark:text-gray-400",
+        ),
+        html.p(
+            "The hx-trigger='revealed once' means it loads only the first time.",
+            class_="text-sm text-gray-500 dark:text-gray-400 mt-2",
+        ),
+        class_="p-4 rounded-lg bg-gray-50 dark:bg-gray-800",
+    )
+    return await renderer.render(content)
+
+
+@app.get("/api/live-data", response_class=HTMLResponse)
+async def live_data_content() -> str:
+    """HTMX endpoint for live data (reloads every time)."""
+    import datetime
+
+    now = datetime.datetime.now().strftime("%H:%M:%S")
+    content = html.div(
+        html.h3("Live Data Reloaded!", class_="text-xl font-bold mb-2 text-gray-900 dark:text-white"),
+        html.p(
+            f"Current time: {now}",
+            class_="text-sm font-mono text-blue-600 dark:text-blue-400",
+        ),
+        html.p(
+            "The hx-trigger='revealed' means this content reloads every time you activate this tab.",
+            class_="text-sm text-gray-500 dark:text-gray-400 mt-2",
+        ),
+        class_="p-4 rounded-lg bg-gray-50 dark:bg-gray-800",
+    )
+    return await renderer.render(content)
+
+
 if __name__ == "__main__":
     import uvicorn
 

@@ -12,7 +12,7 @@ Visit: http://localhost:8000
 """
 
 from fastapi import FastAPI
-from fasthx import Jinja
+from fasthx.jinja import Jinja
 from htmy import Component, html
 
 from flowbite_htmy.components import IconPosition, Tab, Tabs, TabVariant
