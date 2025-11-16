@@ -216,19 +216,27 @@ class Dropdown:
             "</svg>"
         )
 
+        # Build button attributes
+        attrs = {
+            "id": trigger_id,
+            "data_dropdown_toggle": dropdown_id,
+            "data_dropdown_placement": self.placement.value,
+            "data_dropdown_trigger": self.trigger_mode.value,
+            "aria_expanded": "false",
+            "aria_haspopup": "true",
+            "aria_controls": dropdown_id,
+            "type_": "button",
+            "class_": classes,
+        }
+
+        # Only add disabled if True
+        if self.disabled:
+            attrs["disabled"] = True
+
         return html.button(
             self.trigger_label,
             chevron_svg,
-            id=trigger_id,
-            data_dropdown_toggle=dropdown_id,
-            data_dropdown_placement=self.placement.value,
-            data_dropdown_trigger=self.trigger_mode.value,
-            aria_expanded="false",
-            aria_haspopup="true",
-            aria_controls=dropdown_id,
-            type_="button",
-            class_=classes,
-            disabled=self.disabled,
+            **attrs,
         )
 
     # T055: _render_avatar_trigger method
@@ -236,21 +244,28 @@ class Dropdown:
         """Render avatar image trigger."""
         trigger_id = f"trigger-{dropdown_id}"
 
+        attrs = {
+            "type_": "button",
+            "id": trigger_id,
+            "data_dropdown_toggle": dropdown_id,
+            "data_dropdown_placement": self.placement.value,
+            "data_dropdown_trigger": self.trigger_mode.value,
+            "aria_expanded": "false",
+            "aria_haspopup": "true",
+            "aria_controls": dropdown_id,
+            "class_": "flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600",
+        }
+
+        if self.disabled:
+            attrs["disabled"] = True
+
         return html.button(
             html.img(
                 class_="w-10 h-10 rounded-full",
                 src=self.avatar_src or "",
                 alt=self.avatar_alt,
             ),
-            type_="button",
-            id=trigger_id,
-            data_dropdown_toggle=dropdown_id,
-            data_dropdown_placement=self.placement.value,
-            data_dropdown_trigger=self.trigger_mode.value,
-            aria_expanded="false",
-            aria_haspopup="true",
-            aria_controls=dropdown_id,
-            class_="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600",
+            **attrs,
         )
 
     # T056: _render_text_trigger method
@@ -258,17 +273,24 @@ class Dropdown:
         """Render text link trigger."""
         trigger_id = f"trigger-{dropdown_id}"
 
+        attrs = {
+            "type_": "button",
+            "id": trigger_id,
+            "data_dropdown_toggle": dropdown_id,
+            "data_dropdown_placement": self.placement.value,
+            "data_dropdown_trigger": self.trigger_mode.value,
+            "aria_expanded": "false",
+            "aria_haspopup": "true",
+            "aria_controls": dropdown_id,
+            "class_": "text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700",
+        }
+
+        if self.disabled:
+            attrs["disabled"] = True
+
         return html.button(
             self.trigger_label,
-            type_="button",
-            id=trigger_id,
-            data_dropdown_toggle=dropdown_id,
-            data_dropdown_placement=self.placement.value,
-            data_dropdown_trigger=self.trigger_mode.value,
-            aria_expanded="false",
-            aria_haspopup="true",
-            aria_controls=dropdown_id,
-            class_="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700",
+            **attrs,
         )
 
     # T025: _render_menu method
