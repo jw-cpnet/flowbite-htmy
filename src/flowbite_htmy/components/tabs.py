@@ -101,6 +101,36 @@ class Tabs:
             "focus_ring": f"focus:ring-{c300}",
         }
 
+    def _get_flowbite_tab_classes(self) -> tuple[str, str]:
+        """Get Flowbite data-tabs-active-classes and data-tabs-inactive-classes.
+
+        These attributes tell Flowbite JavaScript which classes to add/remove
+        when tabs are activated/deactivated, preventing SSR class retention issues.
+        """
+        color_classes = self._get_color_classes()
+
+        if self.variant == TabVariant.DEFAULT:
+            active = f"active {color_classes['text']} bg-gray-100 dark:bg-gray-800 {color_classes['text_dark']}"
+            inactive = "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+
+        elif self.variant == TabVariant.UNDERLINE:
+            active = f"active {color_classes['text']} border-b-2 {color_classes['border']} {color_classes['text_dark']} {color_classes['border_dark']}"
+            inactive = "border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+
+        elif self.variant == TabVariant.PILLS:
+            active = f"active text-white {color_classes['bg']}"
+            inactive = "hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+
+        elif self.variant == TabVariant.FULL_WIDTH:
+            active = f"active text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white {color_classes['focus_ring']}"
+            inactive = f"bg-white hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700 {color_classes['focus_ring']}"
+
+        else:
+            active = ""
+            inactive = ""
+
+        return (active, inactive)
+
     def _build_tablist_classes(self) -> str:
         """Build Tailwind classes for tablist container based on variant."""
         if self.variant == TabVariant.DEFAULT:
@@ -311,16 +341,21 @@ class Tabs:
         # Build tablist classes
         tablist_classes = self._build_tablist_classes()
 
+        # Get Flowbite active/inactive classes for JS class swapping
+        active_classes, inactive_classes = self._get_flowbite_tab_classes()
+
         # Render tab buttons as list
         tab_buttons = [
             self._render_tab(tab, i, base_id, i == active_index) for i, tab in enumerate(self.tabs)
         ]
 
-        # Render tablist
+        # Render tablist with Flowbite data attributes
         tablist_ul = html.ul(
             *tab_buttons,  # type: ignore[arg-type]
             id=base_id,
             data_tabs_toggle=f"#{content_id}",
+            data_tabs_active_classes=active_classes,
+            data_tabs_inactive_classes=inactive_classes,
             role="tablist",
             class_=tablist_classes,
         )
