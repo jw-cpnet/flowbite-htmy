@@ -251,33 +251,34 @@ def build_dropdowns_showcase():
                 DropdownItem(label="Sign out", icon=Icon.ARROW_RIGHT, href="/signout"),
             ],
         ),
-        # Section 10: Multi-level dropdown
+        # Section 10: Multi-level dropdown (Flowbite official design)
         html.h2(
             "Multi-level dropdown",
             class_="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-12",
         ),
         html.p(
-            "Create nested dropdown menus with multiple levels of hierarchy.",
+            "Matching Flowbite's official multi-level design: nested submenu opens to the right.",
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         Dropdown(
-            trigger_label="Main Menu",
+            trigger_label="Dropdown button",
             items=[
-                DropdownItem(label="Home", href="/"),
-                DropdownItem(label="About", href="/about"),
+                DropdownItem(label="Dashboard", href="#"),
                 DropdownItem(
-                    label="Settings",
+                    label="Dropdown",
                     dropdown=Dropdown(
-                        trigger_label="Settings submenu",
+                        trigger_label="Dropdown submenu",
+                        placement=DropdownPlacement.RIGHT,  # Opens to the right
                         items=[
-                            DropdownItem(label="Account", href="/settings/account"),
-                            DropdownItem(label="Privacy", href="/settings/privacy"),
-                            DropdownItem(label="Security", href="/settings/security"),
+                            DropdownItem(label="Overview", href="#"),
+                            DropdownItem(label="My downloads", href="#"),
+                            DropdownItem(label="Billing", href="#"),
+                            DropdownItem(label="Rewards", href="#"),
                         ],
                     ),
                 ),
-                DropdownDivider(),
-                DropdownItem(label="Contact", href="/contact"),
+                DropdownItem(label="Earnings", href="#"),
+                DropdownItem(label="Sign out", href="#"),
             ],
         ),
         class_="p-8 bg-white dark:bg-gray-900 min-h-screen",
