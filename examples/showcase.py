@@ -21,6 +21,7 @@ from badges import build_badges_showcase
 from buttons import build_buttons_showcase
 from cards import build_cards_showcase
 from checkboxes import build_checkboxes_showcase
+from dropdowns import build_dropdowns_showcase
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -150,6 +151,13 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "title": "Tabs",
         "description": "Tabbed navigation with variants, HTMX, and icons",
         "order": 15,
+    },
+    {
+        "name": "dropdowns",
+        "path": "/dropdowns",
+        "title": "Dropdowns",
+        "description": "Toggleable menus with icons, HTMX, and multi-level nesting",
+        "order": 16,
     },
 ]
 
@@ -470,6 +478,21 @@ async def tabs_page() -> PageContext:
     return {
         "current_page": "tabs",
         "title": "Tabs - Flowbite-HTMY Showcase",
+        "navigation": navigation_html,
+        "content": content_html,
+    }
+
+
+@app.get("/dropdowns")
+@jinja.page("showcase-layout.html.jinja")
+async def dropdowns_page() -> PageContext:
+    """Render dropdowns component showcase page."""
+    navigation_html = await renderer.render(build_navigation("dropdowns"))
+    content_html = await renderer.render(build_dropdowns_showcase())
+
+    return {
+        "current_page": "dropdowns",
+        "title": "Dropdowns - Flowbite-HTMY Showcase",
         "navigation": navigation_html,
         "content": content_html,
     }
