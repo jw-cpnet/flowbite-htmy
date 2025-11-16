@@ -28,12 +28,12 @@ All paths relative to repository root: `/home/jian/Work/personal/flowbite-htmy/`
 
 **Purpose**: Establish baseline and validate prerequisites before making any changes
 
-- [ ] T001 Verify all 187 existing tests pass by running `pytest`
-- [ ] T002 Run coverage baseline: `pytest --cov=src/flowbite_htmy/components --cov-report=term-missing`
-- [ ] T003 [P] Verify showcase application runs: `python examples/showcase.py`
-- [ ] T004 [P] Run mypy strict mode: `mypy src/flowbite_htmy`
-- [ ] T005 [P] Run ruff linting: `ruff check src/flowbite_htmy`
-- [ ] T006 Create baseline git commit for rollback safety
+- [X] T001 Verify all 187 existing tests pass by running `pytest`
+- [X] T002 Run coverage baseline: `pytest --cov=src/flowbite_htmy/components --cov-report=term-missing`
+- [X] T003 [P] Verify showcase application runs: `python examples/showcase.py`
+- [X] T004 [P] Run mypy strict mode: `mypy src/flowbite_htmy`
+- [X] T005 [P] Run ruff linting: `ruff check src/flowbite_htmy`
+- [X] T006 Create baseline git commit for rollback safety
 
 **Checkpoint**: All quality gates pass - ready to begin improvements
 
@@ -53,12 +53,12 @@ All paths relative to repository root: `/home/jian/Work/personal/flowbite-htmy/`
 
 ### Implementation for User Story 1
 
-- [ ] T007 [US1] Verify no references to base.html.jinja: `grep -r "base\.html\.jinja" examples/`
-- [ ] T008 [US1] Check git history for last use: `git log --all --full-history -- examples/templates/base.html.jinja`
-- [ ] T009 [US1] Delete unused template file: `rm examples/templates/base.html.jinja`
-- [ ] T010 [US1] Run showcase application to verify no breakage: `python examples/showcase.py`
-- [ ] T011 [US1] Visit all showcase pages to confirm layout works (http://localhost:8000)
-- [ ] T012 [US1] Commit template cleanup: `git commit -m "Remove unused base.html.jinja template"`
+- [X] T007 [US1] Verify no references to base.html.jinja: `grep -r "base\.html\.jinja" examples/`
+- [X] T008 [US1] Check git history for last use: `git log --all --full-history -- examples/templates/base.html.jinja`
+- [X] T009 [US1] Delete unused template file: `rm examples/templates/base.html.jinja`
+- [X] T010 [US1] Run showcase application to verify no breakage: `python examples/showcase.py`
+- [X] T011 [US1] Visit all showcase pages to confirm layout works (http://localhost:8000)
+- [X] T012 [US1] Commit template cleanup: `git commit -m "Remove unused base.html.jinja template"`
 
 **Checkpoint**: Template cleanup complete - only showcase-layout.html.jinja remains, showcase fully functional
 
