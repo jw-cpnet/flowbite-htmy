@@ -359,3 +359,34 @@ def get_icon(icon: Icon, *, class_: str = _ICON_CLASSES) -> SafeStr:
     if svg_template is None:
         raise ValueError(f"Unknown icon: {icon}")
     return SafeStr(svg_template.format(class_=class_))
+
+
+def get_accordion_icon(
+    icon: Icon = Icon.CHEVRON_DOWN, *, class_: str = "w-3 h-3 shrink-0"
+) -> SafeStr:
+    """Retrieve accordion expand/collapse icon with Flowbite data attribute.
+
+    Args:
+        icon: The icon to retrieve. Defaults to CHEVRON_DOWN.
+        class_: Optional CSS classes to apply. Defaults to "w-3 h-3 shrink-0".
+
+    Returns:
+        SafeStr object containing SVG markup with data-accordion-icon attribute
+        for Flowbite JavaScript rotation animation.
+
+    Raises:
+        ValueError: If the icon is not found in the registry.
+
+    Example:
+        >>> icon = get_accordion_icon()  # Default chevron
+        >>> icon = get_accordion_icon(Icon.PLUS, class_="w-4 h-4")  # Custom icon
+    """
+    svg_template = _ICON_SVGS.get(icon)
+    if svg_template is None:
+        raise ValueError(f"Unknown icon: {icon}")
+
+    # Format the SVG with classes and add data-accordion-icon attribute
+    svg = svg_template.format(class_=class_)
+    # Insert data-accordion-icon attribute after the opening <svg tag
+    svg_with_data_attr = svg.replace('<svg class="', '<svg data-accordion-icon class="', 1)
+    return SafeStr(svg_with_data_attr)

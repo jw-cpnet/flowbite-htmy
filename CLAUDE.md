@@ -281,6 +281,30 @@ These are CSS-only components demonstrating core patterns.
 
 **Note:** Layout components (PageLayout, Footer, Navbar) were removed as they're redundant with the hybrid Jinja + htmy pattern. Use Jinja templates for layouts instead.
 
+## Phase 2 Components (🚧 IN PROGRESS)
+
+Phase 2 focuses on interactive components with JavaScript integration and form controls:
+
+**Phase 2A - Core Interactive (✅ COMPLETE)**:
+1. ✅ **Modal** - Dialog boxes with ARIA and Flowbite JS (100% coverage)
+2. ✅ **Input** - Text input fields with validation states
+3. ✅ **Select** - Dropdown selection fields (98% coverage)
+4. ✅ **Pagination** - Page navigation (99% coverage)
+
+**Phase 2B - Form Controls (✅ COMPLETE)**:
+5. ✅ **Checkbox** - Checkboxes with labels and validation
+6. ✅ **Radio** - Radio buttons with validation states (99% coverage)
+7. ✅ **Textarea** - Multi-line text inputs
+
+**Phase 2C - Advanced Interactive (🚧 1/4 COMPLETE)**:
+8. ✅ **Toast** - Temporary notifications with actions (92% coverage)
+9. ✅ **Accordion** - Collapsible panels with ARIA and Flowbite JS (100% coverage, 18 tests)
+10. ⏳ **Tabs** - NOT STARTED (rank #7, next priority)
+11. ⏳ **Dropdown** - NOT STARTED (rank #8)
+
+**Phase 2D - Smart Data Display**:
+12. ⏳ **Table** - NOT STARTED (conditional - only if "smart table" design)
+
 ## Common Patterns
 
 ### Dark Mode Classes (Always Include)
@@ -370,6 +394,7 @@ Use Basic Memory MCP tools to:
 - Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Icon system, Button component (optional), Avatar component (optional), Flowbite CSS 2.5.1, Flowbite JavaScript (optional) (003-toast)
 - Python 3.11+ (existing project requirement) + htmy 0.1.0+, FastAPI 0.104.0+, fasthx 0.1.0+, Jinja2 3.1+ (004-component-review)
 - N/A (stateless UI component library) (004-component-review)
+- Python 3.11+ + htmy 0.1.0+, ClassBuilder, ThemeContext, Flowbite CSS 2.5.1, Flowbite JavaScript (initAccordions), HTMX 2.0.2 (005-accordion)
 
 ## Recent Changes
 - 001-consolidated-showcase: Added Python 3.11+ + FastAPI 0.104.0+, fasthx 0.1.0+, htmy 0.1.0+, Jinja2 3.1+, flowbite-htmy (current), uvicorn (ASGI server)

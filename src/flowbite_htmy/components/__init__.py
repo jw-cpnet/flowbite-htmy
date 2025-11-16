@@ -1,5 +1,6 @@
 """Flowbite UI components."""
 
+from flowbite_htmy.components.accordion import Accordion, AccordionMode, AccordionVariant, Panel
 from flowbite_htmy.components.alert import Alert
 from flowbite_htmy.components.avatar import Avatar
 from flowbite_htmy.components.badge import Badge
@@ -17,6 +18,9 @@ from flowbite_htmy.components.toast import Toast, ToastActionButton
 # Future components will be imported here as they're implemented
 
 __all__ = [
+    "Accordion",
+    "AccordionMode",
+    "AccordionVariant",
     "Alert",
     "Avatar",
     "Badge",
@@ -25,6 +29,7 @@ __all__ = [
     "Input",
     "Modal",
     "Pagination",
+    "Panel",
     "PopupModal",
     "Radio",
     "Select",

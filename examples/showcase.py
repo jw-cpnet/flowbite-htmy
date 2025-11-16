@@ -13,27 +13,28 @@ Run with: python examples/showcase.py
 Then visit: http://localhost:8000
 """
 
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fasthx.jinja import Jinja
-from htmy import Component, Renderer, html
-
 # Import showcase functions from standalone apps
+from accordions import build_accordions_showcase
 from alerts import build_alerts_showcase
 from avatars import build_avatars_showcase
 from badges import build_badges_showcase
 from buttons import build_buttons_showcase
 from cards import build_cards_showcase
 from checkboxes import build_checkboxes_showcase
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fasthx.jinja import Jinja
+from htmy import Component, Renderer, html
 from inputs import build_inputs_showcase
 from modals import build_modals_showcase
 from paginations import build_paginations_showcase
 from radios import build_radios_showcase
 from selects import build_selects_showcase
+from showcase_types import ComponentRoute, PageContext
 from textareas import build_textareas_showcase
 from toasts import build_toasts_showcase
-from showcase_types import ComponentRoute, PageContext
+
 from flowbite_htmy.components import Button
 from flowbite_htmy.types import ButtonVariant, Color
 
@@ -134,6 +135,13 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "title": "Toasts",
         "description": "Temporary notification messages with actions",
         "order": 13,
+    },
+    {
+        "name": "accordions",
+        "path": "/accordions",
+        "title": "Accordions",
+        "description": "Collapsible panels with FAQ and content sections",
+        "order": 14,
     },
 ]
 
@@ -429,6 +437,21 @@ async def toasts_page() -> PageContext:
     }
 
 
+@app.get("/accordions")
+@jinja.page("showcase-layout.html.jinja")
+async def accordions_page() -> PageContext:
+    """Render accordion component showcase page."""
+    navigation_html = await renderer.render(build_navigation("accordions"))
+    content_html = await renderer.render(build_accordions_showcase())
+
+    return {
+        "current_page": "accordions",
+        "title": "Accordions - Flowbite-HTMY Showcase",
+        "navigation": navigation_html,
+        "content": content_html,
+    }
+
+
 @app.get("/clicked", response_class=HTMLResponse)
 async def clicked() -> str:
     """HTMX endpoint - returns rendered htmy Alert component."""
@@ -449,7 +472,9 @@ async def toast_demo_success():
     """HTMX endpoint - returns success toast with HX-Trigger header."""
     import json
     import uuid
+
     from fastapi import Response
+
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
@@ -465,9 +490,9 @@ async def toast_demo_success():
 
     # Return with HX-Trigger-After-Settle header to tell client which toast to initialize
     response = Response(content=html, media_type="text/html")
-    response.headers["HX-Trigger-After-Settle"] = json.dumps({
-        "initialize_toast_dismiss": {"toast_id": toast_id}
-    })
+    response.headers["HX-Trigger-After-Settle"] = json.dumps(
+        {"initialize_toast_dismiss": {"toast_id": toast_id}}
+    )
 
     return response
 
@@ -477,7 +502,9 @@ async def toast_demo_danger():
     """HTMX endpoint - returns danger toast with HX-Trigger header."""
     import json
     import uuid
+
     from fastapi import Response
+
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
@@ -490,9 +517,9 @@ async def toast_demo_danger():
 
     html = await renderer.render(toast)
     response = Response(content=html, media_type="text/html")
-    response.headers["HX-Trigger-After-Settle"] = json.dumps({
-        "initialize_toast_dismiss": {"toast_id": toast_id}
-    })
+    response.headers["HX-Trigger-After-Settle"] = json.dumps(
+        {"initialize_toast_dismiss": {"toast_id": toast_id}}
+    )
 
     return response
 
@@ -502,7 +529,9 @@ async def toast_demo_warning():
     """HTMX endpoint - returns warning toast with HX-Trigger header."""
     import json
     import uuid
+
     from fastapi import Response
+
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
@@ -515,9 +544,9 @@ async def toast_demo_warning():
 
     html = await renderer.render(toast)
     response = Response(content=html, media_type="text/html")
-    response.headers["HX-Trigger-After-Settle"] = json.dumps({
-        "initialize_toast_dismiss": {"toast_id": toast_id}
-    })
+    response.headers["HX-Trigger-After-Settle"] = json.dumps(
+        {"initialize_toast_dismiss": {"toast_id": toast_id}}
+    )
 
     return response
 
@@ -527,7 +556,9 @@ async def toast_demo_info():
     """HTMX endpoint - returns info toast with HX-Trigger header."""
     import json
     import uuid
+
     from fastapi import Response
+
     from flowbite_htmy.components import Toast
     from flowbite_htmy.types import ToastVariant
 
@@ -540,9 +571,9 @@ async def toast_demo_info():
 
     html = await renderer.render(toast)
     response = Response(content=html, media_type="text/html")
-    response.headers["HX-Trigger-After-Settle"] = json.dumps({
-        "initialize_toast_dismiss": {"toast_id": toast_id}
-    })
+    response.headers["HX-Trigger-After-Settle"] = json.dumps(
+        {"initialize_toast_dismiss": {"toast_id": toast_id}}
+    )
 
     return response
 
