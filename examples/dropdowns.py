@@ -28,27 +28,35 @@ def build_dropdowns_showcase():
                 DropdownItem(label="Sign out", href="/signout"),
             ],
         ),
-        # Section 2: Dropdown with header and dividers
+        # Section 2: Dropdown with header and dividers (Flowbite-inspired using component)
         html.h2(
             "Dropdown with header and dividers",
             class_="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-12",
         ),
         html.p(
-            "Use headers and dividers to organize dropdown items into logical groups.",
+            "Approximating Flowbite's user profile dropdown using Dropdown component with headers, icons, and dividers.",
             class_="text-gray-600 dark:text-gray-400 mb-6",
         ),
         Dropdown(
-            trigger_label="User menu",
+            trigger_label="Dropdown button",
             items=[
-                DropdownHeader(label="Bonnie Green"),
-                DropdownHeader(label="name@flowbite.com"),
+                DropdownHeader(label="Bonnie Green", class_="font-semibold"),
+                DropdownHeader(label="name@flowbite.com", class_="text-xs text-gray-500 dark:text-gray-400 font-normal"),
                 DropdownDivider(),
-                DropdownItem(label="Dashboard", href="/dashboard"),
-                DropdownItem(label="Settings", href="/settings"),
-                DropdownItem(label="Earnings", href="/earnings"),
+                DropdownItem(label="Account", icon=Icon.USER, href="#"),
+                DropdownItem(label="Settings", icon=Icon.USER, href="#"),
+                DropdownItem(label="Privacy", icon=Icon.USER, href="#"),
+                DropdownItem(label="Notifications", icon=Icon.INFO, href="#"),
+                DropdownItem(label="Help center", icon=Icon.INFO, href="#"),
                 DropdownDivider(),
-                DropdownItem(label="Sign out", href="/signout"),
+                DropdownItem(
+                    label="Sign out",
+                    icon=Icon.ARROW_RIGHT,
+                    href="#",
+                    class_="text-red-600 dark:text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600",
+                ),
             ],
+            menu_class="w-72",  # Wider menu like Flowbite example
         ),
         # Section 3: Color variants
         html.h2(
