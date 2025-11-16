@@ -114,8 +114,9 @@ class Tabs:
             inactive = "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
 
         elif self.variant == TabVariant.UNDERLINE:
-            active = f"active {color_classes['text']} border-b-2 {color_classes['border']} {color_classes['text_dark']} {color_classes['border_dark']}"
-            inactive = "border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            # border-b-2 is a base class, not swapped by Flowbite
+            active = f"active {color_classes['text']} {color_classes['border']} {color_classes['text_dark']} {color_classes['border_dark']}"
+            inactive = "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
 
         elif self.variant == TabVariant.PILLS:
             active = f"active text-white {color_classes['bg']}"
