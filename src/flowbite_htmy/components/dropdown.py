@@ -95,7 +95,7 @@ class DropdownItem:
             # Get nested dropdown ID
             nested_id = self.dropdown._get_dropdown_id()
 
-            # Create right arrow icon
+            # Create right arrow icon with ms-auto to push to right
             right_arrow = SafeStr(
                 '<svg class="w-4 h-4 ms-auto rtl:rotate-180" aria-hidden="true" '
                 'xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">'
@@ -104,19 +104,24 @@ class DropdownItem:
                 '</svg>'
             )
 
+            # Update classes to include w-full for full width button
+            nested_classes = self._build_classes().replace(
+                "flex items-center", "inline-flex items-center w-full"
+            )
+
             # Build button attributes for nested trigger
             nested_attrs = {
                 "type_": "button",
                 "data_dropdown_toggle": nested_id,
                 "data_dropdown_placement": f"{self.dropdown.placement.value}-start",
-                "class_": classes,
+                "class_": nested_classes,
                 "role": "menuitem",
             }
 
             if self.disabled:
                 nested_attrs["disabled"] = ""
 
-            # Render parent item as button with right arrow + nested menu
+            # Render parent item as button with label + right arrow (pushed to right)
             nested_parts: list[Component] = [
                 html.button(
                     *children,  # type: ignore[arg-type]
