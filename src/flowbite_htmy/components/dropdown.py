@@ -90,18 +90,40 @@ class DropdownItem:
             children.append(get_icon(self.icon, class_="w-4 h-4 me-2 flex-shrink-0"))
         children.append(self.label)
 
-        # T061: If nested dropdown, render differently
+        # T061: If nested dropdown, render Flowbite-style multi-level menu
         if self.dropdown:
-            # Render nested dropdown structure
+            # Get nested dropdown ID
+            nested_id = self.dropdown._get_dropdown_id()
+
+            # Create right arrow icon
+            right_arrow = SafeStr(
+                '<svg class="w-4 h-4 ms-auto rtl:rotate-180" aria-hidden="true" '
+                'xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">'
+                '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" '
+                'stroke-width="2" d="m9 5 7 7-7 7"/>'
+                '</svg>'
+            )
+
+            # Build button attributes for nested trigger
+            nested_attrs = {
+                "type_": "button",
+                "data_dropdown_toggle": nested_id,
+                "data_dropdown_placement": f"{self.dropdown.placement.value}-start",
+                "class_": classes,
+                "role": "menuitem",
+            }
+
+            if self.disabled:
+                nested_attrs["disabled"] = ""
+
+            # Render parent item as button with right arrow + nested menu
             nested_parts: list[Component] = [
-                html.a(
+                html.button(
                     *children,  # type: ignore[arg-type]
-                    href=self.href,
-                    class_=classes,
-                    role="menuitem",
-                    tabindex="0" if not self.disabled else "-1",
+                    right_arrow,
+                    **nested_attrs,
                 ),
-                self.dropdown.htmy(context),
+                self.dropdown._render_menu(context, nested_id),  # Only render menu, not trigger
             ]
             return html.li(*nested_parts)  # type: ignore[arg-type]
 
@@ -231,7 +253,7 @@ class Dropdown:
 
         # Only add disabled if True
         if self.disabled:
-            attrs["disabled"] = True
+            attrs["disabled"] = ""
 
         return html.button(
             self.trigger_label,
@@ -257,7 +279,7 @@ class Dropdown:
         }
 
         if self.disabled:
-            attrs["disabled"] = True
+            attrs["disabled"] = ""
 
         return html.button(
             html.img(
@@ -286,7 +308,7 @@ class Dropdown:
         }
 
         if self.disabled:
-            attrs["disabled"] = True
+            attrs["disabled"] = ""
 
         return html.button(
             self.trigger_label,
