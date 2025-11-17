@@ -269,6 +269,7 @@ def build_dropdowns_showcase():
                     dropdown=Dropdown(
                         trigger_label="Dropdown submenu",
                         placement=DropdownPlacement.RIGHT,  # Opens to the right
+                        offset_distance=2,  # Tiny gap between parent and nested menu
                         items=[
                             DropdownItem(label="Overview", href="#"),
                             DropdownItem(label="My downloads", href="#"),

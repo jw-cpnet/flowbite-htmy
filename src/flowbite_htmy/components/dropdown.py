@@ -114,6 +114,8 @@ class DropdownItem:
                 "type_": "button",
                 "data_dropdown_toggle": nested_id,
                 "data_dropdown_placement": f"{self.dropdown.placement.value}-start",
+                "data_dropdown_offset_distance": str(self.dropdown.offset_distance),
+                "data_dropdown_offset_skidding": str(self.dropdown.offset_skidding),
                 "class_": nested_classes,
                 "role": "menuitem",
             }
@@ -200,6 +202,8 @@ class Dropdown:
 
     # Positioning
     placement: DropdownPlacement = DropdownPlacement.BOTTOM
+    offset_distance: int = 10  # Gap from trigger (pixels)
+    offset_skidding: int = 0  # Offset along trigger (pixels)
 
     # Identifiers
     dropdown_id: str | None = None
@@ -249,6 +253,8 @@ class Dropdown:
             "data_dropdown_toggle": dropdown_id,
             "data_dropdown_placement": self.placement.value,
             "data_dropdown_trigger": self.trigger_mode.value,
+            "data_dropdown_offset_distance": str(self.offset_distance),
+            "data_dropdown_offset_skidding": str(self.offset_skidding),
             "aria_expanded": "false",
             "aria_haspopup": "true",
             "aria_controls": dropdown_id,
@@ -277,6 +283,8 @@ class Dropdown:
             "data_dropdown_toggle": dropdown_id,
             "data_dropdown_placement": self.placement.value,
             "data_dropdown_trigger": self.trigger_mode.value,
+            "data_dropdown_offset_distance": str(self.offset_distance),
+            "data_dropdown_offset_skidding": str(self.offset_skidding),
             "aria_expanded": "false",
             "aria_haspopup": "true",
             "aria_controls": dropdown_id,
@@ -306,6 +314,8 @@ class Dropdown:
             "data_dropdown_toggle": dropdown_id,
             "data_dropdown_placement": self.placement.value,
             "data_dropdown_trigger": self.trigger_mode.value,
+            "data_dropdown_offset_distance": str(self.offset_distance),
+            "data_dropdown_offset_skidding": str(self.offset_skidding),
             "aria_expanded": "false",
             "aria_haspopup": "true",
             "aria_controls": dropdown_id,
