@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "flowbite-htmy"
-version = "0.2.0"
+version = "0.3.0"
 description = "Flowbite UI components for htmy - type-safe, composable, HTMX-ready"
 readme = "README.md"
 requires-python = ">=3.11"
