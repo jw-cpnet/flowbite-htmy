@@ -6,6 +6,7 @@ from flowbite_htmy.components.avatar import Avatar
 from flowbite_htmy.components.badge import Badge
 from flowbite_htmy.components.button import Button
 from flowbite_htmy.components.checkbox import Checkbox
+from flowbite_htmy.components.drawer import Drawer
 from flowbite_htmy.components.dropdown import (
     Dropdown,
     DropdownDivider,
@@ -33,6 +34,7 @@ __all__ = [
     "Badge",
     "Button",
     "Checkbox",
+    "Drawer",
     "Dropdown",
     "DropdownDivider",
     "DropdownHeader",

@@ -87,14 +87,28 @@ See `examples/` for complete working example with dark mode toggle.
 
 **Stats**: 36 tests passing, 91% coverage, all type-checked and linted
 
-### Phase 2 - Layout Components (In Progress)
+### Phase 2A - Core Interactive ✅ COMPLETE
 
-- ✅ **PageLayout** - Complete HTML page structure with dependencies
-- [ ] Footer - Page footer
-- [ ] Container - Max-width content wrapper
-- [ ] Navbar - Navigation bar (requires JS/HTMX for mobile)
+- ✅ **Modal** - Dialog boxes with ARIA and Flowbite JS (100% coverage)
+- ✅ **Input** - Text input fields with validation states
+- ✅ **Select** - Dropdown selection fields (98% coverage)
+- ✅ **Pagination** - Page navigation (99% coverage)
 
-**Stats**: 43 tests passing, 92% coverage
+### Phase 2B - Form Controls ✅ COMPLETE
+
+- ✅ **Checkbox** - Checkboxes with labels and validation
+- ✅ **Radio** - Radio buttons with validation states (99% coverage)
+- ✅ **Textarea** - Multi-line text inputs
+
+### Phase 2C - Advanced Interactive (IN PROGRESS)
+
+- ✅ **Toast** - Temporary notifications with actions (92% coverage)
+- ✅ **Accordion** - Collapsible panels with ARIA and Flowbite JS (100% coverage, 18 tests)
+- ✅ **Dropdown** - Toggleable menus with multi-level nesting
+- ✅ **Tabs** - Tabbed navigation with variants and HTMX
+- ✅ **Drawer** - Off-canvas panels from any edge with forms and navigation (93% coverage, 23 tests)
+
+**Stats**: 279 tests passing, all type-checked and linted
 
 ### Planned Components
 
