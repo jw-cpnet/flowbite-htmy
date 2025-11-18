@@ -36,9 +36,9 @@ from showcase_types import ComponentRoute, PageContext
 from tabs import build_tabs_showcase
 from textareas import build_textareas_showcase
 from toasts import build_toasts_showcase
-
-from flowbite_htmy.components import Button
-from flowbite_htmy.types import ButtonVariant, Color
+from drawers import build_drawers_showcase
+from flowbite_htmy.components import Button, Drawer
+from flowbite_htmy.types import ButtonVariant, Color, DrawerPlacement
 
 app = FastAPI(title="Flowbite-HTMY Component Showcase")
 templates = Jinja2Templates(directory="examples/templates")
@@ -158,6 +158,13 @@ COMPONENT_ROUTES: list[ComponentRoute] = [
         "title": "Dropdowns",
         "description": "Toggleable menus with icons, HTMX, and multi-level nesting",
         "order": 16,
+    },
+    {
+        "name": "drawers",
+        "path": "/drawers",
+        "title": "Drawers",
+        "description": "Slide-out panels for content display",
+        "order": 17,
     },
 ]
 
@@ -497,6 +504,20 @@ async def dropdowns_page() -> PageContext:
         "content": content_html,
     }
 
+@app.get("/drawers")
+@jinja.page("showcase-layout.html.jinja")
+async def drawers_page() -> PageContext:
+    """Render drawers component showcase page."""
+    navigation_html = await renderer.render(build_navigation("drawers"))
+    content_html = await renderer.render(build_drawers_showcase())
+
+    return {
+        "current_page": "drawers",
+        "title": "Drawers - Flowbite-HTMY Showcase",
+        "navigation": navigation_html,
+        "content": content_html,    
+    }
+
 
 @app.get("/clicked", response_class=HTMLResponse)
 async def clicked() -> str:
@@ -692,7 +713,9 @@ async def live_data_content() -> str:
 
     now = datetime.datetime.now().strftime("%H:%M:%S")
     content = html.div(
-        html.h3("Live Data Reloaded!", class_="text-xl font-bold mb-2 text-gray-900 dark:text-white"),
+        html.h3(
+            "Live Data Reloaded!", class_="text-xl font-bold mb-2 text-gray-900 dark:text-white"
+        ),
         html.p(
             f"Current time: {now}",
             class_="text-sm font-mono text-blue-600 dark:text-blue-400",
