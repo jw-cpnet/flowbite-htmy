@@ -107,12 +107,27 @@
 
     <!-- Initialize Flowbite components -->
     <script>
-        // Initialize on page load (Flowbite JS loaded above makes initFlowbite global)
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof initFlowbite === 'function') {
-                initFlowbite();
-                console.log('Flowbite components initialized');
-            }
+            // --- START: MODAL INITIALIZATION ---
+            // Flowbite 3.x requires explicit modal initialization (not automatic like earlier versions).
+            // Find all modal elements and create Modal instances to register them in Flowbite's instance registry.
+            // This allows data-modal-toggle and data-modal-hide buttons to work correctly.
+
+            document.querySelectorAll('[id$="-modal"]').forEach(function(modalEl) {
+                if (typeof Modal !== 'undefined') {
+                    const modal = new Modal(modalEl, {
+                        backdrop: modalEl.getAttribute('data-modal-backdrop') || 'dynamic',
+                        closable: true,
+                    });
+                    console.log('✓ Initialized modal:', modalEl.id);
+                } else {
+                    console.error('Flowbite Modal class not available');
+                }
+            });
+
+            console.log('✓ Modal initialization complete');
+            // --- END: MODAL INITIALIZATION ---
         });
 
         // Toast management configuration
