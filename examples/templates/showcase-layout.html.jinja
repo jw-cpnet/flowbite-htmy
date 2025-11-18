@@ -128,6 +128,14 @@
 
             console.log('✓ Modal initialization complete');
             // --- END: MODAL INITIALIZATION ---
+
+            // --- START: DRAWER INITIALIZATION ---
+            // Use initFlowbite() for drawers (unlike modals which need explicit init)
+            if (typeof initFlowbite === 'function') {
+                initFlowbite();
+                console.log('✓ Initialized Flowbite (for drawers, accordions, tabs, etc.)');
+            }
+            // --- END: DRAWER INITIALIZATION ---
         });
 
         // Toast management configuration
