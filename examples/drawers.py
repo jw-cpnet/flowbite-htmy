@@ -107,6 +107,7 @@ def build_drawers_showcase():
                 id="drawer-navigation",
                 class_="fixed left-0 top-0 z-40 h-screen w-80 -translate-x-full transition-transform bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700",
                 **{
+                    "data-drawer-placement": "left",
                     "aria-labelledby": "drawer-navigation-label",
                     "tabindex": "-1",
                     "aria-hidden": "true",
@@ -167,8 +168,11 @@ def build_drawers_showcase():
                     ),
                     id="drawer-left",
                     class_="fixed left-0 top-0 z-40 h-screen w-80 -translate-x-full transition-transform bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700",
-                    tabindex="-1",
-                    aria_hidden="true",
+                    **{
+                        "data-drawer-placement": "left",
+                        "tabindex": "-1",
+                        "aria-hidden": "true",
+                    },
                 ),
                 html.div(
                     class_="fixed inset-0 z-30 bg-gray-900/50 dark:bg-gray-900/80",
@@ -214,8 +218,11 @@ def build_drawers_showcase():
                     ),
                     id="drawer-right",
                     class_="fixed right-0 top-0 z-40 h-screen w-80 translate-x-full transition-transform bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700",
-                    tabindex="-1",
-                    aria_hidden="true",
+                    **{
+                        "data-drawer-placement": "right",
+                        "tabindex": "-1",
+                        "aria-hidden": "true",
+                    },
                 ),
                 html.div(
                     class_="fixed inset-0 z-30 bg-gray-900/50 dark:bg-gray-900/80",
@@ -228,6 +235,116 @@ def build_drawers_showcase():
                 class_="mb-4",
             ),
             class_="flex flex-wrap gap-3",
+        ),
+        # Contact form drawer
+        html.h2(
+            "Contact form",
+            class_="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-12",
+        ),
+        html.p(
+            "Use a drawer for contact forms, settings panels, or any form-based interface.",
+            class_="text-gray-600 dark:text-gray-400 mb-6",
+        ),
+        html.div(
+            Button(
+                label="Show contact form",
+                color=Color.BLUE,
+                attrs={
+                    "data-drawer-target": "drawer-contact",
+                    "data-drawer-show": "drawer-contact",
+                    "aria-controls": "drawer-contact",
+                },
+            ),
+            html.div(
+                html.div(
+                    html.h5(
+                        "Contact Us",
+                        id="drawer-contact-label",
+                        class_="text-base font-semibold text-gray-500 uppercase dark:text-gray-400",
+                    ),
+                    html.button(
+                        get_icon(Icon.CLOSE, class_="w-3 h-3"),
+                        type="button",
+                        class_="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white",
+                        **{"data-drawer-hide": "drawer-contact"},
+                    ),
+                    class_="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700",
+                ),
+                html.div(
+                    html.form(
+                        Input(
+                            id="email-contact",
+                            label="Your email",
+                            type="email",
+                            placeholder="name@company.com",
+                            required=True,
+                            attrs={"name": "email"},
+                            class_="mb-6",
+                        ),
+                        Input(
+                            id="subject-contact",
+                            label="Subject",
+                            type="text",
+                            placeholder="Let us know how we can help you",
+                            required=True,
+                            attrs={"name": "subject"},
+                            class_="mb-6",
+                        ),
+                        Textarea(
+                            id="message-contact",
+                            label="Your message",
+                            rows=4,
+                            placeholder="Your message...",
+                            attrs={"name": "message"},
+                            class_="mb-6",
+                        ),
+                        Button(
+                            label="Send message",
+                            color=Color.PRIMARY,
+                            attrs={"type": "submit"},
+                            class_="w-full mb-6",
+                        ),
+                        html.p(
+                            "Get in touch",
+                            class_="mb-2 text-sm text-gray-500 dark:text-gray-400",
+                        ),
+                        html.p(
+                            html.a(
+                                "info@company.com",
+                                href="mailto:info@company.com",
+                                class_="hover:underline",
+                            ),
+                            class_="mb-2 text-sm text-gray-500 dark:text-gray-400",
+                        ),
+                        html.p(
+                            html.a(
+                                "212-456-7890",
+                                href="tel:2124567890",
+                                class_="hover:underline",
+                            ),
+                            class_="mb-2 text-sm text-gray-500 dark:text-gray-400",
+                        ),
+                        class_="mb-4",
+                    ),
+                    class_="p-4 overflow-y-auto",
+                ),
+                id="drawer-contact",
+                class_="fixed right-0 top-0 z-40 h-screen w-80 translate-x-full transition-transform bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700",
+                **{
+                    "data-drawer-placement": "right",
+                    "aria-labelledby": "drawer-contact-label",
+                    "tabindex": "-1",
+                    "aria-hidden": "true",
+                },
+            ),
+            html.div(
+                class_="fixed inset-0 z-30 bg-gray-900/50 dark:bg-gray-900/80",
+                **{
+                    "data-drawer-backdrop": "drawer-contact",
+                    "data-drawer-hide": "drawer-contact",
+                    "aria-hidden": "true",
+                },
+            ),
         ),
         class_="space-y-8",
     )
