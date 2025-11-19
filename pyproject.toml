@@ -133,7 +133,6 @@ select = [
     "UP",     # pyupgrade
     "ARG",    # flake8-unused-arguments
     "SIM",    # flake8-simplify
-    "TCH",    # flake8-type-checking
 ]
 ignore = [
     "E501",   # line too long (handled by formatter)
@@ -146,5 +145,5 @@ ignore = [
 "__init__.py" = ["F401"]  # Unused imports in __init__.py
 "tests/*" = ["ARG", "S"]   # Allow unused args and assert in tests
 
-[tool.ruff.lint.isort]
+[tool.ruff.isort]
 known-first-party = ["flowbite_htmy"]
