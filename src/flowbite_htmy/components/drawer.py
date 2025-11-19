@@ -152,6 +152,7 @@ class Drawer:
             attrs={
                 "data-drawer-target": drawer_id,
                 "data-drawer-show": drawer_id,
+                "data-drawer-placement": self.placement.value,
                 "aria-controls": drawer_id,
             },
         )
@@ -166,7 +167,8 @@ class Drawer:
             Backdrop div element
         """
         # T026: Backdrop with dark overlay and data attributes
-        backdrop_classes = ClassBuilder("fixed inset-0 z-30")
+        # CRITICAL: Must have 'hidden' class to be invisible on page load
+        backdrop_classes = ClassBuilder("hidden fixed inset-0 z-30")
         backdrop_classes.add("bg-gray-900/50 dark:bg-gray-900/80")
 
         return html.div(
@@ -304,7 +306,7 @@ class Drawer:
 
         # Close button
         close_button = html.button(
-            get_icon(Icon.CLOSE, class_=""),
+            get_icon(Icon.CLOSE, class_="w-3 h-3"),
             type="button",
             class_="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white",
             **{
