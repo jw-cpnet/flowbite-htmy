@@ -217,9 +217,9 @@ def build_drawers_showcase():
             ),
             html.div(
                 html.h5(
-                    "Contact Us",
+                    "Contact Form Drawer",
                     id="drawer-contact-label",
-                    class_="mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400",
+                    class_="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400",
                 ),
                 html.button(
                     get_icon(Icon.CLOSE, class_="w-3 h-3"),
@@ -231,60 +231,9 @@ def build_drawers_showcase():
                         "aria-controls": "drawer-contact",
                     },
                 ),
-                html.form(
-                    Input(
-                        id="email-contact",
-                        label="Your email",
-                        type="email",
-                        placeholder="name@company.com",
-                        required=True,
-                        attrs={"name": "email"},
-                        class_="mb-6",
-                    ),
-                    Input(
-                        id="subject-contact",
-                        label="Subject",
-                        type="text",
-                        placeholder="Let us know how we can help you",
-                        required=True,
-                        attrs={"name": "subject"},
-                        class_="mb-6",
-                    ),
-                    Textarea(
-                        id="message-contact",
-                        label="Your message",
-                        rows=4,
-                        placeholder="Your message...",
-                        attrs={"name": "message"},
-                        class_="mb-6",
-                    ),
-                    Button(
-                        label="Send message",
-                        color=Color.PRIMARY,
-                        attrs={"type": "submit"},
-                        class_="w-full mb-6",
-                    ),
-                    class_="mb-6",
-                ),
                 html.p(
-                    "Get in touch",
-                    class_="mb-2 text-sm text-gray-500 dark:text-gray-400",
-                ),
-                html.p(
-                    html.a(
-                        "info@company.com",
-                        href="mailto:info@company.com",
-                        class_="hover:underline",
-                    ),
-                    class_="mb-2 text-sm text-gray-500 dark:text-gray-400",
-                ),
-                html.p(
-                    html.a(
-                        "212-456-7890",
-                        href="tel:2124567890",
-                        class_="hover:underline",
-                    ),
-                    class_="text-sm text-gray-500 dark:text-gray-400",
+                    "This is the contact form drawer. It should slide in from the right side.",
+                    class_="text-gray-500 dark:text-gray-400",
                 ),
                 id="drawer-contact",
                 class_="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800",
