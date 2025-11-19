@@ -130,11 +130,9 @@
             // --- END: MODAL INITIALIZATION ---
 
             // --- START: DRAWER INITIALIZATION ---
-            // Use initFlowbite() for drawers (unlike modals which need explicit init)
-            if (typeof initFlowbite === 'function') {
-                initFlowbite();
-                console.log('✓ Initialized Flowbite (for drawers, accordions, tabs, etc.)');
-            }
+            // Drawers use Flowbite's automatic data attribute system (unlike modals)
+            // No manual initialization needed - just ensure Flowbite JS is loaded
+            console.log('✓ Drawers ready (using Flowbite data attributes)');
             // --- END: DRAWER INITIALIZATION ---
         });
 
