@@ -130,23 +130,9 @@
             // --- END: MODAL INITIALIZATION ---
 
             // --- START: DRAWER INITIALIZATION ---
-            // Explicitly initialize drawers (Flowbite 3.x has buggy auto-init that adds conflicting classes)
-            // Similar pattern to modals - find drawer elements and create instances
-
-            document.querySelectorAll('[id^="drawer-"]').forEach(function(drawerEl) {
-                // Skip label elements
-                if (drawerEl.id.endsWith('-label')) return;
-
-                if (typeof Drawer !== 'undefined') {
-                    // Create instance without options - let it read from data attributes
-                    const drawer = new Drawer(drawerEl);
-                    console.log('✓ Initialized drawer:', drawerEl.id);
-                } else {
-                    console.error('Flowbite Drawer class not available');
-                }
-            });
-
-            console.log('✓ Drawer initialization complete');
+            // Let Flowbite automatically handle drawers via data attributes
+            // Do NOT manually create Drawer instances - this causes conflicting classes
+            console.log('✓ Drawers configured (Flowbite auto-init from data attributes)');
             // --- END: DRAWER INITIALIZATION ---
         });
 
