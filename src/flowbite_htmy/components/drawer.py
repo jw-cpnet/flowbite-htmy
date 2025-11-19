@@ -8,7 +8,7 @@ from htmy import Component, Context, html
 
 from flowbite_htmy.base import ClassBuilder, ThemeContext
 from flowbite_htmy.icons import Icon, get_icon
-from flowbite_htmy.types import Color, DrawerPlacement, Size
+from flowbite_htmy.types import ButtonVariant, Color, DrawerPlacement, Size
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -50,6 +50,9 @@ class Drawer:
     # Customization
     trigger_color: Color = Color.PRIMARY
     """Color variant for the trigger button. Default is PRIMARY."""
+
+    trigger_variant: ButtonVariant = ButtonVariant.DEFAULT
+    """Visual variant for the trigger button (DEFAULT, OUTLINE, GRADIENT). Default is DEFAULT."""
 
     trigger_size: Size = Size.MD
     """Size variant for the trigger button. Default is MD."""
@@ -147,6 +150,7 @@ class Drawer:
         return Button(
             label=self.trigger_label,
             color=self.trigger_color,
+            variant=self.trigger_variant,
             size=self.trigger_size,
             class_=self.trigger_class,
             attrs={
