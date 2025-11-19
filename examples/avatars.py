@@ -1,8 +1,8 @@
 """Avatars showcase content for consolidated app."""
 
 from htmy import html
+
 from flowbite_htmy.components.avatar import Avatar
-from flowbite_htmy.types import Size
 
 
 def build_avatars_showcase():

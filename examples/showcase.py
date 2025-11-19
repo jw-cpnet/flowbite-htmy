@@ -21,6 +21,7 @@ from badges import build_badges_showcase
 from buttons import build_buttons_showcase
 from cards import build_cards_showcase
 from checkboxes import build_checkboxes_showcase
+from drawers import build_drawers_showcase
 from dropdowns import build_dropdowns_showcase
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
@@ -36,9 +37,9 @@ from showcase_types import ComponentRoute, PageContext
 from tabs import build_tabs_showcase
 from textareas import build_textareas_showcase
 from toasts import build_toasts_showcase
-from drawers import build_drawers_showcase
-from flowbite_htmy.components import Button, Drawer
-from flowbite_htmy.types import ButtonVariant, Color, DrawerPlacement
+
+from flowbite_htmy.components import Button
+from flowbite_htmy.types import ButtonVariant, Color
 
 app = FastAPI(title="Flowbite-HTMY Component Showcase")
 templates = Jinja2Templates(directory="examples/templates")
@@ -504,6 +505,7 @@ async def dropdowns_page() -> PageContext:
         "content": content_html,
     }
 
+
 @app.get("/drawers")
 @jinja.page("showcase-layout.html.jinja")
 async def drawers_page() -> PageContext:
@@ -515,7 +517,7 @@ async def drawers_page() -> PageContext:
         "current_page": "drawers",
         "title": "Drawers - Flowbite-HTMY Showcase",
         "navigation": navigation_html,
-        "content": content_html,    
+        "content": content_html,
     }
 
 

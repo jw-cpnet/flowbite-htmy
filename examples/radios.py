@@ -130,9 +130,7 @@ def build_radios_showcase():
                 ),
                 html.div(
                     Radio(label="Free Plan", name="plan", value="free", checked=True),
-                    Radio(
-                        label="Pro Plan - $9/month", name="plan", value="pro"
-                    ),
+                    Radio(label="Pro Plan - $9/month", name="plan", value="pro"),
                     Radio(
                         label="Enterprise Plan - Contact Sales",
                         name="plan",

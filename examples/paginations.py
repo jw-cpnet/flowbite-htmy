@@ -1,6 +1,7 @@
 """Paginations showcase content for consolidated app."""
 
 from htmy import html
+
 from flowbite_htmy.components import Pagination
 
 

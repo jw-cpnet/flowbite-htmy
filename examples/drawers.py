@@ -2,7 +2,7 @@
 
 from htmy import html
 
-from flowbite_htmy.components import Drawer, Input, Textarea, Button
+from flowbite_htmy.components import Button, Drawer, Input, Textarea
 from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color, DrawerPlacement
 

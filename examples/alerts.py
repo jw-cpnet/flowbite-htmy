@@ -1,6 +1,7 @@
 """Alerts showcase content for consolidated app."""
 
 from htmy import html
+
 from flowbite_htmy.components import Alert
 from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color

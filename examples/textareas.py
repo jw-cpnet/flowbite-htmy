@@ -237,8 +237,8 @@ def build_textareas_showcase():
 if __name__ == "__main__":
     import uvicorn
     from fastapi import FastAPI
-    from fasthx.jinja import Jinja
     from fastapi.templating import Jinja2Templates
+    from fasthx.jinja import Jinja
 
     app = FastAPI()
     templates = Jinja2Templates(directory="examples/templates")

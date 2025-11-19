@@ -4,7 +4,13 @@ from htmy import html
 
 from flowbite_htmy.components import Dropdown, DropdownDivider, DropdownHeader, DropdownItem
 from flowbite_htmy.icons import Icon
-from flowbite_htmy.types import Color, DropdownPlacement, DropdownTriggerMode, DropdownTriggerType, Size
+from flowbite_htmy.types import (
+    Color,
+    DropdownPlacement,
+    DropdownTriggerMode,
+    DropdownTriggerType,
+    Size,
+)
 
 
 def build_dropdowns_showcase():
@@ -41,7 +47,10 @@ def build_dropdowns_showcase():
             trigger_label="Dropdown button",
             items=[
                 DropdownHeader(label="Bonnie Green", class_="font-semibold"),
-                DropdownHeader(label="name@flowbite.com", class_="text-xs text-gray-500 dark:text-gray-400 font-normal"),
+                DropdownHeader(
+                    label="name@flowbite.com",
+                    class_="text-xs text-gray-500 dark:text-gray-400 font-normal",
+                ),
                 DropdownDivider(),
                 DropdownItem(label="Account", icon=Icon.USER, href="#"),
                 DropdownItem(label="Settings", icon=Icon.USER, href="#"),

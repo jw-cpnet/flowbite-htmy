@@ -1,9 +1,8 @@
 """Modals showcase content for consolidated app."""
 
 from htmy import html
-from flowbite_htmy.components import Modal, PopupModal
-from flowbite_htmy.components import Button
-from flowbite_htmy.components import Select
+
+from flowbite_htmy.components import Button, Modal, PopupModal
 from flowbite_htmy.icons import Icon, get_icon
 from flowbite_htmy.types import Color, Size
 

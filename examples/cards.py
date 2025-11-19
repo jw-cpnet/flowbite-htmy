@@ -1,7 +1,7 @@
 """Cards showcase content for consolidated app."""
 
 from htmy import html
-from flowbite_htmy.components import Select
+
 from flowbite_htmy.icons import Icon, Payment, Social, get_icon, get_payment_icon, get_social_icon
 
 

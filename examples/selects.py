@@ -1,8 +1,8 @@
 """Selects showcase content for consolidated app."""
 
 from htmy import html
+
 from flowbite_htmy.components import Select
-from flowbite_htmy.types import Size
 
 
 def build_selects_showcase():

@@ -1,9 +1,8 @@
 """Checkboxes showcase content for consolidated app."""
 
 from htmy import html
+
 from flowbite_htmy.components import Checkbox
-from flowbite_htmy.components import Select
-from flowbite_htmy.types import Color
 
 
 def build_checkboxes_showcase():
