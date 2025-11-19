@@ -2,7 +2,6 @@
 
 import uuid
 from dataclasses import dataclass
-from typing import ClassVar
 
 from htmy import Component, Context, html
 

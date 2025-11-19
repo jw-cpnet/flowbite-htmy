@@ -120,7 +120,9 @@ class Tabs:
 
         elif self.variant == TabVariant.PILLS:
             active = f"active text-white {color_classes['bg']}"
-            inactive = "hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+            inactive = (
+                "hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+            )
 
         elif self.variant == TabVariant.FULL_WIDTH:
             active = f"active text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white {color_classes['focus_ring']}"
@@ -248,9 +250,7 @@ class Tabs:
         panel_id = f"panel-{base_id}-{index}"
 
         # Full-width variant uses w-full on list items
-        li_class = (
-            "w-full focus-within:z-10" if self.variant == TabVariant.FULL_WIDTH else "me-2"
-        )
+        li_class = "w-full focus-within:z-10" if self.variant == TabVariant.FULL_WIDTH else "me-2"
 
         # Render tab content (label + optional icon)
         tab_content = self._render_tab_content(tab, is_disabled=tab.disabled)
@@ -373,7 +373,8 @@ class Tabs:
 
         # Render content panels as list
         panels = [
-            self._render_panel(tab, i, base_id, i == active_index) for i, tab in enumerate(self.tabs)
+            self._render_panel(tab, i, base_id, i == active_index)
+            for i, tab in enumerate(self.tabs)
         ]
 
         # Render content panels
