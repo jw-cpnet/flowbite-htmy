@@ -14,11 +14,11 @@
         }
     </script>
 
-    <!-- Flowbite CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- Flowbite CSS (via flowbite-htmy helper) -->
+    {{ flowbite_css() | safe }}
 
-    <!-- HTMX -->
-    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <!-- HTMX (via flowbite-htmy helper) -->
+    {{ htmx_script() | safe }}
 
     <!-- Dark mode toggle script -->
     <script>
@@ -102,114 +102,10 @@
         </main>
     </div>
 
-    <!-- Flowbite JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <!-- Flowbite JavaScript (via flowbite-htmy helper) -->
+    {{ flowbite_js() | safe }}
 
-    <!-- Initialize Flowbite components -->
-    <script>
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- START: MODAL INITIALIZATION ---
-            // Flowbite 3.x requires explicit modal initialization (not automatic like earlier versions).
-            // Find all modal elements and create Modal instances to register them in Flowbite's instance registry.
-            // This allows data-modal-toggle and data-modal-hide buttons to work correctly.
-
-            document.querySelectorAll('[id$="-modal"]').forEach(function(modalEl) {
-                if (typeof Modal !== 'undefined') {
-                    const modal = new Modal(modalEl, {
-                        backdrop: modalEl.getAttribute('data-modal-backdrop') || 'dynamic',
-                        closable: true,
-                    });
-                    console.log('✓ Initialized modal:', modalEl.id);
-                } else {
-                    console.error('Flowbite Modal class not available');
-                }
-            });
-
-            console.log('✓ Modal initialization complete');
-            // --- END: MODAL INITIALIZATION ---
-
-            // --- START: DRAWER INITIALIZATION ---
-            // Let Flowbite automatically handle drawers via data attributes
-            // Do NOT manually create Drawer instances - this causes conflicting classes
-            console.log('✓ Drawers configured (Flowbite auto-init from data attributes)');
-            // --- END: DRAWER INITIALIZATION ---
-        });
-
-        // Toast management configuration
-        const TOAST_CONFIG = {
-            maxToasts: 5,           // Maximum toasts in container
-            autoDismissDelay: 5000  // Auto-dismiss after 5 seconds (0 = disabled)
-        };
-
-        // Listen for server-triggered initialization via HX-Trigger-After-Settle header
-        // Server passes the exact toast_id to initialize - no DOM scanning needed!
-        document.body.addEventListener("initialize_toast_dismiss", function(evt) {
-            const toastId = evt.detail.toast_id;
-
-            if (!toastId) {
-                console.warn('No toast_id provided in initialize_toast_dismiss event');
-                return;
-            }
-
-            // Find the specific toast by ID (server told us exactly which one)
-            const targetEl = document.getElementById(toastId);
-            if (!targetEl) {
-                console.warn('Toast not found:', toastId);
-                return;
-            }
-
-            // Find dismiss button in this specific toast
-            const dismissTrigger = targetEl.querySelector('[data-dismiss-target]');
-            if (!dismissTrigger) {
-                console.warn('No dismiss button in toast:', toastId);
-                return;
-            }
-
-            // Check if already initialized (prevent duplicates)
-            if (dismissTrigger.hasAttribute('data-dismiss-initialized')) {
-                console.log('Toast already initialized, skipping:', toastId);
-                return;
-            }
-
-            // Create Dismiss instance for this specific toast
-            if (typeof Dismiss !== 'undefined') {
-                const dismissInstance = new Dismiss(targetEl, dismissTrigger);
-                dismissTrigger.setAttribute('data-dismiss-initialized', 'true');
-                console.log('✓ Initialized dismiss via server trigger:', toastId);
-
-                // Auto-dismiss after delay (if enabled)
-                if (TOAST_CONFIG.autoDismissDelay > 0) {
-                    setTimeout(function() {
-                        if (targetEl && getComputedStyle(targetEl).display !== 'none') {
-                            dismissInstance.hide();
-                            console.log('⏱ Auto-dismissed toast:', toastId);
-                        }
-                    }, TOAST_CONFIG.autoDismissDelay);
-                }
-            }
-
-            // Enforce max toasts limit
-            enforceMaxToasts();
-        });
-
-        // Enforce maximum number of toasts in container
-        function enforceMaxToasts() {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-
-            const toasts = Array.from(container.querySelectorAll('[role="alert"]'))
-                .filter(toast => getComputedStyle(toast).display !== 'none');
-
-            if (toasts.length > TOAST_CONFIG.maxToasts) {
-                // Remove oldest toasts (from the end, since we use afterbegin)
-                const toastsToRemove = toasts.slice(TOAST_CONFIG.maxToasts);
-                toastsToRemove.forEach(function(toast) {
-                    toast.style.display = 'none';
-                    console.log('🗑 Removed old toast (max limit):', toast.id);
-                });
-            }
-        }
-    </script>
+    <!-- flowbite-htmy Initialization (via flowbite-htmy router) -->
+    {{ flowbite_init_js() | safe }}
 </body>
 </html>

@@ -27,40 +27,93 @@ pip install flowbite-htmy[fastapi]
 
 ## Quick Start
 
-### Recommended: Hybrid Approach (Jinja + htmy)
+### 1. Install the package
 
-Use Jinja for layouts and htmy for components:
+```bash
+pip install flowbite-htmy[fastapi]
+```
+
+### 2. Set up your FastAPI app
 
 ```python
 from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from fasthx.jinja import Jinja
-from htmy import Renderer, html
-from flowbite_htmy.components import Button
-from flowbite_htmy.types import Color
+from htmy import Renderer
+from flowbite_htmy.router import router as flowbite_router
+from flowbite_htmy.helpers import flowbite_css, flowbite_js, flowbite_init_js, htmx_script
 
 app = FastAPI()
+
+# Include flowbite-htmy router (serves initialization JS)
+app.include_router(flowbite_router, prefix="/_flowbite_htmy")
+
+# Set up templates
 templates = Jinja2Templates(directory="templates")
+
+# Register helpers as Jinja globals
+templates.env.globals["flowbite_css"] = flowbite_css
+templates.env.globals["flowbite_js"] = flowbite_js
+templates.env.globals["htmx_script"] = htmx_script
+templates.env.globals["flowbite_init_js"] = flowbite_init_js
+
 jinja = Jinja(templates)
 renderer = Renderer()
+```
+
+### 3. Create a base template (`templates/base.html.jinja`)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    {{ flowbite_css() | safe }}
+    {{ htmx_script() | safe }}
+</head>
+<body>
+    {{ content | safe }}
+
+    {{ flowbite_js() | safe }}
+    {{ flowbite_init_js() | safe }}
+</body>
+</html>
+```
+
+### 4. Use components in your routes
+
+```python
+from flowbite_htmy.components import Button, Alert
+from flowbite_htmy.types import Color
 
 @app.get("/")
 @jinja.page("base.html.jinja")
 async def index():
-    # Build components with htmy (type-safe!)
-    buttons = html.div(
-        Button(label="Primary", color=Color.PRIMARY),
-        Button(label="Success", color=Color.SUCCESS),
+    content = html.div(
+        Alert(
+            message="Welcome to flowbite-htmy!",
+            color=Color.INFO,
+        ),
+        Button(label="Click Me", color=Color.PRIMARY),
     )
 
-    # Render and pass to Jinja template
     return {
         "title": "My App",
-        "content": await renderer.render(buttons)
+        "content": await renderer.render(content)
     }
 ```
 
-See `examples/` for complete working example with dark mode toggle.
+### 5. For production: Set up Tailwind build
+
+```bash
+# Get the package path
+python -m flowbite_htmy tailwind-config
+
+# Add the output to your tailwind.config.js content array
+# Then build: npx tailwindcss -i input.css -o output.css --minify
+```
+
+See [Installation Guide](docs/installation.md) for complete setup instructions and [examples/](examples/) for working applications.
 
 ## Requirements
 

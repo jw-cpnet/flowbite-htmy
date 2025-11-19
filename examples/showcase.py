@@ -39,10 +39,23 @@ from textareas import build_textareas_showcase
 from toasts import build_toasts_showcase
 
 from flowbite_htmy.components import Button
+from flowbite_htmy.helpers import flowbite_css, flowbite_init_js, flowbite_js, htmx_script
+from flowbite_htmy.router import router as flowbite_router
 from flowbite_htmy.types import ButtonVariant, Color
 
 app = FastAPI(title="Flowbite-HTMY Component Showcase")
+
+# Include flowbite-htmy router to serve initialization JS
+app.include_router(flowbite_router, prefix="/_flowbite_htmy")
+
 templates = Jinja2Templates(directory="examples/templates")
+
+# Add flowbite-htmy helpers as Jinja2 globals
+templates.env.globals["flowbite_css"] = flowbite_css
+templates.env.globals["flowbite_js"] = flowbite_js
+templates.env.globals["htmx_script"] = htmx_script
+templates.env.globals["flowbite_init_js"] = flowbite_init_js
+
 jinja = Jinja(templates)
 renderer = Renderer()
 

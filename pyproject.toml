@@ -68,6 +68,13 @@ Issues = "https://github.com/yourusername/flowbite-htmy/issues"
 [tool.hatch.build.targets.wheel]
 packages = ["src/flowbite_htmy"]
 
+[tool.hatch.build]
+# Include JavaScript files as package data
+include = [
+    "src/flowbite_htmy/**/*.py",
+    "src/flowbite_htmy/**/*.js",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
