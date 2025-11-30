@@ -744,6 +744,92 @@ async def live_data_content() -> str:
     return await renderer.render(content)
 
 
+# HTMX DX Demo Endpoints
+@app.delete("/htmx-demo/delete", response_class=HTMLResponse)
+async def htmx_demo_delete() -> str:
+    """HTMX endpoint for delete confirmation demo."""
+    from flowbite_htmy.components import Alert
+
+    alert = Alert(
+        title="Deleted!",
+        message="Item was deleted successfully. (hx_confirm prevented accidental deletion)",
+        color=Color.SUCCESS,
+    )
+    return await renderer.render(alert)
+
+
+@app.post("/htmx-demo/save", response_class=HTMLResponse)
+async def htmx_demo_save() -> str:
+    """HTMX endpoint for save with event handlers demo."""
+    import asyncio
+
+    # Simulate a save operation
+    await asyncio.sleep(0.5)
+
+    from flowbite_htmy.components import Alert
+
+    alert = Alert(
+        title="Saved!",
+        message="Data saved successfully. The hx_on handlers changed button text during the request.",
+        color=Color.SUCCESS,
+    )
+    return await renderer.render(alert)
+
+
+@app.get("/htmx-demo/slow", response_class=HTMLResponse)
+async def htmx_demo_slow() -> str:
+    """HTMX endpoint with artificial delay for loading indicator demo."""
+    import asyncio
+
+    # Simulate slow operation
+    await asyncio.sleep(1)
+
+    from flowbite_htmy.components import Alert
+
+    alert = Alert(
+        title="Data Loaded!",
+        message="The loading spinner was shown during the 1 second delay using hx_indicator.",
+        color=Color.INFO,
+    )
+    return await renderer.render(alert)
+
+
+@app.post("/htmx-demo/submit", response_class=HTMLResponse)
+async def htmx_demo_submit() -> str:
+    """HTMX endpoint for disabled element demo."""
+    import asyncio
+
+    # Simulate form submission
+    await asyncio.sleep(0.8)
+
+    from flowbite_htmy.components import Alert
+
+    alert = Alert(
+        title="Form Submitted!",
+        message="The button was disabled during the request using hx_disabled_elt='this'.",
+        color=Color.INFO,
+    )
+    return await renderer.render(alert)
+
+
+@app.delete("/htmx-demo/delete-full", response_class=HTMLResponse)
+async def htmx_demo_delete_full() -> str:
+    """HTMX endpoint for combined features demo."""
+    import asyncio
+
+    # Simulate delete operation
+    await asyncio.sleep(0.8)
+
+    from flowbite_htmy.components import Alert
+
+    alert = Alert(
+        title="Deleted with All Features!",
+        message="This used hx_confirm, hx_indicator, hx_disabled_elt, and hx_on together. Check the console for the log message!",
+        color=Color.SUCCESS,
+    )
+    return await renderer.render(alert)
+
+
 if __name__ == "__main__":
     import uvicorn
 
