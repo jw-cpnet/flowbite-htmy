@@ -101,6 +101,53 @@ class Button:
     hx_select: str | None = None
     """HTMX hx-select attribute."""
 
+    hx_include: str | None = None
+    """HTMX hx-include attribute for including additional element values."""
+
+    hx_confirm: str | None = None
+    """HTMX hx-confirm attribute for confirmation dialog."""
+
+    hx_vals: str | None = None
+    """HTMX hx-vals attribute for adding values to request."""
+
+    hx_indicator: str | None = None
+    """HTMX hx-indicator attribute for loading indicator element."""
+
+    hx_encoding: str | None = None
+    """HTMX hx-encoding attribute for request encoding type."""
+
+    hx_headers: str | None = None
+    """HTMX hx-headers attribute for additional request headers."""
+
+    hx_disabled_elt: str | None = None
+    """HTMX hx-disabled-elt attribute for elements to disable during request."""
+
+    hx_sync: str | None = None
+    """HTMX hx-sync attribute for synchronizing requests."""
+
+    hx_on: dict[str, str] | None = None
+    """HTMX event handlers as dict.
+
+    Keys are event names (without 'hx-on::' prefix), values are JavaScript code.
+
+    Example:
+        Button(
+            label="Save",
+            hx_post="/api/save",
+            hx_on={
+                "after-request": "if(event.detail.successful) { drawer.hide(); }",
+                "before-request": "showLoading()",
+            }
+        )
+
+    Renders as:
+        <button hx-post="/api/save"
+                hx-on::after-request="if(event.detail.successful) { drawer.hide(); }"
+                hx-on::before-request="showLoading()">
+            Save
+        </button>
+    """
+
     # Custom styling
     class_: str = ""
     """Additional custom classes."""
@@ -232,7 +279,20 @@ class Button:
             "hx-patch": self.hx_patch,
             "hx-push-url": self.hx_push_url,
             "hx-select": self.hx_select,
+            "hx-include": self.hx_include,
+            "hx-confirm": self.hx_confirm,
+            "hx-vals": self.hx_vals,
+            "hx-indicator": self.hx_indicator,
+            "hx-encoding": self.hx_encoding,
+            "hx-headers": self.hx_headers,
+            "hx-disabled-elt": self.hx_disabled_elt,
+            "hx-sync": self.hx_sync,
         }
+
+        # Add hx-on event handlers
+        if self.hx_on:
+            for event, handler in self.hx_on.items():
+                button_attrs[f"hx-on::{event}"] = handler
 
         # Merge passthrough attributes
         if self.attrs:
