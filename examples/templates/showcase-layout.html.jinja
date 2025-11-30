@@ -20,6 +20,18 @@
     <!-- HTMX (via flowbite-htmy helper) -->
     {{ htmx_script() | safe }}
 
+    <!-- HTMX indicator CSS (hidden by default, shown during requests) -->
+    <style>
+        .htmx-indicator {
+            opacity: 0;
+            transition: opacity 200ms ease-in;
+        }
+        .htmx-request .htmx-indicator,
+        .htmx-request.htmx-indicator {
+            opacity: 1;
+        }
+    </style>
+
     <!-- Dark mode toggle script -->
     <script>
         // On page load, check localStorage and apply theme BEFORE page renders
