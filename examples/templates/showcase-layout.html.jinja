@@ -22,12 +22,18 @@
 
     <!-- HTMX indicator CSS (hidden by default, shown during requests) -->
     <style>
+        /* Use high specificity to override Tailwind */
+        button .htmx-indicator,
+        svg.htmx-indicator,
         .htmx-indicator {
-            display: none !important;
+            opacity: 0 !important;
+            transition: opacity 200ms ease-in;
         }
         .htmx-request .htmx-indicator,
-        .htmx-request.htmx-indicator {
-            display: inline !important;
+        .htmx-request.htmx-indicator,
+        button.htmx-request .htmx-indicator,
+        button.htmx-request svg.htmx-indicator {
+            opacity: 1 !important;
         }
     </style>
 

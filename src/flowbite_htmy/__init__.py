@@ -9,7 +9,7 @@ __author__ = "Jian"
 
 # Flowbite and dependency versions
 FLOWBITE_VERSION = "3.1.2"
-HTMX_VERSION = "2.0.2"
+HTMX_VERSION = "2.0.8"
 TAILWIND_VERSION = "3.4.0"
 
 # Export main components (will be populated as we build them)
