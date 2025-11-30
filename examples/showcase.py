@@ -843,4 +843,4 @@ if __name__ == "__main__":
     for route in COMPONENT_ROUTES:
         print(f"  {route['path']} - {route['title']}")
 
-    uvicorn.run("showcase:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("showcase:app", host="0.0.0.0", port=8001, reload=True)

@@ -23,12 +23,11 @@
     <!-- HTMX indicator CSS (hidden by default, shown during requests) -->
     <style>
         .htmx-indicator {
-            opacity: 0;
-            transition: opacity 200ms ease-in;
+            display: none !important;
         }
         .htmx-request .htmx-indicator,
         .htmx-request.htmx-indicator {
-            opacity: 1;
+            display: inline !important;
         }
     </style>
 
