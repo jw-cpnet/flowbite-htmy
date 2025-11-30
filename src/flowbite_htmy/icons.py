@@ -78,6 +78,7 @@ class Icon(str, Enum):
     HELP_CIRCLE = "help-circle"
     EXCLAMATION_CIRCLE = "exclamation-circle"
     PLUS = "plus"
+    SPINNER = "spinner"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -337,6 +338,12 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
     Icon.PLUS: (
         '<svg class="{class_}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">'
         '<path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>'
+        "</svg>"
+    ),
+    Icon.SPINNER: (
+        '<svg class="{class_} animate-spin" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">'
+        '<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>'
+        '<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>'
         "</svg>"
     ),
 }
