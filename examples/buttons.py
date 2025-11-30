@@ -514,27 +514,24 @@ def build_buttons_showcase():
             ),
             class_="mb-8",
         ),
-        # Loading state with hx_on
+        # Built-in indicator prop (recommended)
         html.h3(
-            "Loading State (hx_on + Icon.SPINNER)",
+            "Built-in Indicator (indicator prop) ✨",
             class_="text-lg font-semibold text-gray-900 dark:text-white mb-3",
         ),
         html.p(
-            "Use hx_on to swap button content with a spinner during requests:",
+            "The simplest way to show a loading spinner - just use indicator=True! The spinner appears during HTMX requests and hides when done.",
             class_="text-gray-600 dark:text-gray-400 mb-4",
         ),
         html.div(
             Button(
                 label="Load Data",
                 color=Color.PRIMARY,
+                indicator=True,
                 hx_get="/htmx-demo/slow",
                 hx_target="#indicator-result",
                 hx_swap="innerHTML",
                 hx_disabled_elt="this",
-                hx_on={
-                    "htmx:before-request": 'this.innerHTML = \'<svg class="w-5 h-5 me-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Loading...\'',
-                    "htmx:after-request": "this.innerHTML = 'Load Data'",
-                },
             ),
             html.div(
                 html.p(
@@ -542,6 +539,38 @@ def build_buttons_showcase():
                     class_="text-gray-500 dark:text-gray-400 italic",
                 ),
                 id="indicator-result",
+                class_="mt-4 p-4 rounded-lg bg-gray-100 dark:bg-gray-800",
+            ),
+            class_="mb-8",
+        ),
+        # Loading state with hx_on (alternative)
+        html.h3(
+            "Loading State (hx_on alternative)",
+            class_="text-lg font-semibold text-gray-900 dark:text-white mb-3",
+        ),
+        html.p(
+            "Alternative approach using hx_on to completely swap button content:",
+            class_="text-gray-600 dark:text-gray-400 mb-4",
+        ),
+        html.div(
+            Button(
+                label="Load with hx_on",
+                color=Color.SECONDARY,
+                hx_get="/htmx-demo/slow",
+                hx_target="#indicator-result-2",
+                hx_swap="innerHTML",
+                hx_disabled_elt="this",
+                hx_on={
+                    "htmx:before-request": 'this.innerHTML = \'<svg class="w-5 h-5 me-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Loading...\'',
+                    "htmx:after-request": "this.innerHTML = 'Load with hx_on'",
+                },
+            ),
+            html.div(
+                html.p(
+                    "Uses hx_on to manually swap content...",
+                    class_="text-gray-500 dark:text-gray-400 italic",
+                ),
+                id="indicator-result-2",
                 class_="mt-4 p-4 rounded-lg bg-gray-100 dark:bg-gray-800",
             ),
             class_="mb-8",
@@ -580,7 +609,7 @@ def build_buttons_showcase():
             class_="text-lg font-semibold text-gray-900 dark:text-white mb-3",
         ),
         html.p(
-            "Real-world example combining multiple HTMX attributes:",
+            "Real-world example combining multiple HTMX attributes with the new indicator prop:",
             class_="text-gray-600 dark:text-gray-400 mb-4",
         ),
         html.div(
@@ -588,19 +617,16 @@ def build_buttons_showcase():
                 label="Delete with All Features",
                 color=Color.DANGER,
                 variant=ButtonVariant.OUTLINE,
+                indicator=True,
                 hx_delete="/htmx-demo/delete-full",
                 hx_target="#combined-result",
                 hx_swap="innerHTML",
                 hx_confirm="This action cannot be undone. Continue?",
                 hx_disabled_elt="this",
-                hx_on={
-                    "htmx:before-request": 'this.dataset.originalText = this.innerHTML; this.innerHTML = \'<svg class="w-4 h-4 me-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Deleting...\'',
-                    "htmx:after-request": "this.innerHTML = this.dataset.originalText; if(event.detail.successful) { console.log('Deleted!'); }",
-                },
             ),
             html.div(
                 html.p(
-                    "This button uses: hx_confirm, hx_disabled_elt, and hx_on (for loading state + success callback)",
+                    "This button uses: indicator=True, hx_confirm, and hx_disabled_elt",
                     class_="text-gray-500 dark:text-gray-400 italic",
                 ),
                 id="combined-result",

@@ -263,3 +263,87 @@ class TestButtonHtmxCombined:
         assert 'hx-disabled-elt="this"' in html
         assert 'hx-sync="closest form:abort"' in html
         assert "hx-on::after-request=" in html
+
+
+class TestButtonIndicator:
+    """Test indicator prop for HTMX built-in loading state."""
+
+    @pytest.mark.asyncio
+    async def test_indicator_true_renders_default_spinner(self, htmy):
+        """Test that indicator=True renders default spinner with htmx-indicator class."""
+        button = Button(
+            label="Load Data",
+            indicator=True,
+            hx_get="/api/data",
+        )
+        html = await htmy.render(button)
+        assert "htmx-indicator" in html
+        assert "animate-spin" in html
+        assert "<svg" in html
+
+    @pytest.mark.asyncio
+    async def test_indicator_false_no_spinner(self, htmy):
+        """Test that indicator=False doesn't add spinner."""
+        button = Button(
+            label="Click",
+            indicator=False,
+        )
+        html = await htmy.render(button)
+        assert "htmx-indicator" not in html
+
+    @pytest.mark.asyncio
+    async def test_indicator_custom_icon(self, htmy):
+        """Test that custom icon gets htmx-indicator class added."""
+        from htmy import SafeStr
+
+        custom_icon = SafeStr('<svg class="w-4 h-4">custom</svg>')
+        button = Button(
+            label="Save",
+            indicator=custom_icon,
+            hx_post="/api/save",
+        )
+        html = await htmy.render(button)
+        assert "htmx-indicator" in html
+        assert "custom" in html
+
+    @pytest.mark.asyncio
+    async def test_indicator_custom_icon_no_class(self, htmy):
+        """Test that custom icon without class attribute gets htmx-indicator class."""
+        from htmy import SafeStr
+
+        custom_icon = SafeStr("<svg>icon</svg>")
+        button = Button(
+            label="Save",
+            indicator=custom_icon,
+            hx_post="/api/save",
+        )
+        html = await htmy.render(button)
+        assert 'class="htmx-indicator"' in html
+
+    @pytest.mark.asyncio
+    async def test_indicator_with_htmx_request(self, htmy):
+        """Test indicator with HTMX request attributes."""
+        button = Button(
+            label="Submit",
+            indicator=True,
+            hx_post="/api/submit",
+            hx_target="#result",
+        )
+        html = await htmy.render(button)
+        assert "htmx-indicator" in html
+        assert 'hx-post="/api/submit"' in html
+        assert 'hx-target="#result"' in html
+
+    @pytest.mark.asyncio
+    async def test_indicator_appears_before_label(self, htmy):
+        """Test that indicator appears before the label text in the HTML."""
+        button = Button(
+            label="Load Data",
+            indicator=True,
+            hx_get="/api/data",
+        )
+        html = await htmy.render(button)
+        # The indicator SVG should appear before the label
+        indicator_pos = html.find("htmx-indicator")
+        label_pos = html.find("Load Data")
+        assert indicator_pos < label_pos
