@@ -555,7 +555,7 @@ def build_buttons_showcase():
         html.div(
             Button(
                 label="Load with hx_on",
-                color=Color.SECONDARY,
+                color=Color.DARK,
                 hx_get="/htmx-demo/slow",
                 hx_target="#indicator-result-2",
                 hx_swap="innerHTML",
