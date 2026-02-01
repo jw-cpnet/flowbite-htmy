@@ -4,7 +4,7 @@ A Python library for building Flowbite components with htmy,
 FastAPI, and HTMX support.
 """
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __author__ = "Jian"
 
 # Flowbite and dependency versions
