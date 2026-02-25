@@ -59,13 +59,16 @@ class Select:
     id: str
     """Unique ID for the select field (used for label association)."""
 
-    label: str
-    """Label text displayed above the select field."""
-
     options: list[OptionType]
     """List of options - either strings or dicts with 'value' and 'label' keys."""
 
     # Optional props
+    label: str | None = None
+    """Label text displayed above the select field. If None, renders bare select."""
+
+    name: str | None = None
+    """HTML name attribute for form submission. Defaults to id if not provided."""
+
     placeholder: str | None = None
     """Placeholder option shown first with 'selected' attribute."""
 
@@ -96,12 +99,28 @@ class Select:
     attrs: dict[str, Any] | None = None
     """Additional HTML attributes for the select element."""
 
+    # HTMX attributes
+    hx_get: str | None = None
+    """HTMX hx-get attribute."""
+
+    hx_post: str | None = None
+    """HTMX hx-post attribute."""
+
+    hx_target: str | None = None
+    """HTMX hx-target attribute."""
+
+    hx_swap: str | None = None
+    """HTMX hx-swap attribute."""
+
+    hx_trigger: str | None = None
+    """HTMX hx-trigger attribute."""
+
+    hx_include: str | None = None
+    """HTMX hx-include attribute for including additional element values."""
+
     def htmy(self, context: Context) -> Component:
         """Render the select component."""
         theme = ThemeContext.from_context(context)
-
-        # Build label classes
-        label_classes = self._build_label_classes()
 
         # Build select classes
         select_classes = self._build_select_classes(theme)
@@ -111,6 +130,19 @@ class Select:
 
         # Build option elements
         option_elements = self._build_options()
+
+        select_el = html.select(
+            *option_elements,  # type: ignore[arg-type]
+            **select_attrs,
+            class_=select_classes,
+        )
+
+        # Bare mode: no label wrapping
+        if self.label is None:
+            return select_el
+
+        # Build label classes
+        label_classes = self._build_label_classes()
 
         # Build helper text if provided
         helper = self._render_helper_text() if self.helper_text else None
@@ -122,11 +154,7 @@ class Select:
                 **{"for": self.id},
                 class_=label_classes,
             ),
-            html.select(
-                *option_elements,  # type: ignore[arg-type]
-                **select_attrs,
-                class_=select_classes,
-            ),
+            select_el,
         ]
 
         if helper:
@@ -185,6 +213,7 @@ class Select:
         """Build select element attributes."""
         attrs: dict[str, Any] = {
             "id": self.id,
+            "name": self.name or self.id,
         }
 
         if self.multiple:
@@ -198,6 +227,20 @@ class Select:
 
         if self.disabled:
             attrs["disabled"] = True
+
+        # HTMX attributes
+        if self.hx_get:
+            attrs["hx-get"] = self.hx_get
+        if self.hx_post:
+            attrs["hx-post"] = self.hx_post
+        if self.hx_target:
+            attrs["hx-target"] = self.hx_target
+        if self.hx_swap:
+            attrs["hx-swap"] = self.hx_swap
+        if self.hx_trigger:
+            attrs["hx-trigger"] = self.hx_trigger
+        if self.hx_include:
+            attrs["hx-include"] = self.hx_include
 
         # Merge passthrough attributes
         if self.attrs:

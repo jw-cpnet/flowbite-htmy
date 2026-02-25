@@ -6,7 +6,7 @@ from flowbite_htmy.components.avatar import Avatar
 from flowbite_htmy.components.badge import Badge
 from flowbite_htmy.components.button import Button
 from flowbite_htmy.components.checkbox import Checkbox
-from flowbite_htmy.components.drawer import Drawer
+from flowbite_htmy.components.drawer import Drawer, DrawerShell
 from flowbite_htmy.components.dropdown import (
     Dropdown,
     DropdownDivider,
@@ -15,7 +15,7 @@ from flowbite_htmy.components.dropdown import (
 )
 from flowbite_htmy.components.input import Input
 from flowbite_htmy.components.modal import Modal
-from flowbite_htmy.components.pagination import Pagination
+from flowbite_htmy.components.pagination import HtmxPagination, Pagination
 from flowbite_htmy.components.popup_modal import PopupModal
 from flowbite_htmy.components.radio import Radio
 from flowbite_htmy.components.select import Select
@@ -35,7 +35,9 @@ __all__ = [
     "Button",
     "Checkbox",
     "Drawer",
+    "DrawerShell",
     "Dropdown",
+    "HtmxPagination",
     "DropdownDivider",
     "DropdownHeader",
     "DropdownItem",

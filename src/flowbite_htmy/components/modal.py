@@ -52,10 +52,13 @@ class Modal:
     title: str
     """Modal header title."""
 
-    children: SafeStr | Component
-    """Modal body content."""
-
     # Optional props
+    children: SafeStr | Component | None = None
+    """Modal body content. If None and content_id is set, renders a shell for HTMX."""
+
+    content_id: str | None = None
+    """ID for content div when using HTMX dynamic loading (shell mode)."""
+
     footer: SafeStr | Component | None = None
     """Optional footer content (buttons, actions, etc.)."""
 
@@ -65,8 +68,17 @@ class Modal:
     static_backdrop: bool = False
     """If True, prevents closing modal by clicking outside (backdrop click)."""
 
+    closable: bool = True
+    """Whether to show the close button in header."""
+
     class_: str = ""
     """Additional CSS classes for the modal container."""
+
+    body_class: str = ""
+    """Additional CSS classes for the body section."""
+
+    footer_class: str = ""
+    """Additional CSS classes for the footer section."""
 
     attrs: dict[str, Any] | None = None
     """Additional HTML attributes for the modal container."""
@@ -96,17 +108,37 @@ class Modal:
         if self.attrs:
             modal_attrs.update(self.attrs)
 
+        # Build header children
+        header_children: list[Component | str] = [html.h3(self.title)]
+        if self.closable:
+            header_children.append(self._render_close_button())  # type: ignore[arg-type]
+
         # Build content sections
         content_sections: list[Component] = [
-            # Header
-            html.div(
-                html.h3(self.title),
-                self._render_close_button(),  # type: ignore[arg-type]
-                class_=header_classes,
-            ),
-            # Body with wrapper div for padding and spacing
-            html.div(self.children, class_=body_classes),  # type: ignore[arg-type]
+            html.div(*header_children, class_=header_classes),
         ]
+
+        # Body: static content, dynamic shell, or empty
+        if self.children is not None:
+            content_sections.append(
+                html.div(self.children, class_=body_classes)  # type: ignore[arg-type]
+            )
+        elif self.content_id:
+            # Shell mode: content div with loading spinner for HTMX
+            loading_spinner = html.div(
+                html.div(
+                    class_="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600",
+                ),
+                class_="flex justify-center items-center h-32",
+            )
+            content_sections.append(
+                html.div(
+                    html.div(loading_spinner, id=self.content_id),
+                    class_=body_classes,
+                )
+            )
+        else:
+            content_sections.append(html.div(class_=body_classes))
 
         # Add footer if provided
         if self.footer:
@@ -126,7 +158,6 @@ class Modal:
 
     def _render_close_button(self) -> Component:
         """Render the close button with SVG icon."""
-        # SVG close icon - using SafeStr for proper rendering
         svg_icon = SafeStr(
             '<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" '
             'fill="none" viewBox="0 0 14 14">'
@@ -169,10 +200,12 @@ class Modal:
 
     def _build_body_classes(self, theme: ThemeContext) -> str:
         """Build CSS classes for modal body."""
-        return "p-4 md:p-5 space-y-4"
+        builder = ClassBuilder("p-4 md:p-5 space-y-4")
+        return builder.merge(self.body_class)
 
     def _build_footer_classes(self, theme: ThemeContext) -> str:
         """Build CSS classes for modal footer."""
-        return (
+        builder = ClassBuilder(
             "flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
         )
+        return builder.merge(self.footer_class)

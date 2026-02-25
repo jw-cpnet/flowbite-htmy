@@ -1,10 +1,10 @@
-"""Tests for Drawer component."""
+"""Tests for Drawer and DrawerShell components."""
 
 import pytest
 from htmy import html
 
-from flowbite_htmy.components.drawer import Drawer
-from flowbite_htmy.types import Color, DrawerPlacement, Size
+from flowbite_htmy.components.drawer import Drawer, DrawerShell
+from flowbite_htmy.types import Color, DrawerPlacement, DrawerWidth, Size
 
 
 # Phase 3: User Story 1 Tests (T010-T020) - Red Phase
@@ -391,3 +391,181 @@ async def test_drawer_content_accepts_nested_nav(renderer):
     assert "About" in result
     assert "Contact" in result
     assert 'href="/"' in result
+
+
+# ──────────────────────────────────────────────────
+# DrawerShell tests
+# ──────────────────────────────────────────────────
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_renders_with_id_and_content_id(renderer):
+    """DrawerShell renders with correct ID and content_id."""
+    shell = DrawerShell(
+        id="drawer-update",
+        title="Update Item",
+        content_id="drawer-update-content",
+    )
+    result = await renderer.render(shell)
+
+    assert 'id="drawer-update"' in result
+    assert 'id="drawer-update-content"' in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_hidden_trigger(renderer):
+    """DrawerShell includes a hidden trigger for Flowbite JS discovery."""
+    shell = DrawerShell(
+        id="drawer-test",
+        title="Test",
+        content_id="drawer-test-content",
+    )
+    result = await renderer.render(shell)
+
+    assert 'data-drawer-target="drawer-test"' in result
+    assert 'data-drawer-placement="right"' in result
+    assert "hidden" in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_right_position(renderer):
+    """DrawerShell defaults to right positioning."""
+    shell = DrawerShell(
+        id="drawer-right",
+        title="Right",
+        content_id="content",
+    )
+    result = await renderer.render(shell)
+
+    assert "right-0" in result
+    assert "translate-x-full" in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_left_position(renderer):
+    """DrawerShell supports left positioning."""
+    shell = DrawerShell(
+        id="drawer-left",
+        title="Left",
+        content_id="content",
+        position="left",
+    )
+    result = await renderer.render(shell)
+
+    assert "left-0" in result
+    assert "-translate-x-full" in result
+    assert 'data-drawer-placement="left"' in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_header_visibility(renderer):
+    """DrawerShell hides header when show_header=False."""
+    shell = DrawerShell(
+        id="drawer-no-header",
+        title="Hidden Title",
+        content_id="content",
+        show_header=False,
+    )
+    result = await renderer.render(shell)
+
+    assert "Hidden Title" not in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_loading_spinner(renderer):
+    """DrawerShell shows loading spinner by default."""
+    shell = DrawerShell(
+        id="drawer-spinner",
+        title="Test",
+        content_id="content",
+    )
+    result = await renderer.render(shell)
+
+    assert "animate-spin" in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_no_spinner(renderer):
+    """DrawerShell hides spinner when loading_spinner=False."""
+    shell = DrawerShell(
+        id="drawer-no-spinner",
+        title="Test",
+        content_id="content",
+        loading_spinner=False,
+    )
+    result = await renderer.render(shell)
+
+    assert "animate-spin" not in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_custom_width(renderer):
+    """DrawerShell applies custom DrawerWidth."""
+    shell = DrawerShell(
+        id="drawer-wide",
+        title="Wide",
+        content_id="content",
+        width=DrawerWidth.XXXXL,
+    )
+    result = await renderer.render(shell)
+
+    assert "max-w-4xl" in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_string_width(renderer):
+    """DrawerShell supports raw string width class."""
+    shell = DrawerShell(
+        id="drawer-custom",
+        title="Custom",
+        content_id="content",
+        width="md:w-1/3",
+    )
+    result = await renderer.render(shell)
+
+    assert "md:w-1/3" in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_custom_classes(renderer):
+    """DrawerShell merges custom CSS classes."""
+    shell = DrawerShell(
+        id="drawer-cls",
+        title="Test",
+        content_id="content",
+        class_="my-custom-class",
+        content_class="content-custom",
+    )
+    result = await renderer.render(shell)
+
+    assert "my-custom-class" in result
+    assert "content-custom" in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_aria_attributes(renderer):
+    """DrawerShell has proper ARIA attributes."""
+    shell = DrawerShell(
+        id="drawer-aria",
+        title="Accessible",
+        content_id="content",
+    )
+    result = await renderer.render(shell)
+
+    assert 'aria-labelledby="drawer-aria-label"' in result
+    assert 'aria-hidden="true"' in result
+    assert 'tabindex="-1"' in result
+
+
+@pytest.mark.asyncio
+async def test_drawer_shell_close_button(renderer):
+    """DrawerShell header includes a close button with data-drawer-dismiss."""
+    shell = DrawerShell(
+        id="drawer-close",
+        title="Closeable",
+        content_id="content",
+    )
+    result = await renderer.render(shell)
+
+    assert 'data-drawer-dismiss="drawer-close"' in result
+    assert "Close menu" in result

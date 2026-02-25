@@ -24,7 +24,7 @@ class PopupModal:
     - Alerts and notifications
     - Simple yes/no decisions
 
-    Example:
+    Example with explicit buttons:
         ```python
         PopupModal(
             id="confirm-delete",
@@ -32,7 +32,19 @@ class PopupModal:
             icon=SafeStr('<svg>...</svg>'),  # Warning icon
             confirm_button=Button(label="Yes, I'm sure", color=Color.RED),
             cancel_button=Button(label="No, cancel"),
-            static_backdrop=True,  # Prevent closing on backdrop click
+            static_backdrop=True,
+        )
+        ```
+
+    Example with convenience props (auto-generated buttons):
+        ```python
+        PopupModal(
+            id="confirm-delete",
+            message="Are you sure you want to delete this item?",
+            confirm_url="/api/v1/items/123",
+            confirm_method="delete",
+            confirm_target="#items-container",
+            danger=True,
         )
         ```
 
@@ -53,13 +65,33 @@ class PopupModal:
     message: str
     """Main message/question to display (centered)."""
 
-    confirm_button: Component
-    """Primary action button (usually Button component)."""
+    # Explicit button props (takes precedence over convenience props)
+    confirm_button: Component | None = None
+    """Primary action button (usually Button component). Overrides convenience props."""
 
-    # Optional props
     cancel_button: Component | None = None
     """Secondary/cancel button (usually Button component)."""
 
+    # Convenience props for auto-generated buttons
+    confirm_url: str | None = None
+    """HTMX action URL for confirm button (used with confirm_method)."""
+
+    confirm_method: str = "delete"
+    """HTTP method for confirm action (delete, post, put)."""
+
+    confirm_target: str | None = None
+    """HTMX target for confirm action response."""
+
+    confirm_label: str = "Yes, I'm sure"
+    """Label for the auto-generated confirm button."""
+
+    cancel_label: str = "No, cancel"
+    """Label for the auto-generated cancel button."""
+
+    danger: bool = True
+    """Whether to style the confirm button as danger (red). Only for auto-generated buttons."""
+
+    # Optional props
     icon: SafeStr | None = None
     """Optional icon to display above the message (warning, success, error, etc.)."""
 
@@ -95,10 +127,14 @@ class PopupModal:
         if self.attrs:
             modal_attrs.update(self.attrs)
 
+        # Resolve buttons (explicit props take precedence)
+        confirm_btn = self.confirm_button or self._build_confirm_button()
+        cancel_btn = self.cancel_button or self._build_cancel_button()
+
         # Build buttons list
-        buttons = [self.confirm_button]
-        if self.cancel_button:
-            buttons.append(self.cancel_button)
+        buttons: list[Component] = [confirm_btn]
+        if cancel_btn:
+            buttons.append(cancel_btn)
 
         # Build centered content items (filter out None)
         content_items: list[Component] = []
@@ -133,6 +169,51 @@ class PopupModal:
                 class_="relative p-4 w-full max-w-md max-h-full",
             ),
             **modal_attrs,
+        )
+
+    def _build_confirm_button(self) -> Component:
+        """Build auto-generated confirm button from convenience props."""
+        if self.danger:
+            btn_class = (
+                "text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none "
+                "focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center "
+                "px-5 py-2.5 text-center dark:focus:ring-red-800"
+            )
+        else:
+            btn_class = (
+                "text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none "
+                "focus:ring-primary-300 font-medium rounded-lg text-sm inline-flex items-center "
+                "px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 "
+                "dark:focus:ring-primary-800"
+            )
+
+        btn_attrs: dict[str, Any] = {}
+        if self.confirm_url:
+            hx_attr = f"hx-{self.confirm_method}"
+            btn_attrs[hx_attr] = self.confirm_url
+            if self.confirm_target:
+                btn_attrs["hx-target"] = self.confirm_target
+
+        return html.button(
+            self.confirm_label,
+            type="button",
+            class_=btn_class,
+            **btn_attrs,
+        )
+
+    def _build_cancel_button(self) -> Component:
+        """Build auto-generated cancel button."""
+        return html.button(
+            self.cancel_label,
+            type="button",
+            class_=(
+                "py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none "
+                "bg-white rounded-lg border border-gray-200 hover:bg-gray-100 "
+                "hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 "
+                "dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 "
+                "dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            ),
+            **{"data-modal-hide": self.id},
         )
 
     def _render_close_button(self, classes: str) -> Component:

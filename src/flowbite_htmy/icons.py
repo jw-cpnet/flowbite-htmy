@@ -79,6 +79,10 @@ class Icon(str, Enum):
     EXCLAMATION_CIRCLE = "exclamation-circle"
     PLUS = "plus"
     SPINNER = "spinner"
+    CHEVRON_LEFT = "chevron-left"
+    SEARCH = "search"
+    TRASH = "trash"
+    PENCIL = "pencil"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -344,6 +348,26 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
         '<svg class="{class_} animate-spin" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">'
         '<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>'
         '<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>'
+        "</svg>"
+    ),
+    Icon.CHEVRON_LEFT: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>'
+        "</svg>"
+    ),
+    Icon.SEARCH: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>'
+        "</svg>"
+    ),
+    Icon.TRASH: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>'
+        "</svg>"
+    ),
+    Icon.PENCIL: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">'
+        '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279"/>'
         "</svg>"
     ),
 }

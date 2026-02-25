@@ -45,12 +45,15 @@ class Input:
     id: str
     """Unique ID for the input field (used for label association)."""
 
-    label: str
-    """Label text displayed above the input field."""
+    label: str | None = None
+    """Label text displayed above the input field. If None, renders bare input."""
 
     # Optional props
     type: str = "text"
     """Input type (text, email, password, number, tel, url, etc.)."""
+
+    name: str | None = None
+    """HTML name attribute for form submission. Defaults to id if not provided."""
 
     placeholder: str | None = None
     """Placeholder text shown when input is empty."""
@@ -76,18 +79,40 @@ class Input:
     attrs: dict[str, Any] | None = None
     """Additional HTML attributes for the input element."""
 
+    # HTMX attributes
+    hx_get: str | None = None
+    """HTMX hx-get attribute."""
+
+    hx_post: str | None = None
+    """HTMX hx-post attribute."""
+
+    hx_target: str | None = None
+    """HTMX hx-target attribute."""
+
+    hx_swap: str | None = None
+    """HTMX hx-swap attribute."""
+
+    hx_trigger: str | None = None
+    """HTMX hx-trigger attribute."""
+
     def htmy(self, context: Context) -> Component:
         """Render the input component."""
         theme = ThemeContext.from_context(context)
-
-        # Build label classes
-        label_classes = self._build_label_classes()
 
         # Build input classes
         input_classes = self._build_input_classes(theme)
 
         # Build input attributes
         input_attrs = self._build_input_attrs()
+
+        input_el = html.input_(**input_attrs, class_=input_classes)
+
+        # Bare mode: no label wrapping
+        if self.label is None:
+            return input_el
+
+        # Build label classes
+        label_classes = self._build_label_classes()
 
         # Build helper text if provided
         helper = self._render_helper_text() if self.helper_text else None
@@ -99,7 +124,7 @@ class Input:
                 **{"for": self.id},
                 class_=label_classes,
             ),
-            html.input_(**input_attrs, class_=input_classes),
+            input_el,
         ]
 
         if helper:
@@ -159,6 +184,7 @@ class Input:
         attrs: dict[str, Any] = {
             "type": self.type,
             "id": self.id,
+            "name": self.name or self.id,
         }
 
         if self.placeholder:
@@ -172,6 +198,18 @@ class Input:
 
         if self.disabled:
             attrs["disabled"] = True
+
+        # HTMX attributes
+        if self.hx_get:
+            attrs["hx-get"] = self.hx_get
+        if self.hx_post:
+            attrs["hx-post"] = self.hx_post
+        if self.hx_target:
+            attrs["hx-target"] = self.hx_target
+        if self.hx_swap:
+            attrs["hx-swap"] = self.hx_swap
+        if self.hx_trigger:
+            attrs["hx-trigger"] = self.hx_trigger
 
         # Merge passthrough attributes
         if self.attrs:

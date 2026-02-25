@@ -7,7 +7,7 @@ from htmy import Component, Context, html
 
 from flowbite_htmy.base import ClassBuilder, ThemeContext
 from flowbite_htmy.icons import Icon, get_icon
-from flowbite_htmy.types import ButtonVariant, Color, DrawerPlacement, Size
+from flowbite_htmy.types import ButtonVariant, Color, DrawerPlacement, DrawerWidth, Size
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -328,4 +328,164 @@ class Drawer:
             title,
             close_button,
             class_=header_builder.build(),
+        )
+
+
+@dataclass(frozen=True, kw_only=True)
+class DrawerShell:
+    """Drawer shell for HTMX dynamic content loading.
+
+    An empty drawer container placed once on the page. Content is loaded
+    dynamically via HTMX into the content div identified by ``content_id``.
+    Trigger buttons are separate elements with ``hx-get`` / ``hx-target``
+    attributes pointing to the content div.
+
+    A hidden trigger button is rendered so Flowbite JS discovers and registers
+    the drawer automatically.
+
+    Example:
+        >>> DrawerShell(
+        ...     id="drawer-update",
+        ...     title="Update Item",
+        ...     content_id="drawer-update-content",
+        ...     width=DrawerWidth.XXL,
+        ... )
+
+    Trigger button (separate element):
+        >>> Button(
+        ...     label="Edit",
+        ...     hx_get="/api/items/1",
+        ...     hx_target="#drawer-update-content",
+        ...     attrs={
+        ...         "hx-on::after-request": (
+        ...             "initDrawers(); showDrawer('drawer-update');"
+        ...         ),
+        ...     },
+        ... )
+    """
+
+    # Required props
+    id: str
+    """Unique drawer ID (used for Flowbite data attributes and ARIA)."""
+
+    title: str
+    """Drawer header title."""
+
+    content_id: str
+    """ID for the content div where HTMX will load dynamic content."""
+
+    # Optional configuration
+    width: DrawerWidth | str = DrawerWidth.XXL
+    """Width of the drawer. Use DrawerWidth enum or custom Tailwind class."""
+
+    position: str = "right"
+    """Side the drawer slides in from: ``'left'`` or ``'right'``."""
+
+    show_header: bool = True
+    """Whether to show the header with title and close button."""
+
+    header_icon: Component | None = None
+    """Optional icon component to display before the title."""
+
+    loading_spinner: bool = True
+    """Whether to show a loading spinner as default placeholder content."""
+
+    class_: str = ""
+    """Additional CSS classes for the drawer container."""
+
+    content_class: str = ""
+    """Additional CSS classes for the content div."""
+
+    def htmy(self, context: Context) -> Component:
+        """Render the drawer shell."""
+        width_class = self.width.value if isinstance(self.width, DrawerWidth) else self.width
+
+        position_classes = (
+            "top-0 right-0 translate-x-full"
+            if self.position == "right"
+            else "top-0 left-0 -translate-x-full"
+        )
+
+        container_builder = ClassBuilder(
+            f"fixed {position_classes} z-40 w-full h-screen {width_class} p-4 "
+            "overflow-y-auto transition-transform bg-white dark:bg-gray-800"
+        )
+
+        # Hidden trigger for Flowbite auto-initialisation
+        hidden_trigger = html.button(
+            type="button",
+            class_="hidden",
+            **{
+                "data-drawer-target": self.id,
+                "data-drawer-placement": self.position,
+            },
+        )
+
+        children: list[Component] = [hidden_trigger]
+
+        if self.show_header:
+            children.append(self._render_header())
+
+        children.append(self._render_content())
+
+        return html.div(
+            *children,
+            id=self.id,
+            class_=container_builder.merge(self.class_),
+            tabindex="-1",
+            **{
+                "aria-labelledby": f"{self.id}-label",
+                "aria-hidden": "true",
+            },
+        )
+
+    def _render_header(self) -> Component:
+        """Render header with title and close button."""
+        title_children: list[Component | str] = []
+        if self.header_icon:
+            title_children.append(self.header_icon)
+        title_children.append(self.title)
+
+        title = html.h5(
+            *title_children,
+            id=f"{self.id}-label",
+            class_=(
+                "inline-flex items-center mb-6 text-sm font-semibold "
+                "text-gray-500 uppercase dark:text-gray-400"
+            ),
+        )
+
+        close_button = html.button(
+            get_icon(Icon.CLOSE, class_="w-5 h-5"),
+            html.span("Close menu", class_="sr-only"),
+            type="button",
+            class_=(
+                "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 "
+                "rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex "
+                "items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            ),
+            **{"data-drawer-dismiss": self.id, "aria-controls": self.id},
+        )
+
+        return html.div(title, close_button)
+
+    def _render_content(self) -> Component:
+        """Render the content target div."""
+        default_content: list[Component] = []
+        if self.loading_spinner:
+            default_content.append(
+                html.div(
+                    html.div(
+                        class_=(
+                            "animate-spin rounded-full h-8 w-8 " "border-b-2 border-primary-600"
+                        ),
+                    ),
+                    class_="flex justify-center items-center h-32",
+                )
+            )
+
+        return html.div(
+            *default_content,
+            id=self.content_id,
+            class_=self.content_class or None,
         )
