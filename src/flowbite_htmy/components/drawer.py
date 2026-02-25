@@ -2,6 +2,7 @@
 
 import uuid
 from dataclasses import dataclass
+from typing import Literal
 
 from htmy import Component, Context, html
 
@@ -387,6 +388,10 @@ class DrawerShell:
     header_icon: Component | None = None
     """Optional icon component to display before the title."""
 
+    dismiss_type: Literal["dismiss", "hide"] = "dismiss"
+    """Close button action: ``'dismiss'`` uses ``data-drawer-dismiss``,
+    ``'hide'`` uses ``data-drawer-hide``."""
+
     loading_spinner: bool = True
     """Whether to show a loading spinner as default placeholder content."""
 
@@ -455,6 +460,12 @@ class DrawerShell:
             ),
         )
 
+        dismiss_attr = (
+            {"data-drawer-dismiss": self.id}
+            if self.dismiss_type == "dismiss"
+            else {"data-drawer-hide": self.id}
+        )
+
         close_button = html.button(
             get_icon(Icon.CLOSE, class_="w-5 h-5"),
             html.span("Close menu", class_="sr-only"),
@@ -464,7 +475,8 @@ class DrawerShell:
                 "rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex "
                 "items-center dark:hover:bg-gray-600 dark:hover:text-white"
             ),
-            **{"data-drawer-dismiss": self.id, "aria-controls": self.id},
+            **dismiss_attr,
+            **{"aria-controls": self.id},
         )
 
         return html.div(title, close_button)
@@ -476,9 +488,7 @@ class DrawerShell:
             default_content.append(
                 html.div(
                     html.div(
-                        class_=(
-                            "animate-spin rounded-full h-8 w-8 " "border-b-2 border-primary-600"
-                        ),
+                        class_=("animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"),
                     ),
                     class_="flex justify-center items-center h-32",
                 )
