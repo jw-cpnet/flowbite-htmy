@@ -83,6 +83,7 @@ class Icon(str, Enum):
     SEARCH = "search"
     TRASH = "trash"
     PENCIL = "pencil"
+    CLIPBOARD_CHECK = "clipboard-check"
 
     def __str__(self) -> str:
         """Return the icon value as a string."""
@@ -368,6 +369,12 @@ _ICON_SVGS: Final[dict[Icon, str]] = {
     Icon.PENCIL: (
         '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">'
         '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279"/>'
+        "</svg>"
+    ),
+    Icon.CLIPBOARD_CHECK: (
+        '<svg class="{class_}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">'
+        '<path d="M9 2a1 1 0 0 0 0 2h2a1 1 0 1 0 0-2H9Z"/>'
+        '<path fill-rule="evenodd" d="M4 5a2 2 0 0 1 2-2 3 3 0 0 0 3 3h2a3 3 0 0 0 3-3 2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Zm9.707 5.707a1 1 0 0 0-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>'
         "</svg>"
     ),
 }
