@@ -459,6 +459,7 @@ class Button:
             Color.WARNING: "text-yellow-800 bg-yellow-200",
             Color.INFO: "text-cyan-800 bg-cyan-200",
             Color.DARK: "text-gray-200 bg-gray-800",
+            Color.PURPLE: "text-purple-800 bg-purple-200",
         }
 
         # Get color classes, default to blue
@@ -467,4 +468,4 @@ class Button:
             "text-blue-800 bg-blue-200",
         )
 
-        return f"inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold {badge_colors} rounded-full"
+        return f"inline-flex items-center justify-center min-w-4 h-4 px-1 ms-2 text-xs font-semibold {badge_colors} rounded-full"
